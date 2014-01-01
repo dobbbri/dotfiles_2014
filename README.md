@@ -39,5 +39,14 @@
 * ln -s .dotfiles/bash\_profile .bash_profile
 
 
+rm -r /Users/sldobri/.dotfiles/vim/bundle
+
+Instalar o Vundle:
+--------------------
+`git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle`
 
 
+
+Instalar os plugins:
+--------------------
+`vim +BundleInstall +qall`

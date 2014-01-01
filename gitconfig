@@ -1,0 +1,22 @@
+[user]
+	name = sldobri
+	email = sergiodobri@gmail.com
+[core]
+    excludesfile = /Users/sldobri/.gitignore_global
+[alias]
+    st = status
+    co = checkout
+    ci = commit
+    rb = rebase
+    br = branch
+    pl = pull
+    pu = push
+    ad = add
+    mt = mergetool
+    lg = log --graph --name-status --oneline
+[core]
+    editor = vim
+[color]
+    ui = true
+[mergetool]
+	keepBackup = true

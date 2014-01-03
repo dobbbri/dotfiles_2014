@@ -175,6 +175,10 @@ nnoremap <Leader>p :! php %<CR>
 nmap <leader>mm :e $MYVIMRC<CR>
 nmap <leader>ss :so $MYVIMRC<CR>
 
+nnoremap <silent> <S-Right> :bn<CR>
+nnoremap <silent> <S-Left> :bp<CR>
+
+
 " Disable Arrow Keys: ==========================================================
 " as mensagem foram movidas pro lado
 nnoremap <Down>     :echoe ""<CR> " Use j
@@ -219,37 +223,10 @@ let g:php_htmlInStrings=1         " to highlight HTML in string
 let g:php_noShortTags = 1         " to disable short tags
 let g:DisableAutoPHPFolding=1     " disable PIV's folding
 
-
-" Vim Airline: =================================================================
-Bundle 'bling/vim-airline'
-let g:airline_theme='powerlineish'
-let g:bufferline_echo=1
-" tabline
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-
-if has('gui_running')
-    " unicode symbols
-    let g:airline#extensions#tabline#left_sep = '▶'
-    let g:airline#extensions#tabline#right_sep = '◀'
-    let g:airline_left_sep = '▶'
-    let g:airline_right_sep = '◀'
-    let g:airline_symbols.linenr = '␊'
-    let g:airline_symbols.linenr = '␤'
-    let g:airline_symbols.linenr = '¶'
-    let g:airline_symbols.branch = '⎇'
-    let g:airline_symbols.paste = 'ρ'
-    let g:airline_symbols.paste = 'Þ'
-    let g:airline_symbols.paste = '∥'
-    let g:airline_symbols.whitespace = 'Ξ'
-else
-    let g:airline_left_sep=''
-    let g:airline_right_sep=''
-endif
-
-nnoremap <silent> <S-Right> :bn<CR>
-nnoremap <silent> <S-Left> :bp<CR>
+" Lightline: ==================================================================
+Bundle 'itchyny/lightline.vim'
+let g:lightline.separator = { 'left': '▶', 'right': '◀' }
+let g:lightline.subseparator = { 'left': '▶', 'right': '◀' }
 
 
 " HTML5: =======================================================================
@@ -281,21 +258,6 @@ let g:indentLine_color_term = 239
 let g:indentLine_color_gui='#778899'
 let g:indentLine_char='│'
 let g:indentLine_indentLevel=7
-
-
-" NerdTree: ====================================================================
-" Allows to explore filesystem
-"Bundle 'scrooloose/nerdtree'
-"let g:NERDTreeHighlightCursorline=1     " Destaca a linha atual
-"let g:NERDTreeShowLineNumbers=0
-"let g:NERDTreeMinimalUI=1
-"let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
-
-
-"" NerdTreeTabs: ================================================================
-"Bundle 'jistr/vim-nerdtree-tabs'
-"map <Leader>n :NERDTreeTabsToggle<CR>
-"let g:nerdtree_tabs_focus_on_files=1
 
 
 " Php Cs_fixer: ================================================================

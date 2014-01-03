@@ -43,3 +43,6 @@ function parse_git_branch() {
 }
 
 PS1="\[${BOLD}${MAGENTA}\]\u\[$WHITE\]@\[${BOLD}${ORANGE}\]\h\[$WHITE\]: \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\] > \[$RESET\]"
+
+
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATH"

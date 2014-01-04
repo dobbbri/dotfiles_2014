@@ -175,8 +175,8 @@ nnoremap <Leader>p :! php %<CR>
 nmap <leader>mm :e $MYVIMRC<CR>
 nmap <leader>ss :so $MYVIMRC<CR>
 
-nnoremap <silent> <S-Right> :bn<CR>
-nnoremap <silent> <S-Left> :bp<CR>
+nnoremap <silent> <S-Right> :tabn<CR>
+nnoremap <silent> <S-Left> :tabp<CR>
 
 
 " Disable Arrow Keys: ==========================================================
@@ -222,11 +222,16 @@ let g:php_sql_query=1             " to highlight SQL syntax in strings
 let g:php_htmlInStrings=1         " to highlight HTML in string
 let g:php_noShortTags = 1         " to disable short tags
 let g:DisableAutoPHPFolding=1     " disable PIV's folding
+let g:php_folding = 0
+let g:php_strict_blocks = 0
+let g:php_short_tags = 1
+let g:php_show_semicolon = 1
+let g:php_smart_semicolon = 1
 
 " Lightline: ==================================================================
 Bundle 'itchyny/lightline.vim'
-let g:lightline.separator = { 'left': '▶', 'right': '◀' }
-let g:lightline.subseparator = { 'left': '▶', 'right': '◀' }
+" let g:lightline.separator = { 'left': '▶', 'right': '◀' }
+" let g:lightline.subseparator = { 'left': '▶', 'right': '◀' }
 
 
 " HTML5: =======================================================================
@@ -369,7 +374,7 @@ au BufRead,BufWritePre *.html normal gg=G
 " Html
 au FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
 " PHP
-au FileType php setlocal textwidth=80
+" au FileType php setlocal textwidth=80
 " Markdown
 au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  set filetype=markdown
 au BufNewFile,BufRead vimrc  set filetype=vim
@@ -381,7 +386,6 @@ au BufNewFile,BufRead vimrc  set filetype=vim
 "
 au FileType php :call matchadd('ColorColumn', '\%81v.*', 100)
 au FileType vim :call matchadd('ColorColumn', '\%121v.*', 200)
-
 
 
 " Functions: ==================================================================
@@ -444,7 +448,7 @@ let g:goyo_linenr=0
 function! g:goyo_before()
   if has('gui_running')
     set fullscreen
-    set linespace=3
+    set linespace=4
     set nonumber
   endif
 endfunction
@@ -460,3 +464,8 @@ endfunction
 let g:goyo_callbacks = [function('g:goyo_before'), function('g:goyo_after')]
 
 nnoremap <F1> :Goyo<CR>
+
+
+" Tab Ball: ===================================================================
+" a cada novo buffer sera exibido com guia/tab
+autocmd BufReadPost  * tab ball

@@ -32,7 +32,8 @@ syntax on                       " Syntax highlighting
 " Colorscheme: =================================================================
 set background=dark
 set t_Co=256                    " Allow the use of 256 colors in the terminal
-    colorscheme molokai
+" colorscheme molokai
+colorscheme Iceberg
 
 if has('gui_running')
     let g:rehash256=0
@@ -85,7 +86,7 @@ set guioptions-=Beb
 set guioptions-=TM              " Remove the toolbar e menju
 set guioptions-=LrlR             " Remove scrollbars
 set laststatus=2                " always show status line
-set guifont=Menlo:h15
+set guifont=Anonymous:h15
 set winminheight=0              " Windows can be 0 line high
 set linespace=0                 " No extra spaces between rows
 set number                      " Line numbers on:
@@ -98,12 +99,13 @@ set cursorline                  " hi cursor line
 set icon                        " change the title to include the current file
 set showtabline=1               " 1=exibe qdo tiver +d 1 tab, 2=sempre exibe
 " set lines=45
-" set columns=246
+" set columns=90
 set showcmd                     " show command in botton rigth of the screen
 set noshowmode
 set nocursorcolumn
 set nocursorline
 set modeline                    " " always show file name
+set cursorline
 
 " Diversos: ====================================================================
 set shortmess+=filmnrxoOtT      " Abbrev. of messages (avoids 'hit enter')
@@ -170,26 +172,25 @@ abbrev saf :! open -a safari.app %:p<cr>
 imap jj <Esc>
 nmap <space> :
 " execute php
-nnoremap <Leader>p :! php %<CR>
+nnoremap <F4> :! php %<CR>
 " edit the vimrc file
 nmap <leader>mm :e $MYVIMRC<CR>
 nmap <leader>ss :so $MYVIMRC<CR>
 
-nnoremap <silent> <S-Right> :tabn<CR>
-nnoremap <silent> <S-Left> :tabp<CR>
-
 
 " Disable Arrow Keys: ==========================================================
 " as mensagem foram movidas pro lado
-nnoremap <Down>     :echoe ""<CR> " Use j
-nnoremap <Right>    :echoe ""<CR> " Use l
-nnoremap <Up>       :echoe ""<CR> " Use k
-nnoremap <Down>     :echoe ""<CR> " Use j
+" nnoremap <Down>     :echoe ""<CR> " Use j
+" nnoremap <Right>    :echoe ""<CR> " Use l
+" nnoremap <Up>       :echoe ""<CR> " Use k
+" nnoremap <Down>     :echoe ""<CR> " Use j
 
 " Remapear Abas: ===============================================================
 nnoremap <leader>tn :tabnew<CR>
-nnoremap <leader>tc :tabclose<CR>
 nnoremap <leader>te :tabedit
+nnoremap <silent> <S-Right> :tabn<CR>
+nnoremap <silent> <S-Left> :tabp<CR>
+nnoremap <silent> <C-x> :tabclose<CR>
 
 
 " Bubble Text: =================================================================
@@ -221,7 +222,6 @@ Bundle 'donnut/vim-php54-syntax'
 let g:php_sql_query=1             " to highlight SQL syntax in strings
 let g:php_htmlInStrings=1         " to highlight HTML in string
 let g:php_noShortTags = 1         " to disable short tags
-let g:DisableAutoPHPFolding=1     " disable PIV's folding
 let g:php_folding = 0
 let g:php_strict_blocks = 0
 let g:php_short_tags = 1
@@ -266,19 +266,20 @@ let g:indentLine_indentLevel=7
 
 
 " Php Cs_fixer: ================================================================
-nnoremap <leader>ff :!php-cs-fixer fix % --level=all<CR>
+nnoremap <F3> :!php-cs-fixer fix % --level=all<CR>
 
 " Vim Phpqa: ===================================================================
 Bundle 'joonty/vim-phpqa.git'
 " <Leader>qa  - Show/hide code sniffer and mess detector violations
 " <Leader>qc  - Show/hide code coverage markers
-let g:phpqa_messdetector_autorun = 1
+let g:phpqa_messdetector_autorun = 0
 let g:phpqa_codesniffer_autorun = 1
 let g:phpqa_open_loc = 1
 let g:phpqa_codesniffer_args = "--standard=PSR2"
 let g:phpqa_php_cmd='/Applications/MAMP/bin/php/php5.4.19/bin/php'
 let g:phpqa_codesniffer_cmd='/Applications/MAMP/bin/phpcs'
 let g:phpqa_messdetector_cmd='/Applications/MAMP/bin/phpmd'
+
 
 " Emmet: =======================================================================
 Bundle 'mattn/emmet-vim'
@@ -463,9 +464,29 @@ endfunction
 
 let g:goyo_callbacks = [function('g:goyo_before'), function('g:goyo_after')]
 
-nnoremap <F1> :Goyo<CR>
+nnoremap <F12> :Goyo<CR>
 
 
 " Tab Ball: ===================================================================
 " a cada novo buffer sera exibido com guia/tab
-autocmd BufReadPost  * tab ball
+" autocmd BufReadPost  * tab ball
+nnoremap <F1> :tab ball<CR>NERDTreeToggle<CR>
+
+
+" NerdTree: ====================================================================
+" Allows to explore filesystem
+Bundle 'scrooloose/nerdtree'
+" nnoremap <F2> :NERDTreeToggle<CR>
+" cd /Users/sldobri/Copy
+let g:NERDTreeHighlightCursorline=1     " Destaca a linha atual
+let g:NERDTreeShowLineNumbers=0
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.pdf']
+
+
+" Proj: =======================================================================
+Bundle 'oinksoft/proj.vim'
+nnoremap <F2> :Proj Copy<CR>
+let g:ProjFile='~/.dotfiles/vimproj'
+let g:ProjNoteFile='~/.dotfiles/notes.txt'
+let g:ProjMapLeader='<Leader>c'

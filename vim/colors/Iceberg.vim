@@ -15,8 +15,8 @@ hi Visual ctermfg=NONE ctermbg=16 cterm=NONE guifg=NONE guibg=#161a1f gui=NONE
 hi CursorLine ctermfg=NONE ctermbg=59 cterm=NONE guifg=NONE guibg=#404b4d gui=NONE
 hi CursorColumn ctermfg=NONE ctermbg=59 cterm=NONE guifg=NONE guibg=#404b4d gui=NONE
 hi ColorColumn ctermfg=NONE ctermbg=59 cterm=NONE guifg=NONE guibg=#404b4d gui=NONE
-hi LineNr ctermfg=102 ctermbg=59 cterm=NONE guifg=#778899 guibg=#000000 gui=NONE
-hi VertSplit ctermfg=59 ctermbg=59 cterm=NONE guifg=#5a686b guibg=#5a686b gui=NONE
+hi LineNr ctermfg=102 ctermbg=59 cterm=NONE guifg=#778899 guibg=#111111 gui=NONE
+hi VertSplit ctermfg=59 ctermbg=59 cterm=NONE guifg=#778899 guibg=#111111 gui=NONE
 hi MatchParen ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
 hi StatusLine ctermfg=152 ctermbg=59 cterm=bold guifg=#bdd6db guibg=#5a686b gui=bold
 hi StatusLineNC ctermfg=152 ctermbg=59 cterm=NONE guifg=#bdd6db guibg=#5a686b gui=NONE
@@ -55,32 +55,32 @@ hi Title ctermfg=152 ctermbg=NONE cterm=bold guifg=#bdd6db guibg=NONE gui=bold
 hi Todo ctermfg=60 ctermbg=NONE cterm=inverse,bold guifg=#c6c8d1 guibg=NONE gui=inverse,bold
 hi Type ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE guibg=NONE gui=underline
-hi rubyClass ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
-hi rubyFunction ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
-hi rubyInterpolationDelimiter ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
-hi rubySymbol ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
-hi rubyConstant ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=italic
-hi rubyStringDelimiter ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
-hi rubyBlockParameter ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=italic
-hi rubyInstanceVariable ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
-hi rubyInclude ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
-hi rubyGlobalVariable ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
-hi rubyRegexp ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
-hi rubyRegexpDelimiter ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
-hi rubyEscape ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
-hi rubyControl ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
-hi rubyClassVariable ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
-hi rubyOperator ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
-hi rubyException ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
-hi rubyPseudoVariable ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
-hi rubyRailsUserClass ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=italic
-hi rubyRailsARAssociationMethod ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
-hi rubyRailsARMethod ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
-hi rubyRailsRenderMethod ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
-hi rubyRailsMethod ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
-hi erubyDelimiter ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
-hi erubyComment ctermfg=60 ctermbg=NONE cterm=NONE guifg=#c6c8d1 guibg=NONE gui=NONE
-hi erubyRailsMethod ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
+hi phpClass ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
+hi phpFunction ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
+hi phpInterpolationDelimiter ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi phpSymbol ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
+hi phpConstant ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=italic
+hi phpStringDelimiter ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
+hi phpBlockParameter ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=italic
+hi phpInstanceVariable ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi phpInclude ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
+hi phpGlobalVariable ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi phpRegexp ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
+hi phpRegexpDelimiter ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
+hi phpEscape ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
+hi phpControl ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
+hi phpClassVariable ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi phpOperator ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
+hi phpException ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
+hi phpPseudoVariable ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi phpUserClass ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=italic
+hi phpARAssociationMethod ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
+hi phpARMethod ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
+hi phpRenderMethod ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
+hi phpMethod ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
+hi phpDelimiter ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi phpComment ctermfg=60 ctermbg=NONE cterm=NONE guifg=#c6c8d1 guibg=NONE gui=NONE
+hi phpRailsMethod ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
 hi htmlTag ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 hi htmlEndTag ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 hi htmlTagName ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
@@ -108,10 +108,10 @@ hi! link markdownCodeDelimiter String
 hi! link markdownHeadingDelimiter Comment
 hi! link markdownRule Comment
 hi! link phpVarSelector Identifier
-hi! link rubyDefine Statement
-hi! link rubyInclude Statement
-hi! link rubyInterpolationDelimiter String
-hi! link rubySharpBang Comment
-hi! link rubyStringDelimiter String
+hi! link phpDefine Statement
+hi! link phpInclude Statement
+hi! link phpInterpolationDelimiter String
+hi! link phpSharpBang Comment
+hi! link phpStringDelimiter String
 hi! link vimContinue Comment
 hi! link vimIsCommand Statement

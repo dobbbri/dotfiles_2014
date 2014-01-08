@@ -86,7 +86,8 @@ set guioptions-=Beb
 set guioptions-=TM              " Remove the toolbar e menju
 set guioptions-=LrlR             " Remove scrollbars
 set laststatus=2                " always show status line
-set guifont=Anonymous\ Pro:h18
+set guifont=Anonymous\ Pro\ for\ Powerline:h18
+" set guifont=Anonymous\ Pro:h18
 set winminheight=0              " Windows can be 0 line high
 set linespace=0                 " No extra spaces between rows
 set number                      " Line numbers on:
@@ -109,6 +110,7 @@ set cursorline
 set guicursor=a:blinkon0
 set fillchars+=vert:│
 set numberwidth=4
+set lazyredraw
 
 
 " Diversos: ====================================================================
@@ -235,9 +237,10 @@ let g:php_show_semicolon = 1
 let g:php_smart_semicolon = 1
 
 " Lightline: ==================================================================
-Bundle 'itchyny/lightline.vim'
+" Bundle 'itchyny/lightline.vim'
 " let g:lightline.separator = { 'left': '▶', 'right': '◀' }
 " let g:lightline.subseparator = { 'left': '▶', 'right': '◀' }
+
 
 
 " HTML5: =======================================================================
@@ -299,12 +302,13 @@ let g:user_emmet_prev_key='<c-p>'
 " PhpComplete: =================================================================
 Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'arnaud-lb/vim-php-namespace'
-autocmd  FileType  php setlocal omnifunc=phpcomplete#CompletePHP
 
+autocmd  FileType  php setlocal omnifunc=phpcomplete#CompletePHP
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType vim set omnifunc=syntaxcomplete#Complete
 
 
 " Neocomplcache: ===============================================================
@@ -401,7 +405,8 @@ au BufNewFile,BufRead vimrc  set filetype=vim
 "
 au FileType php :call matchadd('ColorColumn', '\%81v.*', 100)
 au FileType vim :call matchadd('ColorColumn', '\%121v.*', 200)
-
+au InsertEnter * set nocursorline
+au InsertLeave * set cursorline
 
 " Functions: ==================================================================
 " Remove empty line at the end of page
@@ -546,8 +551,7 @@ map <leader>a :BufstopModeFast<CR>     " a command for quick switching
 map <C-tab>   :BufstopBack<CR>
 map <S-tab>   :BufstopForward<CR>
 map <leader>q :BckOpen<CR>
-hi VimpanelPart     guifg=#778899 guibg=#111111
-hi VimpanelOpenable guifg=#778899 guibg=#111111
-hi VimpanelClosable guifg=#778899 guibg=#111111
-hi VimpanelPartFile guifg=#778899 guibg=#111111
-hi VimpanelEndSlash guifg=#778899 guibg=#111111
+
+
+Bundle 'bling/vim-airline'
+let g:airline_powerline_fonts = 1

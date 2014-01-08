@@ -102,16 +102,20 @@ hi cssValueLength ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gu
 hi cssCommonAttr ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
 hi cssBraces ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 
-hi! link htmlTag Identifier
-hi! link markdownCode String
-hi! link markdownCodeDelimiter String
-hi! link markdownHeadingDelimiter Comment
-hi! link markdownRule Comment
-hi! link phpVarSelector Identifier
-hi! link phpDefine Statement
-hi! link phpInclude Statement
-hi! link phpInterpolationDelimiter String
-hi! link phpSharpBang Comment
-hi! link phpStringDelimiter String
-hi! link vimContinue Comment
-hi! link vimIsCommand Statement
+"hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen cterm=NONE guifg=LightGreen guibg=DarkGreen gui=NONE
+"hi TabLine ctermfg=Blue ctermbg=Yellow cterm=NONE guifg=Blue guibg=Yellow gui=NONE
+"hi TabLineSel ctermfg=Red ctermbg=Yellow cterm=NONE guifg=red guibg=yellow gui=NONE
+
+hi link htmlTag Identifier
+hi link markdownCode String
+hi link markdownCodeDelimiter String
+hi link markdownHeadingDelimiter Comment
+hi link markdownRule Comment
+hi link phpVarSelector Identifier
+hi link phpDefine Statement
+hi link phpInclude Statement
+hi link phpInterpolationDelimiter String
+hi link phpSharpBang Comment
+hi link phpStringDelimiter String
+hi link vimContinue Comment
+hi link vimIsCommand Statement

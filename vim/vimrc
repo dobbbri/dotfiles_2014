@@ -130,10 +130,10 @@ set whichwrap+=<,>,h,l,[,]      " Automatically wrap left and right
 set scrolloff=3
 " Speed up vim
 set lazyredraw
-set synmaxcol=200
-highlight clear SignColumn      " SignColumn should match background
-highlight clear LineNr          " Current line number row will have same background color in relative mode
+set synmaxcol=250
 set viminfo=
+set ttimeoutlen=50
+
 
 " Identacao: ===================================================================
 set autoindent                  " Indent at the same level of the previous line
@@ -167,9 +167,11 @@ let mapleader=","
 
 
 " changer cursor type and color ================================================
-au InsertLeave * hi Cursor guibg=#afd700  guifg=#ffffff
-au InsertEnter * hi Cursor guibg=#ffffff guifg=#000000
-au VimEnter    * hi Cursor guibg=#afd700  guifg=#ffffff
+"au InsertLeave * hi Cursor guibg=#afd700  guifg=#ffffff
+"au InsertEnter * hi Cursor guibg=#ffffff guifg=#000000
+"au VimEnter    * hi Cursor guibg=#afd700  guifg=#ffffff
+"au InsertEnter * set nocursorline
+"au InsertLeave * set cursorline
 
 
 " Abre O Buffer No Safari: =====================================================
@@ -196,9 +198,12 @@ nmap <leader>ss :so $MYVIMRC<CR>
 " Remapear Abas: ===============================================================
 nnoremap <leader>tn :tabnew<CR>
 nnoremap <leader>te :tabedit
-nnoremap <silent> <S-Right> :tabn<CR>
-nnoremap <silent> <S-Left> :tabp<CR>
-nnoremap <silent> <C-x> :tabclose<CR>
+nnoremap <silent> <S-Right> :bn<CR>
+nnoremap <silent> <S-Left> :bp<CR>
+nnoremap <silent> <C-x> :bw<CR>
+"nnoremap <silent> <S-Right> :tabn<CR>
+"nnoremap <silent> <S-Left> :tabp<CR>
+"nnoremap <silent> <C-x> :tabclose<CR>
 
 
 " Bubble Text: =================================================================
@@ -209,6 +214,7 @@ nmap <C-Down> ddp
 "Bubble multiple lines
 vmap <C-Up> xkP`[V`]
 vmap <C-Down> xp`[V`]
+
 
 " Source The Vimrc File After Saving It: =======================================
 " no terminal digite: export MYVIMRC="/Users/sldobri/.vim/vimrc"
@@ -235,12 +241,6 @@ let g:php_strict_blocks = 0
 let g:php_short_tags = 1
 let g:php_show_semicolon = 1
 let g:php_smart_semicolon = 1
-
-" Lightline: ==================================================================
-" Bundle 'itchyny/lightline.vim'
-" let g:lightline.separator = { 'left': '▶', 'right': '◀' }
-" let g:lightline.subseparator = { 'left': '▶', 'right': '◀' }
-
 
 
 " HTML5: =======================================================================
@@ -372,10 +372,6 @@ let g:vim_markdown_folding_disabled=1
 Bundle 'vim-scripts/utl.vim'
 
 
-" Map A Change Directory To The Projects: ======================================
-nmap <leader>d :cd ~/Desktop/PHP<CR>:e.<CR>
-
-
 " Lorem Ipsum: =================================================================
 " Helpeful abbreviations
 iab lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -387,7 +383,7 @@ iab llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius
 au BufRead,BufWritePre *.html normal gg=G
 " au BufRead,BufWritePre *.php normal gg=G
 au BufRead,BufWritePre *.css normal gg=G
-" au BufRead,BufWritePre *.js normal gg=G
+au BufRead,BufWritePre *.js normal gg=G
 
 " Html
 au FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
@@ -396,7 +392,8 @@ au FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
 " au FileType php setlocal textwidth=80
 " Markdown
 au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  set filetype=markdown
-au BufNewFile,BufRead vimrc  set filetype=vim
+au FileType vim setlocal tabstop=2 shiftwidth=2 softtabstop=2
+au FileType vim setlocal textwidth=250
 
 
 " Show Colorcolumn: ===========================================================
@@ -404,9 +401,8 @@ au BufNewFile,BufRead vimrc  set filetype=vim
 " set colorcolumn=81
 "
 au FileType php :call matchadd('ColorColumn', '\%81v.*', 100)
-au FileType vim :call matchadd('ColorColumn', '\%121v.*', 200)
-au InsertEnter * set nocursorline
-au InsertLeave * set cursorline
+au FileType vim :call matchadd('ColorColumn', '\%121v.*', 250)
+
 
 " Functions: ==================================================================
 " Remove empty line at the end of page
@@ -460,6 +456,7 @@ nnoremap <leader>r :FufRenewCache<CR>
 " FocusMode: ==================================================================
 " Distraction-free writing in Vim
 Bundle 'junegunn/goyo.vim'
+nnoremap <F12> :Goyo<CR>
 let g:goyo_width=84
 let g:goyo_margin_top=1
 let g:goyo_margin_bottom=1
@@ -480,38 +477,10 @@ function! g:goyo_after()
     set number
   endif
 endfunction
-
 let g:goyo_callbacks = [function('g:goyo_before'), function('g:goyo_after')]
 
-nnoremap <F12> :Goyo<CR>
 
-
-" Tab Ball: ===================================================================
-" a cada novo buffer sera exibido com guia/tab
-" autocmd BufReadPost  * tab ball
-nnoremap <F1> :tab ball<CR>NERDTreeToggle<CR>
-
-
-" NerdTree: ====================================================================
-" Allows to explore filesystem
-"Bundle 'scrooloose/nerdtree'
-" nnoremap <F2> :NERDTreeToggle<CR>
-" cd /Users/sldobri/Copy
-"let g:NERDTreeHighlightCursorline=1     " Destaca a linha atual
-"let g:NERDTreeShowLineNumbers=0
-"let g:NERDTreeMinimalUI=1
-"let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.pdf']
-
-
-" Proj: =======================================================================
-"Bundle 'oinksoft/proj.vim'
-"nnoremap <F2> :Proj Copy<CR>
-"let g:ProjFile='~/.dotfiles/vimproj'
-"let g:ProjNoteFile='~/.dotfiles/notes.txt'
-"let g:ProjMapLeader='<Leader>c'
-
-
-
+" Gmail Calendar: =============================================================
 Bundle 'itchyny/calendar.vim'
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
@@ -521,37 +490,57 @@ let g:calendar_google_task = 1
 " :Calendar -view=clock
 
 
-
-Bundle 'mihaifm/vimpanel'
-nnoremap <F2> :VimpanelLoad copy<CR>
-let g:VimpanelStorage='/Users/sldobri/Copy/vimpanel/'
-cabbrev ss VimpanelSessionMake
-cabbrev sl VimpanelSessionLoad
-cabbrev vp Vimpanel
-cabbrev vl VimpanelLoad
-cabbrev vc VimpanelCreate
-cabbrev ve VimpanelEdit
-cabbrev vr VimpanelRemove
-
-
-" easier window navigation
+" Easier Window Navigation: ===================================================
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
 
+" Surround: ===================================================================
 Bundle 'tpope/vim-surround'
 
 
-Bundle 'mihaifm/bufstop'
-let g:BufstopAutoSpeedToggle = 1       " now I can press ,3,3,3 to cycle the last 3 buffers
-map <leader>b :Bufstop<CR>             " get a visual on the buffers
-map <leader>a :BufstopModeFast<CR>     " a command for quick switching
-map <C-tab>   :BufstopBack<CR>
-map <S-tab>   :BufstopForward<CR>
-map <leader>q :BckOpen<CR>
-
-
+" Airline: ====================================================================
 Bundle 'bling/vim-airline'
 let g:airline_powerline_fonts = 1
+let g:bufferline_echo=1
+" tabline
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+
+" NerdTree: ====================================================================
+" Allows to explore filesystem
+Bundle 'scrooloose/nerdtree'
+cd ~/Copy/TreeHouse
+let g:NERDTreeHighlightCursorline=1     " Destaca a linha atual
+let g:NERDTreeShowLineNumbers=0
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+let g:NERDTreeWinPos = "right"
+
+
+" NerdTreeTabs: ================================================================
+Bundle 'jistr/vim-nerdtree-tabs'
+nnoremap <F2>  :NERDTreeTabsToggle<CR>
+let g:nerdtree_tabs_focus_on_files=1
+
+
+set guicursor=a:block
+
+set guicursor+=o:hor50-Cursor
+set guicursor+=n:Cursor
+set guicursor+=i-ci-sm:InsertCursor-hor20
+set guicursor+=r-cr:ReplaceCursor-hor20
+set guicursor+=c:CommandCursor-hor20
+set guicursor+=v-ve:VisualCursor
+
+set guicursor+=a:blinkon0
+hi Cursor        ctermfg=15 guifg=#fdf6e3 ctermbg=37  guibg=#dfff00
+hi InsertCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=37  guibg=#00BFFF
+hi VisualCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=125 guibg=#FFA500
+hi ReplaceCursor ctermfg=15 guifg=#fdf6e3 ctermbg=65  guibg=#af00df
+hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#00FF00

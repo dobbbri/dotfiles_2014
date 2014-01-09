@@ -102,7 +102,7 @@ hi cssValueLength ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gu
 hi cssCommonAttr ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
 hi cssBraces ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 
-"hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen cterm=NONE guifg=LightGreen guibg=DarkGreen gui=NONE
+hi TabLineFill ctermbg=NONE guibg=#778899 gui=NONE
 "hi TabLine ctermfg=Blue ctermbg=Yellow cterm=NONE guifg=Blue guibg=Yellow gui=NONE
 "hi TabLineSel ctermfg=Red ctermbg=Yellow cterm=NONE guifg=red guibg=yellow gui=NONE
 

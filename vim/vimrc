@@ -107,10 +107,8 @@ set nocursorcolumn
 set nocursorline
 set modeline                    " " always show file name
 set cursorline
-set guicursor=a:blinkon0
-set fillchars+=vert:│
-set numberwidth=4
-set lazyredraw
+set fillchars+=vert:╏
+set nolazyredraw
 
 
 " Diversos: ====================================================================
@@ -531,16 +529,16 @@ let g:nerdtree_tabs_focus_on_files=1
 
 set guicursor=a:block
 
-set guicursor+=o:hor50-Cursor
+set guicursor+=o:hor10-Cursor
 set guicursor+=n:Cursor
-set guicursor+=i-ci-sm:InsertCursor-hor20
-set guicursor+=r-cr:ReplaceCursor-hor20
-set guicursor+=c:CommandCursor-hor20
+set guicursor+=i-ci-sm:InsertCursor-hor10
+set guicursor+=r-cr:ReplaceCursor-hor10
+set guicursor+=c:CommandCursor-hor10
 set guicursor+=v-ve:VisualCursor
 
 set guicursor+=a:blinkon0
-hi Cursor        ctermfg=15 guifg=#fdf6e3 ctermbg=37  guibg=#dfff00
-hi InsertCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=37  guibg=#00BFFF
-hi VisualCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=125 guibg=#FFA500
-hi ReplaceCursor ctermfg=15 guifg=#fdf6e3 ctermbg=65  guibg=#af00df
-hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#00FF00
+hi Cursor        ctermfg=15 guifg=#000000 ctermbg=37  guibg=#dfff00
+hi InsertCursor  ctermfg=15 guifg=#000000 ctermbg=37  guibg=#00BFFF
+hi VisualCursor  ctermfg=15 guifg=#000000 ctermbg=125 guibg=#FFA500
+hi ReplaceCursor ctermfg=15 guifg=#000000 ctermbg=65  guibg=#af00df
+hi CommandCursor ctermfg=15 guifg=#000000 ctermbg=166 guibg=#00FF00

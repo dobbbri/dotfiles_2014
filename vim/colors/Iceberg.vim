@@ -16,7 +16,7 @@ hi CursorLine ctermfg=NONE ctermbg=59 cterm=NONE guifg=NONE guibg=#404b4d gui=NO
 hi CursorColumn ctermfg=NONE ctermbg=59 cterm=NONE guifg=NONE guibg=#404b4d gui=NONE
 hi ColorColumn ctermfg=NONE ctermbg=59 cterm=NONE guifg=NONE guibg=#404b4d gui=NONE
 hi LineNr ctermfg=102 ctermbg=59 cterm=NONE guifg=#778899 guibg=#111111 gui=NONE
-hi VertSplit ctermfg=59 ctermbg=59 cterm=NONE guifg=#778899 guibg=#111111 gui=NONE
+hi VertSplit ctermfg=59 ctermbg=59 cterm=NONE guifg=#4f4f4f guibg=#111111 gui=NONE
 hi MatchParen ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
 hi StatusLine ctermfg=152 ctermbg=59 cterm=bold guifg=#bdd6db guibg=#5a686b gui=bold
 hi StatusLineNC ctermfg=152 ctermbg=59 cterm=NONE guifg=#bdd6db guibg=#5a686b gui=NONE
@@ -102,7 +102,7 @@ hi cssValueLength ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gu
 hi cssCommonAttr ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
 hi cssBraces ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 
-hi TabLineFill ctermbg=NONE guibg=#778899 gui=NONE
+hi TabLineFill guifg=#000000 guibg=#ffffff gui=NONE
 "hi TabLine ctermfg=Blue ctermbg=Yellow cterm=NONE guifg=Blue guibg=Yellow gui=NONE
 "hi TabLineSel ctermfg=Red ctermbg=Yellow cterm=NONE guifg=red guibg=yellow gui=NONE
 

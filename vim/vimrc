@@ -128,7 +128,7 @@ set list listchars=tab:→\ ,trail:·  " Show tabs and trailing spaceis
 set whichwrap+=<,>,h,l,[,]      " Automatically wrap left and right
 set scrolloff=3
 " Speed up vim
-set lazyredraw
+set nolazyredraw
 set synmaxcol=250
 set viminfo=
 set ttimeoutlen=50
@@ -138,7 +138,7 @@ set ttimeoutlen=50
 set autoindent                  " Indent at the same level of the previous line
 set nojoinspaces                " Prevents inserting twospaces afterpunctuation
 set splitright                  " Puts new vsplit windows to the right
-" set splitbelow                  " Puts new split windows to the bottom
+set splitbelow                  " Puts new split windows to the bottom
 set smartindent
 
 
@@ -161,65 +161,25 @@ set nobackup                    " Stop backup
 set nowb
 
 
-" LeaderKey: ===================================================================
-let mapleader=","
+" Cursor: ======================================================================
+" Alterar o formato do cursor
+set guicursor=a:block
 
+set guicursor+=o:hor10-Cursor
+set guicursor+=n:Cursor
+set guicursor+=i-ci-sm:InsertCursor-hor10
+set guicursor+=r-cr:ReplaceCursor-hor10
+set guicursor+=c:CommandCursor-hor10
+set guicursor+=v-ve:VisualCursor
 
-" changer cursor type and color ================================================
-"au InsertLeave * hi Cursor guibg=#afd700  guifg=#ffffff
-"au InsertEnter * hi Cursor guibg=#ffffff guifg=#000000
-"au VimEnter    * hi Cursor guibg=#afd700  guifg=#ffffff
-"au InsertEnter * set nocursorline
-"au InsertLeave * set cursorline
+set guicursor+=a:blinkon0
 
-
-" Abre O Buffer No Safari: =====================================================
-abbrev saf :! open -a safari.app %:p<cr>
-
-
-" Remapear: ====================================================================
-imap jj <Esc>
-nmap <space> :
-" execute php
-nnoremap <F4> :! php %<CR>
-" edit the vimrc file
-nmap <leader>mm :e $MYVIMRC<CR>
-nmap <leader>ss :so $MYVIMRC<CR>
-
-
-" Disable Arrow Keys: ==========================================================
-" as mensagem foram movidas pro lado
-" nnoremap <Down>     :echoe ""<CR> " Use j
-" nnoremap <Right>    :echoe ""<CR> " Use l
-" nnoremap <Up>       :echoe ""<CR> " Use k
-" nnoremap <Down>     :echoe ""<CR> " Use j
-
-" Remapear Abas: ===============================================================
-nnoremap <leader>tn :tabnew<CR>
-nnoremap <leader>te :tabedit
-nnoremap <silent> <S-Right> :bn<CR>
-nnoremap <silent> <S-Left> :bp<CR>
-nnoremap <silent> <C-x> :bw<CR>
-"nnoremap <silent> <S-Right> :tabn<CR>
-"nnoremap <silent> <S-Left> :tabp<CR>
-"nnoremap <silent> <C-x> :tabclose<CR>
-
-
-" Bubble Text: =================================================================
-"http://vimcasts.org/episodes/bubbling-text/
-"Bubble single lines
-nmap <C-Up> ddkP
-nmap <C-Down> ddp
-"Bubble multiple lines
-vmap <C-Up> xkP`[V`]
-vmap <C-Down> xp`[V`]
-
-
-" Source The Vimrc File After Saving It: =======================================
-" no terminal digite: export MYVIMRC="/Users/sldobri/.vim/vimrc"
-if has("autocmd")
-  autocmd bufwritepost vimrc source $MYVIMRC
-endif
+" Alterar a cor do cursor
+highlight Cursor        ctermfg=15 guifg=#000000 ctermbg=37  guibg=#E6D874
+highlight InsertCursor  ctermfg=15 guifg=#000000 ctermbg=37  guibg=#66D9EF
+highlight VisualCursor  ctermfg=15 guifg=#000000 ctermbg=125 guibg=#F7962B
+highlight ReplaceCursor ctermfg=15 guifg=#000000 ctermbg=65  guibg=#EF5939
+highlight CommandCursor ctermfg=15 guifg=#000000 ctermbg=166 guibg=#465457
 
 
 " Nerdcommenter: ===============================================================
@@ -228,19 +188,6 @@ Bundle 'scrooloose/nerdcommenter'
 " [count]<leader>cy- Same as cc except that the commented line(s) are yanked first.
 " <leader>c$ - Comments the current line from the cursor to the end of line.
 " <leader>cA - Adds comment delimiters to the end of line and goes into insert mode between them
-
-
-" Php: =========================================================================
-Bundle 'donnut/vim-php54-syntax'
-let g:php_sql_query=1             " to highlight SQL syntax in strings
-let g:php_htmlInStrings=1         " to highlight HTML in string
-let g:php_noShortTags = 1         " to disable short tags
-let g:php_folding = 0
-let g:php_strict_blocks = 0
-let g:php_short_tags = 1
-let g:php_show_semicolon = 1
-let g:php_smart_semicolon = 1
-
 
 " HTML5: =======================================================================
 Bundle 'othree/html5.vim'
@@ -261,8 +208,51 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'airblade/vim-gitgutter'
 
 
+" Snipmate: ====================================================================
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+Bundle "honza/vim-snippets"
+
+
+" HexHilight: ==================================================================
+Bundle 'vim-scripts/hexHighlight.vim'
+" <Leader><F2> to ativate and desativate
+
+
+" VimTableMode: ===============================================================
+Bundle 'dhruvasagar/vim-table-mode'
+
+
+" VDebug: =====================================================================
+" Php Debug
+Bundle 'joonty/vdebug'
+
+
+" Utl: ========================================================================
+" Univeral Text Linking - Execute URLs, footnotes, open emails, organize ideas
+Bundle 'vim-scripts/utl.vim'
+
+
 " Easy Motions Yeah: ===========================================================
 Bundle 'Lokaltog/vim-easymotion'
+
+
+" PhpComplete: =================================================================
+Bundle 'shawncplus/phpcomplete.vim'
+Bundle 'arnaud-lb/vim-php-namespace'
+
+
+" Php: =========================================================================
+Bundle 'donnut/vim-php54-syntax'
+let g:php_sql_query=1             " to highlight SQL syntax in strings
+let g:php_htmlInStrings=1         " to highlight HTML in string
+let g:php_noShortTags = 1         " to disable short tags
+let g:php_folding = 0
+let g:php_strict_blocks = 0
+let g:php_short_tags = 1
+let g:php_show_semicolon = 1
+let g:php_smart_semicolon = 1
 
 
 " IdentLine: ===================================================================
@@ -273,9 +263,6 @@ let g:indentLine_color_gui='#778899'
 let g:indentLine_char='│'
 let g:indentLine_indentLevel=7
 
-
-" Php Cs_fixer: ================================================================
-nnoremap <F3> :!php-cs-fixer fix % --level=all<CR>
 
 " Vim Phpqa: ===================================================================
 Bundle 'joonty/vim-phpqa.git'
@@ -297,17 +284,6 @@ let g:user_emmet_expandabbr_key='<c-e>'
 let g:user_emmet_complete_tag=1
 let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
-
-" PhpComplete: =================================================================
-Bundle 'shawncplus/phpcomplete.vim'
-Bundle 'arnaud-lb/vim-php-namespace'
-
-autocmd  FileType  php setlocal omnifunc=phpcomplete#CompletePHP
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType vim set omnifunc=syntaxcomplete#Complete
 
 
 " Neocomplcache: ===============================================================
@@ -331,16 +307,10 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
             \: "\<TAB>"
 
 
-" Snipmate: ====================================================================
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
 
-
-" HexHilight: ==================================================================
-Bundle 'vim-scripts/hexHighlight.vim'
-" <Leader><F2> to ativate and desativate
+" Markdown: ===================================================================
+Bundle 'plasticboy/vim-markdown'
+let g:vim_markdown_folding_disabled=1
 
 
 " Calendar: ===================================================================
@@ -350,57 +320,6 @@ Bundle 'vim-scripts/hexHighlight.vim'
 "let g:calendar_mruler = 'Jan,Fev,Mar,Abr,Mai,Jun,Jul,Ago,Set,Out,Nov,Dez'
 "let g:calendar_wruler = 'Do Se Te Qa Qi Se Sa'
 "nmap <Leader>c :Calendar<CR>
-
-
-" VimTableMode: ===============================================================
-Bundle 'dhruvasagar/vim-table-mode'
-
-
-" VDebug: =====================================================================
-" Php Debug
-Bundle 'joonty/vdebug'
-
-
-" Markdown: ===================================================================
-Bundle 'plasticboy/vim-markdown'
-let g:vim_markdown_folding_disabled=1
-
-
-" Utl: ========================================================================
-" Univeral Text Linking - Execute URLs, footnotes, open emails, organize ideas
-Bundle 'vim-scripts/utl.vim'
-
-
-" Lorem Ipsum: =================================================================
-" Helpeful abbreviations
-iab lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-iab llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-
-" Autocomandos: ================================================================
-" autoformat
-au BufRead,BufWritePre *.html normal gg=G
-" au BufRead,BufWritePre *.php normal gg=G
-au BufRead,BufWritePre *.css normal gg=G
-au BufRead,BufWritePre *.js normal gg=G
-
-" Html
-au FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
-au FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
-" PHP
-" au FileType php setlocal textwidth=80
-" Markdown
-au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  set filetype=markdown
-au FileType vim setlocal tabstop=2 shiftwidth=2 softtabstop=2
-au FileType vim setlocal textwidth=250
-
-
-" Show Colorcolumn: ===========================================================
-" Set colorcolumn to be enabled when it goes over colum 80.
-" set colorcolumn=81
-"
-au FileType php :call matchadd('ColorColumn', '\%81v.*', 100)
-au FileType vim :call matchadd('ColorColumn', '\%121v.*', 250)
 
 
 " Functions: ==================================================================
@@ -424,17 +343,37 @@ function! <SID>StripTrailingWhitespaces()
   call cursor(l, c)
 endfunction
 
+
+" Autocomandos: ================================================================
 " Auto remove when saving
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 autocmd BufWritePre * :call <SID>TrimEndLines()
-
-
-" Fast Saving: ================================================================
-nmap <leader>w :w!<cr>
-
-
-" Show Battery Usage: =========================================================
-nnoremap <leader>bb :!pmset -g batt<CR>
+" autoformat
+autocmd BufRead,BufWritePre *.html normal gg=G
+autocmd BufRead,BufWritePre *.css normal gg=G
+autocmd BufRead,BufWritePre *.js normal gg=G
+" tab
+autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType js setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType vim setlocal tabstop=2 shiftwidth=2 softtabstop=2
+" Text width
+autocmd FileType php setlocal textwidth=250
+autocmd FileType vim setlocal textwidth=250
+" Color column
+autocmd FileType php :call matchadd('ColorColumn', '\%81v.*', 250)
+autocmd FileType vim :call matchadd('ColorColumn', '\%121v.*', 250)
+" Languages
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType vim set omnifunc=syntaxcomplete#Complete
+" Markdown
+autocmd BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  set filetype=markdown
+" no terminal digite: export MYVIMRC="/Users/sldobri/.dotfiles/vim/vimrc"
+autocmd bufwritepost vimrc source $MYVIMRC
 
 
 " Fuzzyfinder: ================================================================
@@ -443,19 +382,18 @@ Bundle 'vim-scripts/L9'
 let g:fuf_modesDisable = []
 let g:fuf_mrufile_maxItem = 200
 let g:fuf_mrucmd_maxItem = 200
-nnoremap <leader>b :FufBuffer<CR>
-nnoremap <leader>f :FufFile<CR>
-nnoremap <leader>d :FufDir<CR>
-nnoremap <leader>m :FufMruFile<CR>
-nnoremap <leader>c :FufFileWithFullCwd<CR>
-nnoremap <leader>t :FufTagWithCursorWord!<CR>
-nnoremap <leader>r :FufRenewCache<CR>
+"nnoremap <leader>b :FufBuffer<CR>
+"nnoremap <leader>f :FufFile<CR>
+"nnoremap <leader>d :FufDir<CR>
+"nnoremap <leader>m :FufMruFile<CR>
+"nnoremap <leader>c :FufFileWithFullCwd<CR>
+"nnoremap <leader>t :FufTagWithCursorWord!<CR>
+"nnoremap <leader>r :FufRenewCache<CR>
 
 
 " FocusMode: ==================================================================
 " Distraction-free writing in Vim
 Bundle 'junegunn/goyo.vim'
-nnoremap <F12> :Goyo<CR>
 let g:goyo_width=84
 let g:goyo_margin_top=1
 let g:goyo_margin_bottom=1
@@ -477,6 +415,7 @@ function! g:goyo_after()
   endif
 endfunction
 let g:goyo_callbacks = [function('g:goyo_before'), function('g:goyo_after')]
+" nnoremap <F12> :Goyo<CR>
 
 
 " Gmail Calendar: =============================================================
@@ -487,13 +426,6 @@ let g:calendar_google_task = 1
 " :Calendar -view=year -split=vertical -width=27
 " :Calendar -view=year -split=horizontal -position=below -height=12
 " :Calendar -view=clock
-
-
-" Easier Window Navigation: ===================================================
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
 
 
 " Surround: ===================================================================
@@ -510,37 +442,97 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:bufferline_rotate = 1
- let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+
 
 " NerdTree: ====================================================================
 " Allows to explore filesystem
 Bundle 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs'
 cd ~/Copy/TreeHouse
 let g:NERDTreeHighlightCursorline=1     " Destaca a linha atual
 let g:NERDTreeShowLineNumbers=0
 let g:NERDTreeMinimalUI=1
 let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
 let g:NERDTreeWinPos = "right"
+" nnoremap <F2>  :NERDTreeTabsToggle<CR>
 
 
-" NerdTreeTabs: ================================================================
-Bundle 'jistr/vim-nerdtree-tabs'
+" LeaderKey: ===================================================================
+let mapleader=","
+
+
+" Remapear: ====================================================================
+imap jj <Esc>
+nmap <space> :
+" edit the vimrc file
+nmap <leader>mm :e $MYVIMRC<CR>
+nmap <leader>ss :so $MYVIMRC<CR>
+
+
+" Navegar: ====================================================================
+" entre Buffers
+nnoremap <silent> <S-Right> :bn<CR>
+nnoremap <silent> <S-Left> :bp<CR>
+nnoremap <silent> <C-x> :q<CR>
+" Entre Janlas
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+" Entre tabs
+"nnoremap <silent> <S-Right> :tabn<CR>
+"nnoremap <silent> <S-Left> :tabp<CR>
+"nnoremap <silent> <C-x> :tabclose<CR>
+
+
+" Bubble Text: =================================================================
+"http://vimcasts.org/episodes/bubbling-text/
+"Bubble single lines
+nmap <C-Up> ddkP
+nmap <C-Down> ddp
+"Bubble multiple lines
+vmap <C-Up> xkP`[V`]
+vmap <C-Down> xp`[V`]
+
+" Fast Saving: ================================================================
+nnoremap <leader>w :w!<cr>
+
+
+" Show Battery Usage: =========================================================
+nnoremap <leader>bb :!pmset -g batt<CR>
+
+" Teclas de Funcoes: ==========================================================
 nnoremap <F2>  :NERDTreeTabsToggle<CR>
-let g:nerdtree_tabs_focus_on_files=1
+" execute php-cs-fixer
+nnoremap <F3> :!php-cs-fixer fix % --level=all<CR>
+" execute php
+nnoremap <F4> :! php %<CR>
+" Livrar distracoes
+nnoremap <F12> :Goyo<CR>
+
+" Buscas Fuzzy
+nnoremap <leader>b :FufBuffer<CR>
+nnoremap <leader>f :FufFile<CR>
+nnoremap <leader>d :FufDir<CR>
+nnoremap <leader>m :FufMruFile<CR>
+nnoremap <leader>c :FufFileWithFullCwd<CR>
+nnoremap <leader>t :FufTagWithCursorWord!<CR>
+nnoremap <leader>r :FufRenewCache<CR>
 
 
-set guicursor=a:block
+" Disable Arrow Keys: ==========================================================
+" as mensagem foram movidas pro lado
+" nnoremap <Down>     :echoe ""<CR> " Use j
+" nnoremap <Right>    :echoe ""<CR> " Use l
+" nnoremap <Up>       :echoe ""<CR> " Use k
+" nnoremap <Down>     :echoe ""<CR> " Use j
 
-set guicursor+=o:hor10-Cursor
-set guicursor+=n:Cursor
-set guicursor+=i-ci-sm:InsertCursor-hor10
-set guicursor+=r-cr:ReplaceCursor-hor10
-set guicursor+=c:CommandCursor-hor10
-set guicursor+=v-ve:VisualCursor
+" Lorem Ipsum: =================================================================
+" Helpeful abbreviations
+iab lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+iab llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
-set guicursor+=a:blinkon0
-hi Cursor        ctermfg=15 guifg=#000000 ctermbg=37  guibg=#E6D874
-hi InsertCursor  ctermfg=15 guifg=#000000 ctermbg=37  guibg=#66D9EF
-hi VisualCursor  ctermfg=15 guifg=#000000 ctermbg=125 guibg=#F7962B
-hi ReplaceCursor ctermfg=15 guifg=#000000 ctermbg=65  guibg=#EF5939
-hi CommandCursor ctermfg=15 guifg=#000000 ctermbg=166 guibg=#465457
+
+" Abre O Buffer No Safari: =====================================================
+abbrev saf :! open -a safari.app %:p<cr>

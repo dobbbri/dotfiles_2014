@@ -102,9 +102,6 @@ hi cssValueLength ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gu
 hi cssCommonAttr ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
 hi cssBraces ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 
-hi TabLineFill guifg=#000000 guibg=#ffffff gui=NONE
-"hi TabLine ctermfg=Blue ctermbg=Yellow cterm=NONE guifg=Blue guibg=Yellow gui=NONE
-"hi TabLineSel ctermfg=Red ctermbg=Yellow cterm=NONE guifg=red guibg=yellow gui=NONE
 
 hi link htmlTag Identifier
 hi link markdownCode String

@@ -32,8 +32,8 @@ syntax on                       " Syntax highlighting
 " Colorscheme: =================================================================
 set background=dark
 set t_Co=256                    " Allow the use of 256 colors in the terminal
-" colorscheme molokai
-colorscheme Iceberg
+colorscheme molokai
+" colorscheme Iceberg
 
 if has('gui_running')
     let g:rehash256=0
@@ -86,7 +86,8 @@ set guioptions-=Beb
 set guioptions-=TM              " Remove the toolbar e menju
 set guioptions-=LrlR             " Remove scrollbars
 set laststatus=2                " always show status line
-set guifont=Anonymous\ Pro\ for\ Powerline:h18
+set guifont=Meslo\ LG\ S\ for\ Powerline:h16
+" set guifont=Anonymous\ Pro\ for\ Powerline:h18
 " set guifont=Anonymous\ Pro:h18
 set winminheight=0              " Windows can be 0 line high
 set linespace=0                 " No extra spaces between rows
@@ -107,7 +108,7 @@ set nocursorcolumn
 set nocursorline
 set modeline                    " " always show file name
 set cursorline
-set fillchars+=vert:╏
+set fillchars+=vert:│
 set nolazyredraw
 
 
@@ -508,7 +509,8 @@ let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-
+let g:bufferline_rotate = 1
+ let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 
 " NerdTree: ====================================================================
 " Allows to explore filesystem
@@ -537,8 +539,8 @@ set guicursor+=c:CommandCursor-hor10
 set guicursor+=v-ve:VisualCursor
 
 set guicursor+=a:blinkon0
-hi Cursor        ctermfg=15 guifg=#000000 ctermbg=37  guibg=#dfff00
-hi InsertCursor  ctermfg=15 guifg=#000000 ctermbg=37  guibg=#00BFFF
-hi VisualCursor  ctermfg=15 guifg=#000000 ctermbg=125 guibg=#FFA500
-hi ReplaceCursor ctermfg=15 guifg=#000000 ctermbg=65  guibg=#af00df
-hi CommandCursor ctermfg=15 guifg=#000000 ctermbg=166 guibg=#00FF00
+hi Cursor        ctermfg=15 guifg=#000000 ctermbg=37  guibg=#E6D874
+hi InsertCursor  ctermfg=15 guifg=#000000 ctermbg=37  guibg=#66D9EF
+hi VisualCursor  ctermfg=15 guifg=#000000 ctermbg=125 guibg=#F7962B
+hi ReplaceCursor ctermfg=15 guifg=#000000 ctermbg=65  guibg=#EF5939
+hi CommandCursor ctermfg=15 guifg=#000000 ctermbg=166 guibg=#465457

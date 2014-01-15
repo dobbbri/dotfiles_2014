@@ -46,3 +46,4 @@ PS1="\[${BOLD}${MAGENTA}\]\u\[$WHITE\]@\[${BOLD}${ORANGE}\]\h\[$WHITE\]: \[$GREE
 
 
 export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATH"
+export PATH="/Applications/MAMP/bin/php/php5.4.19/bin:$PATH"

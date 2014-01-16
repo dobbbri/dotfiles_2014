@@ -87,7 +87,8 @@ set guioptions-=Beb
 set guioptions-=TM              " Remove the toolbar e menju
 set guioptions-=LrlR             " Remove scrollbars
 set laststatus=2                " always show status line
-set guifont=Source\ Code\ Pro\ for\ Powerline:h17
+set guifont=monofur\ for\ Powerline:h20
+" set guifont=Source\ Code\ Pro\ for\ Powerline:h17
 " set guifont=Envy Code R\ for\ Powerline:h18
 set winminheight=0              " Windows can be 0 line high
 set linespace=0                 " No extra spaces between rows
@@ -241,6 +242,7 @@ Bundle 'Lokaltog/vim-easymotion'
 " PhpComplete: =================================================================
 Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'arnaud-lb/vim-php-namespace'
+Bundle 'StanAngeloff/php.vim'
 
 
 " Php: =========================================================================
@@ -275,6 +277,11 @@ let g:phpqa_codesniffer_args = "--standard=PSR2"
 let g:phpqa_php_cmd='/Applications/MAMP/bin/php/php5.4.19/bin/php'
 let g:phpqa_codesniffer_cmd='/Applications/MAMP/bin/phpcs'
 let g:phpqa_messdetector_cmd='/Applications/MAMP/bin/phpmd'
+
+
+" Auto Pairs: ==================================================================
+Bundle 'jiangmiao/auto-pairs'
+let g:AutoPairsFlyMode = 1
 
 
 " Emmet: =======================================================================

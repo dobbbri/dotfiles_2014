@@ -80,6 +80,7 @@ set wildmode=full               " Command <Tab> completion, list matches
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.DS_Store   " Linux/MacOSX
 
+
 " Gui: =========================================================================
 set guioptions=aAc              " aA = autoselect  c = console dialogs
 set guioptions-=Beb
@@ -99,8 +100,8 @@ set title                       " change the terminal's title
 set cursorline                  " hi cursor line
 set icon                        " change the title to include the current file
 set showtabline=1               " 1=exibe qdo tiver +d 1 tab, 2=sempre exibe
-" set lines=45
-" set columns=90
+set lines=45
+set columns=85
 set showcmd                     " show command in botton rigth of the screen
 set noshowmode
 set nocursorcolumn
@@ -350,14 +351,15 @@ function! BrowseDoc()
     endif
 endfunction
 
+
 " Autocomandos: ================================================================
 " Auto remove when saving
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 autocmd BufWritePre * :call <SID>TrimEndLines()
 " autoformat
-autocmd BufRead,BufWritePre *.html normal gg=G
-autocmd BufRead,BufWritePre *.css normal gg=G
-autocmd BufRead,BufWritePre *.js normal gg=G
+autocmd BufRead,BufWritePre *.html normal mzgg=G`z
+autocmd BufRead,BufWritePre *.css normal mzgg=G`z
+autocmd BufRead,BufWritePre *.js normal mzgg=G`z
 " tab
 autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
@@ -507,6 +509,7 @@ map <F7> :call BrowseDoc()<CR>
 " Livrar distracoes
 nnoremap <F12> :Goyo<CR>
 map <F1> <Plug>PeepOpen
+nnoremap <F8> mzgg=G`z<CR>
 
 " map <unique> <silent> <Leader>p <Plug>PeepOpen
 " Disable Arrow Keys: ==========================================================

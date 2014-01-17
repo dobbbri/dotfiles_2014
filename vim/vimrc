@@ -506,17 +506,18 @@ nnoremap <leader>w :w!<cr>
 nnoremap <leader>bb :!pmset -g batt<CR>
 
 " Teclas de Funcoes: ==========================================================
-nnoremap <F2>  :NERDTreeToggle<CR>
+" menu de selecao de arwuivos
+map <F2> <Plug>PeepOpen
 " execute php-cs-fixer
 nnoremap <F3> :!php-cs-fixer fix % --level=all<CR>
 " execute php
 nnoremap <F4> :! php %<CR>
 "manual do php
-map <F7> :call BrowseDoc()<CR>
-" Livrar distracoes
+map <F5> :call BrowseDoc()<CR>
+" alinhar codigo
+nnoremap <F6> mzgg=G`z<CR>
+" remover distracoes
 nnoremap <F12> :Goyo<CR>
-map <F1> <Plug>PeepOpen
-nnoremap <F8> mzgg=G`z<CR>
 
 " map <unique> <silent> <Leader>p <Plug>PeepOpen
 " Disable Arrow Keys: ==========================================================

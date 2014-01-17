@@ -101,8 +101,8 @@ set title                       " change the terminal's title
 set cursorline                  " hi cursor line
 set icon                        " change the title to include the current file
 set showtabline=1               " 1=exibe qdo tiver +d 1 tab, 2=sempre exibe
-set lines=45
-set columns=85
+"set lines=45
+"set columns=85
 set showcmd                     " show command in botton rigth of the screen
 set noshowmode
 set nocursorcolumn

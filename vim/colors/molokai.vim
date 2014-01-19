@@ -32,7 +32,7 @@ hi Boolean         guifg=#AE81FF
 hi Character       guifg=#E6DB74
 hi Number          guifg=#AE81FF
 hi String          guifg=#E6DB74
-hi Conditional     guifg=#F92672               gui=none
+hi Conditional     guifg=#FFFFFF               gui=none
 hi Constant        guifg=#AE81FF               gui=none
 hi Cursor          guifg=#000000 guibg=#F8F8F0
 hi Debug           guifg=#BCA3A3               gui=none
@@ -55,7 +55,7 @@ hi Identifier      guifg=#FD971F
 hi Ignore          guifg=#808080 guibg=bg
 hi IncSearch       guifg=#C4BE89 guibg=#000000
 
-hi Keyword         guifg=#F92672               gui=none
+hi Keyword         guifg=#A6E22E               gui=none
 hi Label           guifg=#E6DB74               gui=none
 hi Macro           guifg=#C4BE89               gui=italic
 hi SpecialKey      guifg=#66D9EF               gui=italic
@@ -63,7 +63,7 @@ hi SpecialKey      guifg=#66D9EF               gui=italic
 hi MatchParen      guifg=#000000 guibg=#FD971F gui=none
 hi ModeMsg         guifg=#E6DB74
 hi MoreMsg         guifg=#E6DB74
-hi Operator        guifg=#F92672
+hi Operator        guifg=#FFFFFF gui=italic
 
 " complete menu
 hi Pmenu           guifg=#66D9EF guibg=#000000
@@ -80,7 +80,7 @@ hi Search          guifg=#FFFFFF guibg=#455354
 hi SignColumn      guifg=#A6E22E guibg=#232526
 hi SpecialChar     guifg=#F92672               gui=none
 hi SpecialComment  guifg=#465457               gui=none
-hi Special         guifg=#66D9EF guibg=bg      gui=italic
+hi Special         guifg=#FFFFFF guibg=bg      gui=none
 hi SpecialKey      guifg=#888A85               gui=italic
 if has("spell")
     hi SpellBad    guisp=#FF0000 gui=undercurl
@@ -92,13 +92,13 @@ hi Statement       guifg=#F92672               gui=none
 hi StatusLine      guifg=#455354 guibg=fg
 hi StatusLineNC    guifg=#808080 guibg=#080808
 hi StorageClass    guifg=#FD971F               gui=italic
-hi Structure       guifg=#66D9EF
+hi Structure       guifg=#FFFFFF
 hi Tag             guifg=#F92672               gui=italic
 hi Title           guifg=#ef5939
 hi Todo            guifg=#FFFFFF guibg=bg      gui=none
 
-hi Typedef         guifg=#66D9EF
-hi Type            guifg=#66D9EF               gui=none
+hi Typedef         guifg=#A6E22E
+hi Type            guifg=#A6E22E            gui=none
 hi Underlined      guifg=#808080               gui=underline
 
 hi VertSplit       guifg=#465457 guibg=#111111 gui=none
@@ -108,7 +108,7 @@ hi WarningMsg      guifg=#FFFFFF guibg=#333333 gui=none
 hi WildMenu        guifg=#66D9EF guibg=#000000
 hi colorloumn      guibg=#FFFFFF guibg=#778899
 
-hi Normal          guifg=#F8F8F2 guibg=#111111
+hi Normal          guifg=#66D9EF guibg=#111111
 hi Comment         guifg=#778899                 gui=italic
 hi CursorLine                    guibg=#293739
 hi CursorColumn                  guibg=#293739

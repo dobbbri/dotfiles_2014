@@ -28,7 +28,7 @@ else
 endif
 
 
-hi Boolean         guifg=#AE81FF
+hi Boolean         guifg=#F92672
 hi Character       guifg=#E6DB74
 hi Number          guifg=#AE81FF
 hi String          guifg=#E6DB74
@@ -88,12 +88,12 @@ if has("spell")
     hi SpellLocal  guisp=#70F0F0 gui=undercurl
     hi SpellRare   guisp=#FFFFFF gui=undercurl
 endif
-hi Statement       guifg=#F92672               gui=none
+hi Statement       guifg=#A6E22E               gui=none
 hi StatusLine      guifg=#455354 guibg=fg
 hi StatusLineNC    guifg=#808080 guibg=#080808
-hi StorageClass    guifg=#FD971F               gui=italic
+hi StorageClass    guifg=#A6E22E               gui=italic
 hi Structure       guifg=#FFFFFF
-hi Tag             guifg=#F92672               gui=italic
+hi Tag             guifg=#A6E22E               gui=italic
 hi Title           guifg=#ef5939
 hi Todo            guifg=#FFFFFF guibg=bg      gui=none
 

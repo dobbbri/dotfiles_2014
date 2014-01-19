@@ -87,7 +87,8 @@ set guioptions-=Beb
 set guioptions-=TM              " Remove the toolbar e menju
 set guioptions-=LrlR             " Remove scrollbars
 set laststatus=2                " always show status line
-set guifont=monofur\ for\ Powerline:h20
+set antialias
+set guifont=monofur\ for\ Powerline:h21
 " set guifont=Source\ Code\ Pro\ for\ Powerline:h17
 " set guifont=Envy Code R\ for\ Powerline:h18
 set winminheight=0              " Windows can be 0 line high

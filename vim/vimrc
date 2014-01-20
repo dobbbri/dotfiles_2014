@@ -32,13 +32,12 @@ syntax on                       " Syntax highlighting
 " Colorscheme: =================================================================
 set background=dark
 set t_Co=256                    " Allow the use of 256 colors in the terminal
-colorscheme molokai
 " colorscheme Iceberg
 
 if has('gui_running')
-    let g:rehash256=0
-else
-    let g:rehash256=1
+    colorscheme new_molokai
+  else
+    colorscheme molokai
 endif
 
 " Trailing Space: ==============================================================
@@ -255,13 +254,6 @@ let g:php_smart_semicolon = 1
 
 " Nerdcommenter: ===============================================================
 Bundle 'scrooloose/nerdcommenter'
-let g:NERDCompactSexyComs=0
-let g:NERDSpaceDelims=1
-let g:NERDBlockComIgnoreEmpty=0
-"imap <C-i> <plug>NERDCommenterInsert
-"map <C-s>  <plug>NERDCommenterSexy
-"map <C-t>  <plug>NERDCommenterToggle
-"map <C-c>  <plug>NERDCommenterComment
 
 
 " IdentLine: ===================================================================
@@ -505,6 +497,7 @@ nmap <C-Down> ddp
 vmap <C-Up> xkP`[V`]
 vmap <C-Down> xp`[V`]
 
+
 " Fast Saving: ================================================================
 nnoremap <leader>w :w!<cr>
 
@@ -512,10 +505,7 @@ nnoremap <leader>w :w!<cr>
 " Show Battery Usage: =========================================================
 nnoremap <leader>bb :!pmset -g batt<CR>
 
-imap <C-i> <plug>NERDCommenterInsert
-map <C-s>  <plug>NERDCommenterSexy
-map <C-t>  <plug>NERDCommenterToggle
-map <C-c>  <plug>NERDCommenterComment
+
 " Teclas de Funcoes: ==========================================================
 " menu de selecao de arwuivos
 map <F2> <Plug>PeepOpen
@@ -530,6 +520,7 @@ nnoremap <F6> mzgg=G`z<CR>
 " remover distracoes
 nnoremap <F12> :Goyo<CR>
 
+
 " map <unique> <silent> <Leader>p <Plug>PeepOpen
 " Disable Arrow Keys: ==========================================================
 " as mensagem foram movidas pro lado
@@ -537,6 +528,7 @@ nnoremap <F12> :Goyo<CR>
 " nnoremap <Right>    :echoe ""<CR> " Use l
 " nnoremap <Up>       :echoe ""<CR> " Use k
 " nnoremap <Down>     :echoe ""<CR> " Use j
+
 
 " Lorem Ipsum: =================================================================
 " Helpeful abbreviations
@@ -550,3 +542,24 @@ abbrev saf :! open -a safari.app %:p<cr>
 
 " Pasta De Trabalho: ===========================================================
 cd ~/Copy/TreeHouse
+
+
+" PHPCS: =======================================================================
+function! RunPhpcs()
+    let l:filename=@%
+    let l:phpcs_output=system('phpcs --report=csv --standard=YMC '.l:filename)
+"    echo l:phpcs_output
+    let l:phpcs_list=split(l:phpcs_output, "\n")
+    unlet l:phpcs_list[0]
+    cexpr l:phpcs_list
+    cwindow
+endfunction
+
+set errorformat+=\"%f\"\\,%l\\,%c\\,%t%*[a-zA-Z]\\,\"%m\"
+command! Phpcs execute RunPhpcs()
+
+
+" PHP Documentor: ==============================================================
+Bundle 'tobyS/pdv'
+let g:pdv_template_dir = "~/.dotfiles/vim/bundle/pdv/templates_snip"
+nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>

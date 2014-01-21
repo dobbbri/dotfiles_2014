@@ -35,7 +35,8 @@ set t_Co=256                    " Allow the use of 256 colors in the terminal
 " colorscheme Iceberg
 
 if has('gui_running')
-    colorscheme new_molokai
+    colorscheme tron
+    "colorscheme new_molokai
   else
     colorscheme molokai
 endif
@@ -176,11 +177,11 @@ set guicursor+=v-ve:VisualCursor
 set guicursor+=a:blinkon0
 
 " Alterar a cor do cursor
-highlight Cursor        ctermfg=15 guifg=#000000 ctermbg=37  guibg=#E6D874
-highlight InsertCursor  ctermfg=15 guifg=#000000 ctermbg=37  guibg=#66D9EF
-highlight VisualCursor  ctermfg=15 guifg=#000000 ctermbg=125 guibg=#F7962B
-highlight ReplaceCursor ctermfg=15 guifg=#000000 ctermbg=65  guibg=#EF5939
-highlight CommandCursor ctermfg=15 guifg=#000000 ctermbg=166 guibg=#465457
+highlight Cursor        ctermfg=15 guifg=#ffffff ctermbg=37  guibg=#5f00af
+highlight InsertCursor  ctermfg=15 guifg=#ffffff ctermbg=37  guibg=#005fff
+highlight VisualCursor  ctermfg=15 guifg=#ffffff ctermbg=125 guibg=#ff5f00
+highlight ReplaceCursor ctermfg=15 guifg=#ffffff ctermbg=65  guibg=#ff0000
+highlight CommandCursor ctermfg=15 guifg=#000000 ctermbg=166 guibg=#9e9e9e
 
 
 
@@ -434,8 +435,10 @@ Bundle 'tpope/vim-surround'
 
 " Airline: ====================================================================
 Bundle 'bling/vim-airline'
+Bundle 'paranoida/vim-airlineish'
 let g:airline_powerline_fonts = 1
 let g:bufferline_echo=1
+let g:airline_theme = 'airlineish'
 " tabline
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -563,3 +566,16 @@ command! Phpcs execute RunPhpcs()
 Bundle 'tobyS/pdv'
 let g:pdv_template_dir = "~/.dotfiles/vim/bundle/pdv/templates_snip"
 nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
+
+
+" Remove Delay: ================================================================
+" The issue is that Powerline causes a delay when leaving Insert mode, but this
+" can be  fixed by changing the InsertEnter timeoutlen setting to 0:
+if ! has('gui_running')
+  set ttimeoutlen=10
+  augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=1000
+  augroup END
+endif

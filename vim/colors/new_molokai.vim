@@ -24,14 +24,14 @@ hi Character       guifg=Yellow
 hi Number          guifg=Purple
 hi String          guifg=Yellow
 hi Conditional     guifg=White
-hi Constant        guifg=#AE81FF
+hi Constant        guifg=White
 hi Cursor          guifg=Black guibg=White
 hi Debug           guifg=Gray
 hi Define          guifg=White
 hi Delimiter       guifg=Gray
 hi DiffAdd                       guibg=Yellow
-hi DiffChange      guifg=Gray guibg=Gray
-hi DiffDelete      guifg=Red guibg=#1E0010
+hi DiffChange      guifg=Black guibg=Gray
+hi DiffDelete      guifg=Red guibg=white
 hi DiffText                      guibg=Gray gui=italic,none
 
 hi Directory       guifg=Green
@@ -58,7 +58,7 @@ hi Operator        guifg=White gui=italic
 
 " complete menu
 hi Pmenu           guifg=Cyan guibg=Black
-hi PmenuSel                      guibg=Gray
+hi PmenuSel        guifg=Black  guibg=Yellow
 hi PmenuSbar                     guibg=Black
 hi PmenuThumb      guifg=Cyan
 
@@ -94,7 +94,7 @@ hi Typedef         guifg=Green
 hi Type            guifg=Green
 hi Underlined      guifg=Gray               gui=underline
 
-hi VertSplit       guifg=Gray guibg=Black
+hi VertSplit       guifg=Gray    guibg=Black
 hi VisualNOS                     guibg=Gray
 hi Visual                        guibg=Gray
 hi WarningMsg      guifg=White guibg=Gray
@@ -118,8 +118,8 @@ hi htmlSpecialChar guifg=White
 hi cssFunctionName guifg=Orange
 hi cssColor        guifg=Purple
 hi cssPseudoClassId guifg=Orange
-hi cssTagNane guifg=Orange
+hi cssTagNane      guifg=Orange
 hi cssClassName    guifg=Orange
 hi cssValueLength  guifg=Purple
-hi cssCommonAttr   guifg=#ffffff
+hi cssCommonAttr   guifg=white
 hi cssBraces       guifg=White

@@ -45,5 +45,10 @@ function parse_git_branch() {
 PS1="\[${BOLD}${MAGENTA}\]\u\[$WHITE\]@\[${BOLD}${ORANGE}\]\h\[$WHITE\]: \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\] > \[$RESET\]"
 
 
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATH"
-export PATH="/Applications/MAMP/bin/php/php5.4.19/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/bin:/Applications/XAMPP/xamppfiles/bin:/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATH"
+
+alias myup='sudo /usr/local/mysql/support-files/mysql.server start'
+alias mydown='sudo /usr/local/mysql/support-files/mysql.server stop'
+alias apup='sudo apachectl start'
+alias apdown='sudo apachectl stop'
+alias apres='sudo apachectl restart'

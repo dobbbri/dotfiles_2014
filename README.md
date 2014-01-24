@@ -45,6 +45,7 @@
 * ln -s ~/.dotfiles/gitconfig ~/.gitconfig
 * ln -s ~/.dotfiles/gitignore\_global ~/.gitignore\_global
 * ln -s ~/.dotfiles/bash\_profile ~/.bash_profile
+* source .bash_profile
 
 ###4 - Instalar o Vundle:
 > * git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle

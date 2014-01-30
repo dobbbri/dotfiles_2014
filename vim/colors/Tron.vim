@@ -57,11 +57,11 @@ hi Todo ctermfg=59 ctermbg=NONE cterm=inverse,bold guifg=#324357 guibg=NONE gui=
 hi Type ctermfg=NONE ctermbg=NONE cterm=NONE guifg=SteelBlue1 guibg=NONE gui=NONE
 hi Underlined ctermfg=NONE ctermbg=NONE cterm=underline guifg=White guibg=NONE gui=underline
 
-hi htmlTag ctermfg=NONE ctermbg=NONE cterm=NONE guifg=#95cc5e guibg=NONE gui=NONE
-hi htmlEndTag ctermfg=NONE ctermbg=NONE cterm=NONE guifg=#95cc5e guibg=NONE gui=NONE
-hi htmlTagName ctermfg=NONE ctermbg=NONE cterm=NONE guifg=Purple guibg=NONE gui=NONE
+hi htmlTag ctermfg=NONE ctermbg=NONE cterm=NONE guifg=#267fb5 guibg=NONE gui=NONE
+hi htmlEndTag ctermfg=NONE ctermbg=NONE cterm=NONE guifg=#267fb5 guibg=NONE gui=NONE
+hi htmlTagName ctermfg=NONE ctermbg=NONE cterm=NONE guifg=White guibg=NONE gui=NONE
 hi htmlArg ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
-hi htmlSpecialChar ctermfg=75 ctermbg=NONE cterm=NONE guifg=#4cbbff guibg=NONE gui=NONE
+hi htmlSpecialChar ctermfg=75 ctermbg=NONE cterm=NONE guifg=Yellow guibg=NONE gui=NONE
 
 hi javaScriptFunction ctermfg=31 ctermbg=NONE cterm=NONE guifg=#267fb5 guibg=NONE gui=italic
 hi javaScriptRailsFunction ctermfg=31 ctermbg=NONE cterm=NONE guifg=#267fb5 guibg=NONE gui=NONE

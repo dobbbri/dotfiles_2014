@@ -511,7 +511,7 @@ nnoremap <leader>bb :!pmset -g batt<CR>
 
 " Teclas de Funcoes: ==========================================================
 " menu de selecao de arwuivos
-map <F2> <Plug>PeepOpen
+map <unique> <silent> <F2> <Plug>PeepOpen
 " execute php-cs-fixer
 nnoremap <F3> :!php-cs-fixer fix % --level=all<CR>
 " execute php

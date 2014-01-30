@@ -2,7 +2,7 @@
 	name = sldobri
 	email = sergiodobri@gmail.com
 [core]
-    excludesfile = /Users/sldobri/.gitignore_global
+	excludesfile = /Users/sldobri/.gitignore_global
 [alias]
     st = status
     co = checkout
@@ -20,3 +20,9 @@
     ui = true
 [mergetool]
 	keepBackup = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

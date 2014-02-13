@@ -62,7 +62,22 @@ set mousehide                   " Hide the mouse cursor while typing
 " Encoding: ====================================================================
 set fileencoding=utf-8
 set encoding=utf-8
-scriptencoding utf-8
+scriptencoding utf-"
+
+" Corretor Ortográfico: ========================================================
+set spell spelllang=pt,en
+
+" Como usar:
+"
+" ]s vai para a próxima palavra;
+" [s vai para a palavra anterior;
+" z= mostra a lista de sugestões para a palavra;
+" zg adiciona a palavra sob o cursor no dicionário, assim ela não será mais marcada como errada;
+" zug desfaz a última palavra adicionada;
+" zw remove a palavra sob o cursor do dicionário, assim ela será marcada como errada;
+" zuw desfaz a última palavra removida.
+
+" set nospell                     " no Spell checking on
 
 
 " Pesquisa: ====================================================================
@@ -82,9 +97,9 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.DS_Store   " Linux/MacOSX
 
 
 " Gui: =========================================================================
-set guioptions=aAc              " aA = autoselect  c = console dialogs
+set guioptions=aAce              " aA = autoselect  c = console dialogs
 set guioptions-=Beb
-set guioptions-=TM              " Remove the toolbar e menju
+set guioptions-=TMm              " Remove the toolbar e menju
 set guioptions-=LrlR             " Remove scrollbars
 set laststatus=2                " always show status line
 set antialias
@@ -122,7 +137,6 @@ set backspace=indent,eol,start
 set clipboard=autoselect
 set confirm                     " If unsaved changes, ask if you want to save
 set timeoutlen=500              " reduce a slag after type leader key + command
-set nospell                     " no Spell checking on
 set nowrap                      " Do not wrap long lines
 set nofoldenable                " No Auto fold code
 set noerrorbells                " don't beep
@@ -375,7 +389,7 @@ autocmd FileType js setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType vim setlocal tabstop=2 shiftwidth=2 softtabstop=2
 " Text width
 autocmd FileType php setlocal textwidth=250
-autocmd FileType vim setlocal textwidth=250
+autocmd FileType vim setlocal textwidth=250 nospell
 " Color column
 autocmd FileType php :call matchadd('ColorColumn', '\%81v.*', 250)
 autocmd FileType vim :call matchadd('ColorColumn', '\%121v.*', 250)
@@ -390,7 +404,8 @@ autocmd FileType vim set omnifunc=syntaxcomplete#Complete
 autocmd BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  set filetype=markdown
 " no terminal digite: export MYVIMRC="/Users/sldobri/.dotfiles/vim/vimrc"
 autocmd bufwritepost vimrc source $MYVIMRC
-
+" ir para a pasta do arquivo aberto
+autocmd BufEnter * silent! lcd %:p:h
 
 " FocusMode: ==================================================================
 " Distraction-free writing in Vim
@@ -513,16 +528,24 @@ nnoremap <leader>bb :!pmset -g batt<CR>
 " menu de selecao de arwuivos
 map <unique> <silent> <F2> <Plug>PeepOpen
 " execute php-cs-fixer
-nnoremap <F3> :!php-cs-fixer fix % --level=all<CR>
+nnoremap <silent> <F3> :!php-cs-fixer fix % --level=all<CR>
 " execute php
-nnoremap <F4> :! php %<CR>
+nnoremap <silent> <F4> :! php %<CR>
 "manual do php
 map <F5> :call BrowseDoc()<CR>
 " alinhar codigo
-nnoremap <F6> mzgg=G`z<CR>
+nnoremap <silent> <F6> mzgg=G`z<CR>
+" taglist
+nnoremap <silent> <F8> :TlistToggle<CR>
 " remover distracoes
-nnoremap <F12> :Goyo<CR>
+nnoremap <silent> <F12> :Goyo<CR>
+map <silent> <F7> :call RunJS() <cr>
 
+
+" Run Javascript: =============================================================
+function RunJS()
+  exec "! node %"
+endfunction
 
 " map <unique> <silent> <Leader>p <Plug>PeepOpen
 " Disable Arrow Keys: ==========================================================
@@ -548,6 +571,7 @@ cd ~/Copy/TreeHouse
 
 
 " PHPCS: =======================================================================
+/Users/sldobri
 function! RunPhpcs()
     let l:filename=@%
     let l:phpcs_output=system('phpcs --report=csv --standard=YMC '.l:filename)
@@ -579,3 +603,81 @@ if ! has('gui_running')
     au InsertLeave * set timeoutlen=1000
   augroup END
 endif
+
+
+" Rename Buffer/Files: ========================================================
+function! RenameFunction(newname)
+    let a:oldname = expand("%:p")
+    exec "saveas " . a:newname
+    call delete(a:oldname)
+endfunction
+
+command! -nargs=1 Rename call RenameFunction(<f-args>)
+
+
+"AutoSave: ====================================================================
+bundle '907th/vim-auto-save'
+let g:auto_save = 1                 " enable AutoSave on Vim startup
+let g:auto_save_no_updatetime = 1   " do not change the 'updatetime' option
+
+
+" Vawa Plugin for VIM  Version 1.00 ===========================================
+" Maintainer:	Sandeep.c.r<sandeepcr2@gmail.com>
+
+function! s:vawa()
+    call clearmatches()
+    let s:temp = getpos('.')
+    let s:current_col = s:temp[2]
+    let s:current_line = s:temp[1]
+    let s:temp = searchpos('[>$]','bcn')
+    let s:dollar_line = s:temp[0]
+    let s:dollar_col = s:temp[1]
+    if(s:dollar_line != s:current_line)
+        return
+    endif
+    let s:temp = getbufline(bufnr('%'),line('.'))
+    let s:varend = match(s:temp[0], '[^a-zA-Z0-9_\x7f-\xff]\|\n', s:dollar_col)+1
+    let s:space_col = s:varend
+    if((s:space_col > s:dollar_col) && ( s:space_col< s:current_col))
+        return
+    endif
+    if(s:varend == 0)
+        let s:varend = strlen(s:temp[0])+1
+    endif
+    let s:current_char = s:temp[0][s:current_col-1]
+    if(s:current_char == '>' || s:current_char == '-')
+        return
+    endif
+    if(exists("g:vawahl"))
+        exe "highlight VarHl  " . g:vawahl
+    else
+        highlight VarHl  ctermbg=black ctermfg=red guifg=#ff0000 guibg=#000000 ctermfg=LightRed gui=bold
+    endif
+    let s:str = strpart(s:temp[0], s:dollar_col-1,(s:varend - s:dollar_col))
+    let s:prefix = ''
+    if(exists("g:vawanohlcurrent") && (g:vawanohlcurrent == 1))
+        let s:lineab = s:current_line - 1
+        let s:linebe = s:current_line + 1
+        let s:colbf  = s:dollar_col + 1
+        let s:prefix = '\(\%>'.s:lineab.'l.\%<'.s:linebe.'l.\%>'.s:colbf.'c\)\@!'
+    endif
+    if(s:str == '$')
+        return
+    endif
+    if(strpart(s:str,0,1) == '>')
+        let s:str = strpart(s:str ,1)
+        call matchadd('VarHl', s:prefix.'>\@<='. s:str.'\n\{-\}\(\([^a-zA-Z0-9_\x7f-\xff]\)\|$\)\@=')
+    else
+        call matchadd('VarHl', s:prefix.s:str.'\n\{-\}\(\([^a-zA-Z0-9_\x7f-\xff]\)\|$\)\@=')
+    endif
+endfunction
+if(!exists("g:vawanoauto") || (g:vawanoauto == 1))
+    augroup HighlightVar
+            autocmd!
+            au CursorMoved *.php call <sid>vawa()
+            au CursorMovedi *.php call <sid>vawa()
+    augroup END
+endif
+
+command! Vawa :call <sid>vawa()
+let g:vawahl="ctermbg=black ctermfg=red guifg=Yellow guibg=#111111 gui=bold"

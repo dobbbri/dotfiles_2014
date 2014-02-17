@@ -11,11 +11,6 @@
  "                                                                         "
  "====================================================== Sergio Luiz Dobri "
 
-" Pasta De Trabalho: ===========================================================
-let g:dev_dir="~/Copy/TreeHouse"
-exec "lcd " . g:dev_dir
-
-
 set nocompatible               " be iMproved
 filetype off                   " required!
 set rtp+=~/.vim/bundle/vundle/
@@ -34,20 +29,27 @@ syntax on                       " Syntax highlighting
 
 " Colorscheme: =================================================================
 set background=dark
-set t_Co=256                    " Allow the use of 256 colors in the terminal
-" colorscheme Iceberg
+" set t_Co=256                    " Allow the use of 256 colors in the terminal
 
-if has('gui_running')
-    colorscheme tron
-    "colorscheme new_molokai
-  else
-    colorscheme molokai
-endif
+colorscheme molokai
 
-" Trailing Space: ==============================================================
+" set guifont=Fantasque\ Sans\ Mono:h21
+" set guifont=monofur\ for\ Powerline:h21
+" set guifont=Source\ Code\ Pro:h17
+" set guifont=Envy Code R\ for\ Powerline:h18"
+
+
 " Remove trailing spaces when saving a file
 exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 set list
+
+
+" Disable Bell: ================================================================
+" dont beep
+autocmd! GUIEnter * set vb t_vb=
+set noerrorbells
+set novisualbell
+set t_vb=
 
 
 " Buffers: =====================================================================
@@ -68,7 +70,10 @@ set encoding=utf-8
 scriptencoding utf-8
 
 " Corretor Ortográfico: ========================================================
-set spell spelllang=pt,en
+set spelllang=pt,en
+set spellsuggest=10
+set spellfile=~/.vim/spell/spellfile.add
+set complete+=kspell            " press CTRL-N or CTRL-P in insert-mode to complete the word we're typing!
 
 " Como usar:
 "
@@ -96,19 +101,16 @@ set gdefault                    " subtitui o g no substitruir
 set wildmenu                    " Show list instead of just completing
 set wildmode=full               " Command <Tab> completion, list matches
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.DS_Store   " Linux/MacOSX
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.DS_Store   " Linux/MacOSX
 
 
 " Gui: =========================================================================
-set guioptions=aAce              " aA = autoselect  c = console dialogs
+set guioptions=aAc              " aA = autoselect  c = console dialogs
 set guioptions-=Beb
-set guioptions-=TMm              " Remove the toolbar e menju
+set guioptions-=TMmt              " Remove the toolbar e menju
 set guioptions-=LrlR             " Remove scrollbars
 set laststatus=2                " always show status line
 set antialias
-set guifont=monofur\ for\ Powerline:h21
-" set guifont=Source\ Code\ Pro\ for\ Powerline:h17
-" set guifont=Envy Code R\ for\ Powerline:h18
 set winminheight=0              " Windows can be 0 line high
 set linespace=0                 " No extra spaces between rows
 set number                      " Line numbers on:
@@ -119,15 +121,12 @@ set viewoptions=folds,options,cursor,unix,slash " Better Unix/Windows compatib.
 set title                       " change the terminal's title
 set cursorline                  " hi cursor line
 set icon                        " change the title to include the current file
-set showtabline=1               " 1=exibe qdo tiver +d 1 tab, 2=sempre exibe
+set showtabline=2               " 1=exibe qdo tiver +d 1 tab, 2=sempre exibe
 "set lines=45
 "set columns=85
 set showcmd                     " show command in botton rigth of the screen
 set noshowmode
-set nocursorcolumn
-set nocursorline
 set modeline                    " " always show file name
-set cursorline
 set fillchars+=vert:│
 set nolazyredraw
 
@@ -142,7 +141,6 @@ set confirm                     " If unsaved changes, ask if you want to save
 set timeoutlen=500              " reduce a slag after type leader key + command
 set nowrap                      " Do not wrap long lines
 set nofoldenable                " No Auto fold code
-set noerrorbells                " don't beep
 set list listchars=tab:→\ ,trail:·  " Show tabs and trailing spaceis
 set whichwrap+=<,>,h,l,[,]      " Automatically wrap left and right
 set scrolloff=3
@@ -159,6 +157,7 @@ set nojoinspaces                " Prevents inserting twospaces afterpunctuation
 set splitright                  " Puts new vsplit windows to the right
 set splitbelow                  " Puts new split windows to the bottom
 set smartindent
+set shellslash
 
 
 " Tabulacao: ===================================================================
@@ -194,13 +193,11 @@ set guicursor+=v-ve:VisualCursor
 set guicursor+=a:blinkon0
 
 " Alterar a cor do cursor
-highlight Cursor        ctermfg=15 guifg=#ffffff ctermbg=37  guibg=#5f00af
-highlight InsertCursor  ctermfg=15 guifg=#ffffff ctermbg=37  guibg=#005fff
-highlight VisualCursor  ctermfg=15 guifg=#ffffff ctermbg=125 guibg=#ff5f00
-highlight ReplaceCursor ctermfg=15 guifg=#ffffff ctermbg=65  guibg=#ff0000
-highlight CommandCursor ctermfg=15 guifg=#000000 ctermbg=166 guibg=#9e9e9e
-
-
+highlight Cursor        ctermfg=22  guifg=#005f00 ctermbg=148 guibg=#afdf00
+highlight InsertCursor  ctermfg=117 guifg=#87dfff ctermbg=231 guibg=#ffffff
+highlight VisualCursor  ctermfg=88  guifg=#870000 ctermbg=125 guibg=#ff8700
+highlight ReplaceCursor ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#df0000
+highlight CommandCursor ctermfg=16  guifg=#000000 ctermbg=231 guibg=#ffffff
 
 
 " HTML5: =======================================================================
@@ -259,7 +256,8 @@ Bundle 'StanAngeloff/php.vim'
 
 
 " Php: =========================================================================
-Bundle 'donnut/vim-php54-syntax'
+" Bundle 'donnut/vim-php54-syntax'
+Bundle 'vim-scripts/php.vim-for-php5'
 let g:php_sql_query=1             " to highlight SQL syntax in strings
 let g:php_htmlInStrings=1         " to highlight HTML in string
 let g:php_noShortTags = 1         " to disable short tags
@@ -387,15 +385,17 @@ autocmd BufRead,BufWritePre *.css normal mzgg=G`z
 autocmd BufRead,BufWritePre *.js normal mzgg=G`z
 " tab
 autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType js setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType vim setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType css  setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType js   setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType vim  setlocal tabstop=2 shiftwidth=2 softtabstop=2
 " Text width
-autocmd FileType php setlocal textwidth=250
-autocmd FileType vim setlocal textwidth=250
-"nospell
-autocmd FileType css setlocal nospell
-autocmd FileType vim setlocal nospell
+autocmd FileType php  setlocal textwidth=250
+autocmd FileType vim  setlocal textwidth=250
+" spell
+autocmd FileType html setlocal spell
+autocmd FileType php  setlocal spell
+autocmd FileType css  setlocal nospell
+autocmd FileType vim  setlocal nospell
 " Color column
 autocmd FileType php :call matchadd('ColorColumn', '\%81v.*', 250)
 autocmd FileType vim :call matchadd('ColorColumn', '\%121v.*', 250)
@@ -408,7 +408,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType vim set omnifunc=syntaxcomplete#Complete
 " Markdown
 autocmd BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  set filetype=markdown
-" no terminal digite: export MYVIMRC="/Users/sldobri/.dotfiles/vim/vimrc"
+" no terminal digite: export MYVIMRC="/User/sldobri/.dotfiles/vim/vimrc"
 autocmd bufwritepost vimrc source $MYVIMRC
 " ir para a pasta do arquivo aberto
 " autocmd BufEnter * silent! lcd %:p:h
@@ -455,26 +455,31 @@ Bundle 'tpope/vim-surround'
 
 
 " Airline: ====================================================================
-Bundle 'bling/vim-airline'
-Bundle 'paranoida/vim-airlineish'
-let g:airline_powerline_fonts = 1
-let g:bufferline_echo=1
-let g:airline_theme = 'airlineish'
-" tabline
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+"Bundle 'bling/vim-airline'
+"Bundle 'paranoida/vim-airlineish'
+"let g:airline_powerline_fonts = 1
+"let g:bufferline_echo=1
+"let g:airline_theme = 'airlineish'
+"" tabline
+"let g:airline#extensions#tabline#enabled=1
+"let g:airline#extensions#tabline#formatter = 'unique_tail'
+"let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 
 
 " NerdTree: ====================================================================
 " Allows to explore filesystem
-" Bundle 'scrooloose/nerdtree'
-" Bundle 'jistr/vim-nerdtree-tabs'
-"let g:NERDTreeHighlightCursorline=1     " Destaca a linha atual
-"let g:NERDTreeMinimalUI=1
-"let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
-"let g:NERDTreeWinPos = "right"
-" nnoremap <F2>  :NERDTreeToggle<CR>
+Bundle 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs'
+" let g:NERDTreeQuitOnOpen=1
+let g:NERDTreeHighlightCursorline=1     " Destaca a linha atual
+let g:NERDTreeHijackNetrw=1
+" let g:NERDTreeShowHidden=1
+" let g:NERDTreeWinSize=40
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '.DS_Store', 'Icon']
+let g:NERDTreeWinPos = "right"
+let NERDTreeHijackNetrw=1
+nnoremap <F1>  :NERDTreeTabsToggle<CR>
 
 
 " Peepopen: ====================================================================
@@ -486,6 +491,7 @@ let p:peepopen_quit = 1
 
 " LeaderKey: ===================================================================
 let mapleader=","
+let maplocalleader = ","
 
 
 " Remapear: ====================================================================
@@ -541,11 +547,13 @@ nnoremap <silent> <F4> :! php %<CR>
 map <F5> :call BrowseDoc()<CR>
 " alinhar codigo
 nnoremap <silent> <F6> mzgg=G`z<CR>
-" taglist
-nnoremap <silent> <F8> :TlistToggle<CR>
+" execute javascript
+map <silent> <F7> :call RunJS() <cr>
+" corretor Ortográfico
+map <F8> :call SpellCheck()<CR>
+map <F9> :call SpellProposeAlternatives()<CR>
 " remover distracoes
 nnoremap <silent> <F12> :Goyo<CR>
-map <silent> <F7> :call RunJS() <cr>
 
 
 " Run Javascript: =============================================================
@@ -607,81 +615,43 @@ if ! has('gui_running')
 endif
 
 
-" Rename Buffer/Files: ========================================================
-function! RenameFunction(newname)
-    lcd %:p:h
-    let a:oldname = expand("%:p")
-    exec "saveas ". a:newname
-    call delete(a:oldname)
-    exec "lcd " . g:dev_dir
-endfunction
-
-command! -nargs=1 Rename call RenameFunction(<f-args>)
-
-
-"AutoSave: ====================================================================
+" AutoSave: =====================================================================
 bundle '907th/vim-auto-save'
 let g:auto_save = 1                 " enable AutoSave on Vim startup
 let g:auto_save_no_updatetime = 1   " do not change the 'updatetime' option
 
 
-" Vawa Plugin for VIM  Version 1.00 ===========================================
-" Maintainer:	Sandeep.c.r<sandeepcr2@gmail.com>
+" Visional: ====================================================================
+Bundle 'justindomingue/visional'
+let g:visionalhl='ctermbg=black ctermfg=yellow guifg=yellow guibg=black ctermfg=yellow gui=bold'
 
-function! s:vawa()
-    call clearmatches()
-    let s:temp = getpos('.')
-    let s:current_col = s:temp[2]
-    let s:current_line = s:temp[1]
-    let s:temp = searchpos('[>$]','bcn')
-    let s:dollar_line = s:temp[0]
-    let s:dollar_col = s:temp[1]
-    if(s:dollar_line != s:current_line)
-        return
-    endif
-    let s:temp = getbufline(bufnr('%'),line('.'))
-    let s:varend = match(s:temp[0], '[^a-zA-Z0-9_\x7f-\xff]\|\n', s:dollar_col)+1
-    let s:space_col = s:varend
-    if((s:space_col > s:dollar_col) && ( s:space_col< s:current_col))
-        return
-    endif
-    if(s:varend == 0)
-        let s:varend = strlen(s:temp[0])+1
-    endif
-    let s:current_char = s:temp[0][s:current_col-1]
-    if(s:current_char == '>' || s:current_char == '-')
-        return
-    endif
-    if(exists("g:vawahl"))
-        exe "highlight VarHl  " . g:vawahl
-    else
-        highlight VarHl  ctermbg=black ctermfg=red guifg=#ff0000 guibg=#000000 ctermfg=LightRed gui=bold
-    endif
-    let s:str = strpart(s:temp[0], s:dollar_col-1,(s:varend - s:dollar_col))
-    let s:prefix = ''
-    if(exists("g:vawanohlcurrent") && (g:vawanohlcurrent == 1))
-        let s:lineab = s:current_line - 1
-        let s:linebe = s:current_line + 1
-        let s:colbf  = s:dollar_col + 1
-        let s:prefix = '\(\%>'.s:lineab.'l.\%<'.s:linebe.'l.\%>'.s:colbf.'c\)\@!'
-    endif
-    if(s:str == '$')
-        return
-    endif
-    if(strpart(s:str,0,1) == '>')
-        let s:str = strpart(s:str ,1)
-        call matchadd('VarHl', s:prefix.'>\@<='. s:str.'\n\{-\}\(\([^a-zA-Z0-9_\x7f-\xff]\)\|$\)\@=')
-    else
-        call matchadd('VarHl', s:prefix.s:str.'\n\{-\}\(\([^a-zA-Z0-9_\x7f-\xff]\)\|$\)\@=')
-    endif
-endfunction
-if(!exists("g:vawanoauto") || (g:vawanoauto == 1))
-    augroup HighlightVar
-            autocmd!
-            au CursorMoved *.php call <sid>vawa()
-            au CursorMovedi *.php call <sid>vawa()
-    augroup END
-endif
 
-command! Vawa :call <sid>vawa()
-let g:vawahl="ctermbg=black ctermfg=red guifg=Yellow guibg=#111111 gui=bold"
+" Pomodoro: ====================================================================
+Bundle 'pydave/AsyncCommand'
+Bundle 'mnick/vim-pomodoro'
+" Duration of a pomodoro in minutes (default: 25)
+let g:pomodoro_time_work = 25
+" Duration of a break in minutes (default: 5)
+let g:pomodoro_time_slack = 5
+" Log completed pomodoros, 0 = False, 1 = True (default: 0)
+let g:pomodoro_do_log = 0
+" Path to the pomodoro log file (default: /tmp/pomodoro.log)
+let g:pomodoro_log_file = "~/pomodoro.log"
+let g:pomodoro_notification_cmd = "mpg123 -q ~/.vim/pomodoro-notification.mp3"
+" let g:pomodoro_notification_cmd = 'zenity --notification --text="Pomodoro finished"'
+set statusline=%#ErrorMsg#%{PomodoroStatus()}%#StatusLine#
+
+
+" Vim Vinegar: =================================================================
+Bundle 'tpope/vim-vinegar'
+
+
+" Lightline: ===================================================================
+Bundle 'itchyny/lightline.vim'
+Bundle 'itchyny/lightline-powerful'
+
+
+" Font Manager: ================================================================
+Bundle 'takac/vim-fontmanager'
+let g:fontman_font = "Source Code Pro Light"
+let g:fontman_size = 17

@@ -62,11 +62,11 @@ hi Identifier   gui=NONE guifg=Aquamarine4 guibg=NONE
 hi Ignore       gui=NONE guifg=bg guibg=NONE
 hi PreProc      gui=NONE guifg=DodgerBlue3 guibg=NONE
 hi Special      gui=NONE guifg=BlueViolet guibg=NONE
-hi String       gui=NONE guifg=SkyBlue4 guibg=NONE
+hi String       gui=NONE guifg=CadetBlue3 guibg=NONE
 hi Underlined   gui=underline guifg=SteelBlue1
 
 hi Boolean      gui=NONE guifg=DeepPink4 guibg=NONE
-hi Comment      gui=italic guifg=CadetBlue3
+hi Comment      gui=italic guifg=#778899
 hi Constant     gui=NONE guifg=Goldenrod1 guibg=NONE
 hi Cursor       guibg=LightGoldenrod guifg=bg
 hi CursorColumn guibg=Gray20

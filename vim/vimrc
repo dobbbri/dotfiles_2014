@@ -29,14 +29,9 @@ syntax on                       " Syntax highlighting
 
 " Colorscheme: =================================================================
 set background=dark
-" set t_Co=256                    " Allow the use of 256 colors in the terminal
-
-colorscheme molokai
-
-" set guifont=Fantasque\ Sans\ Mono:h21
-" set guifont=monofur\ for\ Powerline:h21
-" set guifont=Source\ Code\ Pro:h17
-" set guifont=Envy Code R\ for\ Powerline:h18"
+set t_Co=256                    " Allow the use of 256 colors in the terminal
+colorscheme base16-monokai
+set guifont=monofur\ for\ Powerline:h21
 
 
 " Remove trailing spaces when saving a file
@@ -479,13 +474,12 @@ let g:NERDTreeMinimalUI=1
 let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '.DS_Store', 'Icon']
 let g:NERDTreeWinPos = "right"
 let NERDTreeHijackNetrw=1
-nnoremap <F1>  :NERDTreeTabsToggle<CR>
 
 
 " Peepopen: ====================================================================
 " http://topfunky.github.io/PeepOpen/   to download the app PeepOpen.dmg
-Bundle 'shemerey/vim-peepopen'
-let p:peepopen_quit = 1
+" Bundle 'shemerey/vim-peepopen'
+" let p:peepopen_quit = 1
 " map <unique> <silent> <Leader>p <Plug>PeepOpen
 
 
@@ -538,7 +532,7 @@ nnoremap <leader>bb :!pmset -g batt<CR>
 
 " Teclas de Funcoes: ==========================================================
 " menu de selecao de arwuivos
-map <unique> <silent> <F2> <Plug>PeepOpen
+nnoremap <silent> <F2> :NERDTreeTabsToggle<CR>
 " execute php-cs-fixer
 nnoremap <silent> <F3> :!php-cs-fixer fix % --level=all<CR>
 " execute php
@@ -561,7 +555,7 @@ function RunJS()
   exec "! node %"
 endfunction
 
-" map <unique> <silent> <Leader>p <Plug>PeepOpen
+
 " Disable Arrow Keys: ==========================================================
 " as mensagem foram movidas pro lado
 " nnoremap <Down>     :echoe ""<CR> " Use j
@@ -579,21 +573,6 @@ iab llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius
 " Abre O Buffer No Safari: =====================================================
 abbrev saf :! open -a safari.app %:p<cr>
 
-
-" PHPCS: =======================================================================
-/Users/sldobri
-function! RunPhpcs()
-    let l:filename=@%
-    let l:phpcs_output=system('phpcs --report=csv --standard=YMC '.l:filename)
-"    echo l:phpcs_output
-    let l:phpcs_list=split(l:phpcs_output, "\n")
-    unlet l:phpcs_list[0]
-    cexpr l:phpcs_list
-    cwindow
-endfunction
-
-set errorformat+=\"%f\"\\,%l\\,%c\\,%t%*[a-zA-Z]\\,\"%m\"
-command! Phpcs execute RunPhpcs()
 
 
 " PHP Documentor: ==============================================================
@@ -648,10 +627,7 @@ Bundle 'tpope/vim-vinegar'
 
 " Lightline: ===================================================================
 Bundle 'itchyny/lightline.vim'
-Bundle 'itchyny/lightline-powerful'
-
-
-" Font Manager: ================================================================
-Bundle 'takac/vim-fontmanager'
-let g:fontman_font = "Source Code Pro Light"
-let g:fontman_size = 17
+let g:lightline = {
+		\ 'separator': { 'left': '', 'right': '' },
+		\ 'subseparator': { 'left': '', 'right': '' }
+		\ }

@@ -131,7 +131,7 @@ endfun
 " Vim editor colors
 call <sid>hi("Bold",          "", "", "", "", "bold")
 call <sid>hi("Debug",         s:gui08, "", s:cterm08, "", "")
-call <sid>hi("Directory",     s:gui0D, "", s:cterm0D, "", "")
+call <sid>hi("Directory",     s:gui04, "", s:cterm04, "", "")
 call <sid>hi("ErrorMsg",      s:gui08, s:gui00, s:cterm08, s:cterm00, "")
 call <sid>hi("Exception",     s:gui08, "", s:cterm08, "", "")
 call <sid>hi("FoldColumn",    "", s:gui01, "", s:cterm01, "")
@@ -271,7 +271,7 @@ call <sid>hi("GitGutterDelete",  s:gui08, s:gui01, s:cterm08, s:cterm01, "")
 
 
 " NERDTree highlighting
-call <sid>hi("NERDTreeDirSlash",  s:gui0D, "", s:cterm0D, "", "")
+call <sid>hi("NERDTreeDirSlash",  s:gui00, "", s:cterm00, "", "")
 call <sid>hi("NERDTreeExecFile",  s:gui05, "", s:cterm05, "", "")
 
 " Remove functions

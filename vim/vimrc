@@ -1,15 +1,15 @@
- "========================================================================="
- "                                                                         "
- "      /$$$$$$  /$$       /$$$$$$$            /$$                 /$$     "
- "     /$$__  $$| $$      | $$__  $$          | $$                |__/     "
- "    | $$  \__/| $$      | $$  \ $$  /$$$$$$ | $$$$$$$   /$$$$$$  /$$     "
- "    |  $$$$$$ | $$      | $$  | $$ /$$__  $$| $$__  $$ /$$__  $$| $$     "
- "     \____  $$| $$      | $$  | $$| $$  \ $$| $$  \ $$| $$  \__/| $$     "
- "     /$$  \ $$| $$      | $$  | $$| $$  | $$| $$  | $$| $$      | $$     "
- "    |  $$$$$$/| $$$$$$$$| $$$$$$$/|  $$$$$$/| $$$$$$$/| $$      | $$     "
- "     \______/ |________/|_______/  \______/ |_______/ |__/      |__/     "
- "                                                                         "
- "====================================================== Sergio Luiz Dobri "
+"========================================================================="
+"                                                                         "
+"      /$$$$$$  /$$       /$$$$$$$            /$$                 /$$     "
+"     /$$__  $$| $$      | $$__  $$          | $$                |__/     "
+"    | $$  \__/| $$      | $$  \ $$  /$$$$$$ | $$$$$$$   /$$$$$$  /$$     "
+"    |  $$$$$$ | $$      | $$  | $$ /$$__  $$| $$__  $$ /$$__  $$| $$     "
+"     \____  $$| $$      | $$  | $$| $$  \ $$| $$  \ $$| $$  \__/| $$     "
+"     /$$  \ $$| $$      | $$  | $$| $$  | $$| $$  | $$| $$      | $$     "
+"    |  $$$$$$/| $$$$$$$$| $$$$$$$/|  $$$$$$/| $$$$$$$/| $$      | $$     "
+"     \______/ |________/|_______/  \______/ |_______/ |__/      |__/     "
+"                                                                         "
+"====================================================== Sergio Luiz Dobri "
 
 set nocompatible               " be iMproved
 filetype off                   " required!
@@ -23,24 +23,36 @@ Bundle 'gmarik/vundle'
 
 
 " Config: ======================================================================
+syntax on
+filetype on
+filetype plugin on
 filetype plugin indent on       " required!
-syntax on                       " Syntax highlighting
 
 
-" Colorscheme: =================================================================
+" Gui: =========================================================================
 set background=dark
 set t_Co=256                    " Allow the use of 256 colors in the terminal
-colorscheme base16-monokai
+
+if has("gui_running")
+  colorscheme base16-monokai
+else
+  colorscheme vividchalk
+endif
+
 set guifont=monofur\ for\ Powerline:h21
 
 
-" Remove trailing spaces when saving a file
+" Remove Trailing Spaces When Saving File: =====================================
 exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 set list
 
 
+" LeaderKey: ===================================================================
+let mapleader=","
+let maplocalleader = ","
+
+
 " Disable Bell: ================================================================
-" dont beep
 autocmd! GUIEnter * set vb t_vb=
 set noerrorbells
 set novisualbell
@@ -52,7 +64,7 @@ set t_vb=
 set autowrite                   " Save buffer automatically when changing files
 set hidden                      " Allow buffer switching without saving
 set autoread                    " reload buffer when external changes detected
-
+set autowriteall
 
 " Mouse: =======================================================================
 set mouse=a                     " Automatically enable mouse usage
@@ -63,6 +75,7 @@ set mousehide                   " Hide the mouse cursor while typing
 set fileencoding=utf-8
 set encoding=utf-8
 scriptencoding utf-8
+
 
 " Corretor Ortográfico: ========================================================
 set spelllang=pt,en
@@ -100,16 +113,12 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.DS_Store   " Linux/MacOSX
 
 
 " Gui: =========================================================================
-set guioptions=aAc              " aA = autoselect  c = console dialogs
-set guioptions-=Beb
-set guioptions-=TMmt              " Remove the toolbar e menju
-set guioptions-=LrlR             " Remove scrollbars
+set guioptions=                  " Remove tudo, toolbar, menu etc..
 set laststatus=2                " always show status line
 set antialias
 set winminheight=0              " Windows can be 0 line high
 set linespace=0                 " No extra spaces between rows
-set number                      " Line numbers on:
-" set relativenumber
+set nonumber                    " Line numbers off:
 set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=3                 " Minimum lines to keep above and below cursor
 set viewoptions=folds,options,cursor,unix,slash " Better Unix/Windows compatib.
@@ -117,14 +126,12 @@ set title                       " change the terminal's title
 set cursorline                  " hi cursor line
 set icon                        " change the title to include the current file
 set showtabline=2               " 1=exibe qdo tiver +d 1 tab, 2=sempre exibe
-"set lines=45
-"set columns=85
 set showcmd                     " show command in botton rigth of the screen
 set noshowmode
 set modeline                    " " always show file name
 set fillchars+=vert:│
 set nolazyredraw
-
+set cmdheight=1
 
 " Diversos: ====================================================================
 set shortmess+=filmnrxoOtT      " Abbrev. of messages (avoids 'hit enter')
@@ -144,6 +151,8 @@ set nolazyredraw
 set synmaxcol=250
 set viminfo=
 set ttimeoutlen=50
+" No scratch
+set completeopt-=preview
 
 
 " Identacao: ===================================================================
@@ -195,6 +204,19 @@ highlight ReplaceCursor ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#df0000
 highlight CommandCursor ctermfg=16  guifg=#000000 ctermbg=231 guibg=#ffffff
 
 
+" Remove Delay: ================================================================
+" The issue is that Powerline causes a delay when leaving Insert mode, but this
+" can be  fixed by changing the InsertEnter timeoutlen setting to 0:
+if ! has('gui_running')
+  set ttimeoutlen=10
+  augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=1000
+  augroup END
+endif
+
+
 " HTML5: =======================================================================
 Bundle 'othree/html5.vim'
 Bundle 'amirh/HTML-AutoCloseTag'
@@ -212,13 +234,6 @@ Bundle 'Townk/vim-autoclose'
 Bundle 'tpope/vim-fugitive'
 " Mostrando adições, remoções e alterações do Git
 Bundle 'airblade/vim-gitgutter'
-
-
-" Snipmate: ====================================================================
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
 
 
 " HexHilight: ==================================================================
@@ -250,6 +265,14 @@ Bundle 'arnaud-lb/vim-php-namespace'
 Bundle 'StanAngeloff/php.vim'
 
 
+" PHP Getter Setter: ===========================================================
+Bundle 'docteurklein/php-getter-setter.vim'
+" Commands:
+imap <Leader>gg :InsertGetterOnly
+imap <Leader>ss :InsertSetterOnly
+imap <Leader>ii :InsertBothGetterSetter
+
+
 " Php: =========================================================================
 " Bundle 'donnut/vim-php54-syntax'
 Bundle 'vim-scripts/php.vim-for-php5'
@@ -265,6 +288,7 @@ let g:php_smart_semicolon = 1
 
 " Nerdcommenter: ===============================================================
 Bundle 'scrooloose/nerdcommenter'
+map <leader>cc <plug>NERDCommenterInvert
 
 
 " IdentLine: ===================================================================
@@ -303,29 +327,6 @@ let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
 
 
-" Neocomplcache: ===============================================================
-Bundle 'Shougo/neocomplcache.vim'
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-noremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-
-" Neosnippet: ==================================================================
-Bundle 'Shougo/neosnippet'
-Bundle 'Shougo/neosnippet-snippets'
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-            \ "\<Plug>(neosnippet_expand_or_jump)"
-            \: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-            \ "\<Plug>(neosnippet_expand_or_jump)"
-            \: "\<TAB>"
-
-
-
 " Markdown: ===================================================================
 Bundle 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
@@ -333,11 +334,11 @@ let g:vim_markdown_folding_disabled=1
 
 " Calendar: ===================================================================
 " Exibe 3 calendarios contendo o mes anterior, mes atual e o proximo mes
-"Bundle 'mattn/calendar-vim'
-"let g:calendar_navi_label = '<Ant.,Hoje,Pro.>'
-"let g:calendar_mruler = 'Jan,Fev,Mar,Abr,Mai,Jun,Jul,Ago,Set,Out,Nov,Dez'
-"let g:calendar_wruler = 'Do Se Te Qa Qi Se Sa'
-"nmap <Leader>c :Calendar<CR>
+Bundle 'mattn/calendar-vim'
+let g:calendar_navi_label = '<Ant.,Hoje,Pro.>'
+let g:calendar_mruler = 'Jan,Fev,Mar,Abr,Mai,Jun,Jul,Ago,Set,Out,Nov,Dez'
+let g:calendar_wruler = 'Do Se Te Qa Qi Se Sa'
+abbreviate cal :Calendar<CR>
 
 
 " Functions: ==================================================================
@@ -362,11 +363,15 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 
 function! BrowseDoc()
-    if b:current_syntax == "php"
-        ! open "http://ch2.php.net/manual-lookup.php?pattern=<cword>"
-    else
-        return
-    endif
+  if b:current_syntax == "php"
+    ! open "http://ch2.php.net/manual-lookup.php?pattern=<cword>"
+  else
+    return
+  endif
+endfunction
+
+function! RunJScript1()
+  exec "! node %"
 endfunction
 
 
@@ -404,9 +409,12 @@ autocmd FileType vim set omnifunc=syntaxcomplete#Complete
 " Markdown
 autocmd BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  set filetype=markdown
 " no terminal digite: export MYVIMRC="/User/sldobri/.dotfiles/vim/vimrc"
-autocmd bufwritepost vimrc source $MYVIMRC
-" ir para a pasta do arquivo aberto
-" autocmd BufEnter * silent! lcd %:p:h
+autocmd bufwritepost vimrc :so %
+" java compile files
+autocmd filetype java nnoremap <Leader>c :w <CR>:!javac % && java %:r<CR>
+" Commit
+autocmd filetype gitcommit nnoremap <buffer> c :Gcommit<CR>
+
 
 " FocusMode: ==================================================================
 " Distraction-free writing in Vim
@@ -435,60 +443,11 @@ let g:goyo_callbacks = [function('g:goyo_before'), function('g:goyo_after')]
 " nnoremap <F12> :Goyo<CR>
 
 
-" Gmail Calendar: =============================================================
-Bundle 'itchyny/calendar.vim'
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-" :Calendar -view=year
-" :Calendar -view=year -split=vertical -width=27
-" :Calendar -view=year -split=horizontal -position=below -height=12
-" :Calendar -view=clock
-
-
 " Surround: ===================================================================
 Bundle 'tpope/vim-surround'
 
 
-" Airline: ====================================================================
-"Bundle 'bling/vim-airline'
-"Bundle 'paranoida/vim-airlineish'
-"let g:airline_powerline_fonts = 1
-"let g:bufferline_echo=1
-"let g:airline_theme = 'airlineish'
-"" tabline
-"let g:airline#extensions#tabline#enabled=1
-"let g:airline#extensions#tabline#formatter = 'unique_tail'
-"let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
-
-
-" NerdTree: ====================================================================
-" Allows to explore filesystem
-Bundle 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
-" let g:NERDTreeQuitOnOpen=1
-let g:NERDTreeHighlightCursorline=1     " Destaca a linha atual
-let g:NERDTreeHijackNetrw=1
-" let g:NERDTreeShowHidden=1
-" let g:NERDTreeWinSize=40
-let g:NERDTreeMinimalUI=1
-let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '.DS_Store', 'Icon']
-let g:NERDTreeWinPos = "right"
-let NERDTreeHijackNetrw=1
-
-
-" Peepopen: ====================================================================
-" http://topfunky.github.io/PeepOpen/   to download the app PeepOpen.dmg
-" Bundle 'shemerey/vim-peepopen'
-" let p:peepopen_quit = 1
-" map <unique> <silent> <Leader>p <Plug>PeepOpen
-
-
-" LeaderKey: ===================================================================
-let mapleader=","
-let maplocalleader = ","
-
-
-" Remapear: ====================================================================
+Remapear: ====================================================================
 imap jj <Esc>
 nmap <space> :
 " edit the vimrc file
@@ -496,7 +455,7 @@ nmap <leader>mm :e $MYVIMRC<CR>
 nmap <leader>ss :so $MYVIMRC<CR>
 
 
-" Navegar: ====================================================================
+" Navegar: =====================================================================
 " entre Buffers
 nnoremap <silent> <S-Right> :bn<CR>
 nnoremap <silent> <S-Left> :bp<CR>
@@ -522,38 +481,30 @@ vmap <C-Up> xkP`[V`]
 vmap <C-Down> xp`[V`]
 
 
-" Fast Saving: ================================================================
+" Fast Saving: =================================================================
 nnoremap <leader>w :w!<cr>
 
 
-" Show Battery Usage: =========================================================
-nnoremap <leader>bb :!pmset -g batt<CR>
-
-
-" Teclas de Funcoes: ==========================================================
+" Teclas de Funcoes: ===========================================================
 " menu de selecao de arwuivos
 nnoremap <silent> <F2> :NERDTreeTabsToggle<CR>
 " execute php-cs-fixer
-nnoremap <silent> <F3> :!php-cs-fixer fix % --level=all<CR>
+nnoremap <silent> <F4> :!php-cs-fixer fix % --level=all<CR>
 " execute php
-nnoremap <silent> <F4> :! php %<CR>
+nnoremap <silent> <F5> :! php %<CR>
 "manual do php
-map <F5> :call BrowseDoc()<CR>
+map <F6> :call BrowseDoc()<CR>
 " alinhar codigo
-nnoremap <silent> <F6> mzgg=G`z<CR>
+nnoremap <silent> <F7> mzgg=G`z<CR>
 " execute javascript
-map <silent> <F7> :call RunJS() <cr>
+map <silent> <F8> :call RunJScript1() <cr>
 " corretor Ortográfico
-map <F8> :call SpellCheck()<CR>
-map <F9> :call SpellProposeAlternatives()<CR>
+map <F9> :call SpellCheck()<CR>
+map <F10> :call SpellProposeAlternatives()<CR>
+" ativate Gundo
+nnoremap <F11> :GundoToggle<CR>
 " remover distracoes
 nnoremap <silent> <F12> :Goyo<CR>
-
-
-" Run Javascript: =============================================================
-function RunJS()
-  exec "! node %"
-endfunction
 
 
 " Disable Arrow Keys: ==========================================================
@@ -563,16 +514,20 @@ endfunction
 " nnoremap <Up>       :echoe ""<CR> " Use k
 " nnoremap <Down>     :echoe ""<CR> " Use j
 
-
-" Lorem Ipsum: =================================================================
-" Helpeful abbreviations
-iab lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-iab llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-
-" Abre O Buffer No Safari: =====================================================
-abbrev saf :! open -a safari.app %:p<cr>
-
+" Atalhos: =====================================================================
+" Show Battery Usage:
+abbreviate batt :!pmset -g batt<CR>
+" Lorem Ipsum:
+iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+iabbrev llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+" Abre O Buffer No Safari:
+abbreviate saf :! open -a safari.app %:p<CR>
+" Start Stop Apache:
+abbreviate apup :! /Applications/XAMPP/xamppfiles/xampp startapache<CR>
+abbreviate apdown :! /Applications/XAMPP/xamppfiles/xampp stopapache<CR>i
+" Start Stop Mysql:
+abbreviate myup :! /Applications/XAMPP/xamppfiles/share/mysql/mysql.server start<CR>
+abbreviate mydown :! /Applications/XAMPP/xamppfiles/share/mysql/mysql.server stop<CR>
 
 
 " PHP Documentor: ==============================================================
@@ -581,44 +536,9 @@ let g:pdv_template_dir = "~/.dotfiles/vim/bundle/pdv/templates_snip"
 nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
 
 
-" Remove Delay: ================================================================
-" The issue is that Powerline causes a delay when leaving Insert mode, but this
-" can be  fixed by changing the InsertEnter timeoutlen setting to 0:
-if ! has('gui_running')
-  set ttimeoutlen=10
-  augroup FastEscape
-    autocmd!
-    au InsertEnter * set timeoutlen=0
-    au InsertLeave * set timeoutlen=1000
-  augroup END
-endif
-
-
-" AutoSave: =====================================================================
-bundle '907th/vim-auto-save'
-let g:auto_save = 1                 " enable AutoSave on Vim startup
-let g:auto_save_no_updatetime = 1   " do not change the 'updatetime' option
-
-
 " Visional: ====================================================================
 Bundle 'justindomingue/visional'
 let g:visionalhl='ctermbg=black ctermfg=yellow guifg=yellow guibg=black ctermfg=yellow gui=bold'
-
-
-" Pomodoro: ====================================================================
-Bundle 'pydave/AsyncCommand'
-Bundle 'mnick/vim-pomodoro'
-" Duration of a pomodoro in minutes (default: 25)
-let g:pomodoro_time_work = 25
-" Duration of a break in minutes (default: 5)
-let g:pomodoro_time_slack = 5
-" Log completed pomodoros, 0 = False, 1 = True (default: 0)
-let g:pomodoro_do_log = 0
-" Path to the pomodoro log file (default: /tmp/pomodoro.log)
-let g:pomodoro_log_file = "~/pomodoro.log"
-let g:pomodoro_notification_cmd = "mpg123 -q ~/.vim/pomodoro-notification.mp3"
-" let g:pomodoro_notification_cmd = 'zenity --notification --text="Pomodoro finished"'
-set statusline=%#ErrorMsg#%{PomodoroStatus()}%#StatusLine#
 
 
 " Vim Vinegar: =================================================================
@@ -628,6 +548,88 @@ Bundle 'tpope/vim-vinegar'
 " Lightline: ===================================================================
 Bundle 'itchyny/lightline.vim'
 let g:lightline = {
-		\ 'separator': { 'left': '', 'right': '' },
-		\ 'subseparator': { 'left': '', 'right': '' }
-		\ }
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
+
+" Rename: ======================================================================
+Bundle 'wojtekmach/vim-rename'
+" Usage:
+" :Rename[!] {newname}
+
+
+" Mutiple Cursors: =============================================================
+Bundle 'terryma/vim-multiple-cursors'
+let g:multi_cursor_use_default_mapping=0
+" Default mapping
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+" Default highlighting (see help :highlight and help :highlight-link)
+highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
+highlight link multiple_cursors_visual Visual
+
+
+" Gundo: =======================================================================
+Bundle 'sjl/gundo.vim'
+let g:gundo_width = 60
+let g:gundo_preview_height = 40
+let g:gundo_right = 1
+set undolevels=400
+set undodir=~/.dotfiles/vim/undodir
+
+
+" Neocomplete: =================================================================
+Bundle 'Shougo/neocomplete.vim'
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 2
+
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplete#smart_close_popup() . "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+" automatically open and close the popup menu / preview window
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+
+
+" VimShell: ====================================================================
+Bundle 'Shougo/vimshell.vim'
+Bundle 'Shougo/vimproc'
+
+
+
+" NerdTree: ====================================================================
+" Allows to explore filesystem
+Bundle 'scrooloose/nerdtree'
+Bundle 'jistr/vim-nerdtree-tabs'
+let g:NERDTreeHighlightCursorline=1     " Destaca a linha atual
+let g:NERDTreeHijackNetrw=1
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '.DS_Store', 'Icon']
+let g:NERDTreeWinPos = "right"
+let g:NERDTreeHijackNetrw=1
+let g:NERDTreeWinSize=32
+
+
+" TagList: =====================================================================
+Bundle 'majutsushi/tagbar'
+let g:tagbar_singleclick=1
+let g:tagbar_autoshowtag=1
+let g:tagbar_iconchars=['▸', '▾']
+let g:tagbar_width=32
+let g:tagbar_compact=1
+let g:tagbar_ctags_bin='/usr/local/Cellar/ctags/5.8/bin/ctags'
+
+nmap <Leader>t :!/usr/local/Cellar/ctags/5.8/bin/ctags --totals -R ./<CR>
+nmap <F3> :TagbarToggle<CR>

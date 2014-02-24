@@ -35,11 +35,14 @@ set t_Co=256                    " Allow the use of 256 colors in the terminal
 
 if has("gui_running")
   colorscheme base16-monokai
+  set fuoptions=maxvert,maxhorz
+  set fullscreen
 else
   colorscheme vividchalk
 endif
 
-set guifont=monofur\ for\ Powerline:h21
+set guifont=Anonymous\ Pro\ for\ Powerline:h21
+"set guifont=monofur\ for\ Powerline:h21
 
 
 " Remove Trailing Spaces When Saving File: =====================================
@@ -78,12 +81,12 @@ scriptencoding utf-8
 
 
 " Corretor Ortográfico: ========================================================
+set nospell
 set spelllang=pt,en
 set spellsuggest=10
 set spellfile=~/.vim/spell/spellfile.add
 set complete+=kspell            " press CTRL-N or CTRL-P in insert-mode to complete the word we're typing!
-
-" Como usar:
+" Como Usar:
 "
 " ]s vai para a próxima palavra;
 " [s vai para a palavra anterior;
@@ -110,7 +113,7 @@ set wildmenu                    " Show list instead of just completing
 set wildmode=full               " Command <Tab> completion, list matches
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.DS_Store   " Linux/MacOSX
-
+set complete=.,t
 
 " Gui: =========================================================================
 set guioptions=                  " Remove tudo, toolbar, menu etc..
@@ -119,6 +122,7 @@ set antialias
 set winminheight=0              " Windows can be 0 line high
 set linespace=0                 " No extra spaces between rows
 set nonumber                    " Line numbers off:
+
 set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=3                 " Minimum lines to keep above and below cursor
 set viewoptions=folds,options,cursor,unix,slash " Better Unix/Windows compatib.
@@ -232,6 +236,15 @@ Bundle 'Townk/vim-autoclose'
 
 " Git: =========================================================================
 Bundle 'tpope/vim-fugitive'
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gr :Gremove<CR>
+nnoremap <Leader>gl :Glog<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gm :Gmove
+nnoremap <Leader>gp :Ggrep
+nnoremap <Leader>gR :Gread<CR>
+nnoremap <Leader>gg :Git
+nnoremap <Leader>gd :Gdiff<CR>
 " Mostrando adições, remoções e alterações do Git
 Bundle 'airblade/vim-gitgutter'
 
@@ -268,7 +281,7 @@ Bundle 'StanAngeloff/php.vim'
 " PHP Getter Setter: ===========================================================
 Bundle 'docteurklein/php-getter-setter.vim'
 " Commands:
-imap <Leader>gg :InsertGetterOnly
+imap <Leader>gg :InsertGetterOnly<CR>
 imap <Leader>ss :InsertSetterOnly
 imap <Leader>ii :InsertBothGetterSetter
 
@@ -374,6 +387,16 @@ function! RunJScript1()
   exec "! node %"
 endfunction
 
+function! Myspell()
+   let Myspl=&spell
+   if &spell
+      let Myspl="nospell"
+   else
+      let Myspl="spell"
+   endif
+   exe "setlocal " . Myspl
+endfunction
+
 
 " Autocomandos: ================================================================
 " Auto remove when saving
@@ -391,11 +414,11 @@ autocmd FileType vim  setlocal tabstop=2 shiftwidth=2 softtabstop=2
 " Text width
 autocmd FileType php  setlocal textwidth=250
 autocmd FileType vim  setlocal textwidth=250
-" spell
-autocmd FileType html setlocal spell
-autocmd FileType php  setlocal spell
-autocmd FileType css  setlocal nospell
-autocmd FileType vim  setlocal nospell
+"" spell
+"autocmd FileType html setlocal spell
+"autocmd FileType php  setlocal spell
+"autocmd FileType css  setlocal nospell
+"autocmd FileType vim  setlocal nospell
 " Color column
 autocmd FileType php :call matchadd('ColorColumn', '\%81v.*', 250)
 autocmd FileType vim :call matchadd('ColorColumn', '\%121v.*', 250)
@@ -447,12 +470,9 @@ let g:goyo_callbacks = [function('g:goyo_before'), function('g:goyo_after')]
 Bundle 'tpope/vim-surround'
 
 
-Remapear: ====================================================================
+" Remapear: ====================================================================
 imap jj <Esc>
 nmap <space> :
-" edit the vimrc file
-nmap <leader>mm :e $MYVIMRC<CR>
-nmap <leader>ss :so $MYVIMRC<CR>
 
 
 " Navegar: =====================================================================
@@ -482,7 +502,7 @@ vmap <C-Down> xp`[V`]
 
 
 " Fast Saving: =================================================================
-nnoremap <leader>w :w!<cr>
+nnoremap <leader>w :w!<CR>
 
 
 " Teclas de Funcoes: ===========================================================
@@ -497,10 +517,9 @@ map <F6> :call BrowseDoc()<CR>
 " alinhar codigo
 nnoremap <silent> <F7> mzgg=G`z<CR>
 " execute javascript
-map <silent> <F8> :call RunJScript1() <cr>
+map <silent> <F8> :call RunJScript1() <CR>
 " corretor Ortográfico
-map <F9> :call SpellCheck()<CR>
-map <F10> :call SpellProposeAlternatives()<CR>
+map <silent><F9> :call Myspell()<CR>
 " ativate Gundo
 nnoremap <F11> :GundoToggle<CR>
 " remover distracoes
@@ -523,17 +542,18 @@ iabbrev llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 
 " Abre O Buffer No Safari:
 abbreviate saf :! open -a safari.app %:p<CR>
 " Start Stop Apache:
-abbreviate apup :! /Applications/XAMPP/xamppfiles/xampp startapache<CR>
-abbreviate apdown :! /Applications/XAMPP/xamppfiles/xampp stopapache<CR>i
+abbreviate apup :!sudo /Applications/XAMPP/xamppfiles/xampp startapache<CR>
+abbreviate apdown :!sudo /Applications/XAMPP/xamppfiles/xampp stopapache<CR>i
 " Start Stop Mysql:
-abbreviate myup :! /Applications/XAMPP/xamppfiles/share/mysql/mysql.server start<CR>
-abbreviate mydown :! /Applications/XAMPP/xamppfiles/share/mysql/mysql.server stop<CR>
+abbreviate myup :!sudo /Applications/XAMPP/xamppfiles/share/mysql/mysql.server start<CR>
+abbreviate mydown :!sudo /Applications/XAMPP/xamppfiles/share/mysql/mysql.server stop<CR>
 
 
 " PHP Documentor: ==============================================================
 Bundle 'tobyS/pdv'
 let g:pdv_template_dir = "~/.dotfiles/vim/bundle/pdv/templates_snip"
 nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
+imap <C-o> :set paste<CR>:exe PhpDoc()<CR>:set nopaste<CR>i
 
 
 " Visional: ====================================================================
@@ -585,12 +605,8 @@ Bundle 'Shougo/neocomplete.vim'
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 2
-
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplete#smart_close_popup() . "\<CR>"
-endfunction
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
@@ -608,7 +624,6 @@ Bundle 'Shougo/vimshell.vim'
 Bundle 'Shougo/vimproc'
 
 
-
 " NerdTree: ====================================================================
 " Allows to explore filesystem
 Bundle 'scrooloose/nerdtree'
@@ -619,17 +634,88 @@ let g:NERDTreeMinimalUI=1
 let g:NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '.DS_Store', 'Icon']
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeHijackNetrw=1
-let g:NERDTreeWinSize=32
+let g:NERDTreeWinSize=30
+let g:NERDTreeAutoCenter = 1
+" Usage:
+"o.......Open files, directories and bookmarks
+"go......Open selected file, but leave cursor in the NERDTree
+"t.......Open selected node/bookmark in a new tab
+"T.......Same as 't' but keep the focus on the current tab
+"i.......Open selected file in a split window
+"gi......Same as i, but leave the cursor on the NERDTree
+"s.......Open selected file in a new vsplit
+"gs......Same as s, but leave the cursor on the NERDTree
+"O.......Recursively open the selected directory
+"x.......Close the current nodes parent
+"X.......Recursively close all children of the current node
+"e.......Edit the current dir
+
+"<CR>...............same as |NERDTree-o|.
+"double-click.......same as the |NERDTree-o| map.
+"middle-click.......same as |NERDTree-i| for files, same as
+                   "|NERDTree-e| for dirs.
+
+"D.......Delete the current bookmark
+
+"P.......Jump to the root node
+"p.......Jump to current nodes parent
+"K.......Jump up inside directories at the current tree depth
+"J.......Jump down inside directories at the current tree depth
+"<C-J>...Jump down to the next sibling of the current directory
+"<C-K>...Jump up to the previous sibling of the current directory
+
+"C.......Change the tree root to the selected dir
+"u.......Move the tree root up one directory
+"U.......Same as 'u' except the old root node is left open
+"r.......Recursively refresh the current directory
+"R.......Recursively refresh the current root
+"m.......Display the NERD tree menu
+"cd......Change the CWD to the dir of the selected node
+"CD......Change tree root to the CWD
+
+"I.......Toggle whether hidden files displayed
+"f.......Toggle whether the file filters are used
+"F.......Toggle whether files are displayed
+"B.......Toggle whether the bookmark table is displayed
+
+"q.......Close the NERDTree window
+"A.......Zoom (maximize/minimize) the NERDTree window
+"?.......Toggle the display of the quick help
 
 
-" TagList: =====================================================================
+" Tagbar: ======================================================================
 Bundle 'majutsushi/tagbar'
 let g:tagbar_singleclick=1
 let g:tagbar_autoshowtag=1
 let g:tagbar_iconchars=['▸', '▾']
-let g:tagbar_width=32
+let g:tagbar_width=30
 let g:tagbar_compact=1
 let g:tagbar_ctags_bin='/usr/local/Cellar/ctags/5.8/bin/ctags'
 
 nmap <Leader>t :!/usr/local/Cellar/ctags/5.8/bin/ctags --totals -R ./<CR>
 nmap <F3> :TagbarToggle<CR>
+
+
+Bundle 'rking/ag.vim'
+let g:agprg="/usr/local/Cellar/the_silver_searcher/0.19.1/bin/ag  --column --smart-case"
+let g:aghighlight=1
+let g:agformat="%f:%l:%m"
+"Keyboard Shortcuts
+"In the quickfix window, you can use:
+"e    to open file and close the quickfix window
+"o    to open (same as enter)
+"go   to preview file (open but maintain focus on ag.vim results)
+"t    to open in new tab
+"T    to open in new tab silently
+"h    to open in horizontal split
+"H    to open in horizontal split silently
+"v    to open in vertical split
+"gv   to open in vertical split silently
+"q    to close the quickfix window
+
+
+" Auto Save: ===================================================================
+"au! CursorHoldI,CursorHold,BufLeave <buffer> silent! :update
+Bundle 'https://github.com/907th/vim-auto-save'
+let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option

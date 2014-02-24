@@ -2,8 +2,8 @@
 " Scheme: Wimer Hazenberg (http://www.monokai.nl)
 
 " GUI color definitions
-let s:gui00 = "111111"
-let s:gui01 = "293739"
+let s:gui00 = "000000"
+let s:gui01 = "1D2628"
 let s:gui02 = "49483e"
 let s:gui03 = "778899"
 let s:gui04 = "a59f85"
@@ -131,7 +131,7 @@ endfun
 " Vim editor colors
 call <sid>hi("Bold",          "", "", "", "", "bold")
 call <sid>hi("Debug",         s:gui08, "", s:cterm08, "", "")
-call <sid>hi("Directory",     s:gui04, "", s:cterm04, "", "")
+call <sid>hi("Directory",     s:gui03, "", s:cterm03, "", "")
 call <sid>hi("ErrorMsg",      s:gui08, s:gui00, s:cterm08, s:cterm00, "")
 call <sid>hi("Exception",     s:gui08, "", s:cterm08, "", "")
 call <sid>hi("FoldColumn",    "", s:gui01, "", s:cterm01, "")
@@ -166,8 +166,8 @@ call <sid>hi("ColorColumn",   "", s:gui00, "", s:cterm00, "none")
 call <sid>hi("CursorColumn",  "", s:gui01, "", s:cterm01, "none")
 call <sid>hi("CursorLine",    "", s:gui01, "", s:cterm01, "none")
 call <sid>hi("CursorLineNr",  s:gui03, s:gui01, s:cterm03, s:cterm01, "")
-call <sid>hi("PMenu",         s:gui04, s:gui01, s:cterm04, s:cterm01, "none")
-call <sid>hi("PMenuSel",      s:gui04, s:gui01, s:cterm04, s:cterm01, "reverse")
+call <sid>hi("PMenu",         s:gui09, s:gui01, s:cterm09, s:cterm01, "none")
+call <sid>hi("PMenuSel",      s:gui09, s:gui01, s:cterm09, s:cterm01, "reverse")
 call <sid>hi("TabLine",       s:gui03, s:gui01, s:cterm03, s:cterm01, "none")
 call <sid>hi("TabLineFill",   s:gui03, s:gui01, s:cterm03, s:cterm01, "none")
 call <sid>hi("TabLineSel",    s:gui0B, s:gui01, s:cterm0B, s:cterm01, "none")

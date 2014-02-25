@@ -11,25 +11,21 @@
 "                                                                         "
 "====================================================== Sergio Luiz Dobri "
 
+" VUNDLE MANAGER: ==============================================================
+" required!
 set nocompatible               " be iMproved
 filetype off                   " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-
-" Let Vundle Manage Vundle: ====================================================
-" required!
 Bundle 'gmarik/vundle'
-
-
-" Config: ======================================================================
 syntax on
 filetype on
 filetype plugin on
 filetype plugin indent on       " required!
 
 
-" Gui: =========================================================================
+" GUI SETTINGS: ================================================================
 set background=dark
 set t_Co=256                    " Allow the use of 256 colors in the terminal
 
@@ -45,24 +41,24 @@ set guifont=Anonymous\ Pro\ for\ Powerline:h21
 "set guifont=monofur\ for\ Powerline:h21
 
 
-" Remove Trailing Spaces When Saving File: =====================================
+" TRAILING SPACES: =============================================================
 exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 set list
 
 
-" LeaderKey: ===================================================================
+" LEADER KEY: ==================================================================
 let mapleader=","
 let maplocalleader = ","
 
 
-" Disable Bell: ================================================================
+" DISABLE BELL: ================================================================
 autocmd! GUIEnter * set vb t_vb=
 set noerrorbells
 set novisualbell
 set t_vb=
 
 
-" Buffers: =====================================================================
+" BUFFERS: =====================================================================
 " Navegador para os buffers abertos
 set autowrite                   " Save buffer automatically when changing files
 set hidden                      " Allow buffer switching without saving
@@ -74,13 +70,13 @@ set mouse=a                     " Automatically enable mouse usage
 set mousehide                   " Hide the mouse cursor while typing
 
 
-" Encoding: ====================================================================
+" ENCODING: ====================================================================
 set fileencoding=utf-8
 set encoding=utf-8
 scriptencoding utf-8
 
 
-" Corretor Ortográfico: ========================================================
+" SPELL: =======================================================================
 set nospell
 set spelllang=pt,en
 set spellsuggest=10
@@ -99,7 +95,7 @@ set complete+=kspell            " press CTRL-N or CTRL-P in insert-mode to compl
 " set nospell                     " no Spell checking on
 
 
-" Pesquisa: ====================================================================
+" SEARCH: ======================================================================
 set incsearch                   " Find as you type search
 set hlsearch                    " Highlight search terms
 set ignorecase                  " Case insensitive search
@@ -108,14 +104,14 @@ set showmatch                   " Show matching brackets/parenthesis
 set gdefault                    " subtitui o g no substitruir
 
 
-" Menu Autocompletar: ==========================================================
+" MENU AUTOCOMPLETE: ===========================================================
 set wildmenu                    " Show list instead of just completing
 set wildmode=full               " Command <Tab> completion, list matches
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.DS_Store   " Linux/MacOSX
 set complete=.,t
 
-" Gui: =========================================================================
+" GUI: =========================================================================
 set guioptions=                  " Remove tudo, toolbar, menu etc..
 set laststatus=2                " always show status line
 set antialias
@@ -137,7 +133,7 @@ set fillchars+=vert:│
 set nolazyredraw
 set cmdheight=1
 
-" Diversos: ====================================================================
+" VAROUS: ======================================================================
 set shortmess+=filmnrxoOtT      " Abbrev. of messages (avoids 'hit enter')
 set virtualedit=onemore         " Allow for cursor beyond last character
 set history=50                  " Store a ton of history (default is 20)
@@ -159,7 +155,7 @@ set ttimeoutlen=50
 set completeopt-=preview
 
 
-" Identacao: ===================================================================
+" IDENT: =======================================================================
 set autoindent                  " Indent at the same level of the previous line
 set nojoinspaces                " Prevents inserting twospaces afterpunctuation
 set splitright                  " Puts new vsplit windows to the right
@@ -168,7 +164,7 @@ set smartindent
 set shellslash
 
 
-" Tabulacao: ===================================================================
+" TABS: ========================================================================
 set shiftwidth=4                " Use indents of 4 spaces
 set tabpagemax=15               " Only show 15 tabs
 set tabstop=4                   " An indentation every four columns
@@ -177,17 +173,17 @@ set expandtab                   " Tabs are spaces, not tabs
 set shiftround                  "round > and < to multiples of shiftwidth
 
 
-" Session Settings: ============================================================
+" SESSION SETTINGS: ============================================================
 set sessionoptions=resize,winpos,winsize,buffers,tabpages,folds,curdir,help
 
 
-" Swap E Backup: ===============================================================
+" SWAP E BACKUP: ===============================================================
 set noswapfile                  " Stop vim from creating automatic backups
 set nobackup                    " Stop backup
 set nowb
 
 
-" Cursor: ======================================================================
+" CURSOR: ======================================================================
 " Alterar o formato do cursor
 set guicursor=a:block
 
@@ -208,7 +204,7 @@ highlight ReplaceCursor ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#df0000
 highlight CommandCursor ctermfg=16  guifg=#000000 ctermbg=231 guibg=#ffffff
 
 
-" Remove Delay: ================================================================
+" REMOVE DELAY: ================================================================
 " The issue is that Powerline causes a delay when leaving Insert mode, but this
 " can be  fixed by changing the InsertEnter timeoutlen setting to 0:
 if ! has('gui_running')
@@ -230,11 +226,11 @@ Bundle 'amirh/HTML-AutoCloseTag'
 Bundle 'hail2u/vim-css3-syntax'
 
 
-" Autoclose: ===================================================================
+" AUTOCLOSE: ===================================================================
 Bundle 'Townk/vim-autoclose'
 
 
-" Git: =========================================================================
+" GIT: =========================================================================
 Bundle 'tpope/vim-fugitive'
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gr :Gremove<CR>
@@ -249,36 +245,36 @@ nnoremap <Leader>gd :Gdiff<CR>
 Bundle 'airblade/vim-gitgutter'
 
 
-" HexHilight: ==================================================================
+" HEX HIGHLIGHT: ===============================================================
 Bundle 'vim-scripts/hexHighlight.vim'
 " <Leader><F2> to ativate and desativate
 
 
-" VimTableMode: ===============================================================
+" VIM TABLE MODE: ==============================================================
 Bundle 'dhruvasagar/vim-table-mode'
 
 
-" VDebug: =====================================================================
+" VDEGUG: ======================================================================
 " Php Debug
 Bundle 'joonty/vdebug'
 
 
-" Utl: ========================================================================
+" UTL: =========================================================================
 " Univeral Text Linking - Execute URLs, footnotes, open emails, organize ideas
 Bundle 'vim-scripts/utl.vim'
 
 
-" Easy Motions Yeah: ===========================================================
+" EASY MOTIONS: ================================================================
 Bundle 'Lokaltog/vim-easymotion'
 
 
-" PhpComplete: =================================================================
+" PHPCOMPLETE: =================================================================
 Bundle 'shawncplus/phpcomplete.vim'
 Bundle 'arnaud-lb/vim-php-namespace'
 Bundle 'StanAngeloff/php.vim'
 
 
-" PHP Getter Setter: ===========================================================
+" PHP GETTER SETTER: ===========================================================
 Bundle 'docteurklein/php-getter-setter.vim'
 " Commands:
 imap <Leader>gg :InsertGetterOnly<CR>
@@ -286,7 +282,7 @@ imap <Leader>ss :InsertSetterOnly
 imap <Leader>ii :InsertBothGetterSetter
 
 
-" Php: =========================================================================
+" PHP: =========================================================================
 " Bundle 'donnut/vim-php54-syntax'
 Bundle 'vim-scripts/php.vim-for-php5'
 let g:php_sql_query=1             " to highlight SQL syntax in strings
@@ -299,12 +295,12 @@ let g:php_show_semicolon = 1
 let g:php_smart_semicolon = 1
 
 
-" Nerdcommenter: ===============================================================
+" NERDCOMMENTER: ===============================================================
 Bundle 'scrooloose/nerdcommenter'
 map <leader>cc <plug>NERDCommenterInvert
 
 
-" IdentLine: ===================================================================
+" IDENTLINE: ===================================================================
 " display the indention levels with thin vertical lines
 Bundle 'Yggdroot/indentLine'
 let g:indentLine_color_term = 239
@@ -313,7 +309,7 @@ let g:indentLine_char='│'
 let g:indentLine_indentLevel=7
 
 
-" Vim Phpqa: ===================================================================
+" VIM PHPQA: ===================================================================
 Bundle 'joonty/vim-phpqa.git'
 " <Leader>qa  - Show/hide code sniffer and mess detector violations
 " <Leader>qc  - Show/hide code coverage markers
@@ -326,12 +322,12 @@ let g:phpqa_codesniffer_cmd='/Applications/XAMPP/xamppfiles/bin/phpcs'
 let g:phpqa_messdetector_cmd='/Applications/XAMPP/xamppfiles/bin/phpmd'
 
 
-" Auto Pairs: ==================================================================
+" AUTO PAIRS: ==================================================================
 Bundle 'jiangmiao/auto-pairs'
 let g:AutoPairsFlyMode = 1
 
 
-" Emmet: =======================================================================
+" EMMET: =======================================================================
 Bundle 'mattn/emmet-vim'
 let g:user_emmet_mode='a'    "enable all function in all mode.
 let g:user_emmet_expandabbr_key='<c-e>'
@@ -340,12 +336,12 @@ let g:user_emmet_next_key='<c-n>'
 let g:user_emmet_prev_key='<c-p>'
 
 
-" Markdown: ===================================================================
+" MARKDOWN: ====================================================================
 Bundle 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 
 
-" Calendar: ===================================================================
+" CALENDAR: ====================================================================
 " Exibe 3 calendarios contendo o mes anterior, mes atual e o proximo mes
 Bundle 'mattn/calendar-vim'
 let g:calendar_navi_label = '<Ant.,Hoje,Pro.>'
@@ -354,7 +350,7 @@ let g:calendar_wruler = 'Do Se Te Qa Qi Se Sa'
 abbreviate cal :Calendar<CR>
 
 
-" Functions: ==================================================================
+" FUNCTIONS: ==================================================================
 " Remove empty line at the end of page
 function! <SID>TrimEndLines()
   let save_cursor = getpos(".")
@@ -398,7 +394,7 @@ function! Myspell()
 endfunction
 
 
-" Autocomandos: ================================================================
+" AUTOCMD: =====================================================================
 " Auto remove when saving
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 autocmd BufWritePre * :call <SID>TrimEndLines()
@@ -439,7 +435,7 @@ autocmd filetype java nnoremap <Leader>c :w <CR>:!javac % && java %:r<CR>
 autocmd filetype gitcommit nnoremap <buffer> c :Gcommit<CR>
 
 
-" FocusMode: ==================================================================
+" DISTRACTION FREE: ============================================================
 " Distraction-free writing in Vim
 Bundle 'junegunn/goyo.vim'
 let g:goyo_width=84
@@ -460,22 +456,17 @@ function! g:goyo_after()
     set nofullscreen
     set linespace=0
     set number
-  endif
+endif
 endfunction
 let g:goyo_callbacks = [function('g:goyo_before'), function('g:goyo_after')]
 " nnoremap <F12> :Goyo<CR>
 
 
-" Surround: ===================================================================
+" SURROUND: ===================================================================
 Bundle 'tpope/vim-surround'
 
 
-" Remapear: ====================================================================
-imap jj <Esc>
-nmap <space> :
-
-
-" Navegar: =====================================================================
+" NAVIGATE: ====================================================================
 " entre Buffers
 nnoremap <silent> <S-Right> :bn<CR>
 nnoremap <silent> <S-Left> :bp<CR>
@@ -489,9 +480,11 @@ nmap <C-l> <C-w>l
 "nnoremap <silent> <S-Right> :tabn<CR>
 "nnoremap <silent> <S-Left> :tabp<CR>
 "nnoremap <silent> <C-x> :tabclose<CR>
+imap jj <Esc>
+nmap <space> :
 
 
-" Bubble Text: =================================================================
+" BUBLE TEXT: ==================================================================
 "http://vimcasts.org/episodes/bubbling-text/
 "Bubble single lines
 nmap <C-Up> ddkP
@@ -501,11 +494,11 @@ vmap <C-Up> xkP`[V`]
 vmap <C-Down> xp`[V`]
 
 
-" Fast Saving: =================================================================
+" FAST SAVE: ===================================================================
 nnoremap <leader>w :w!<CR>
 
 
-" Teclas de Funcoes: ===========================================================
+" FUNCTIONS KEY: ===============================================================
 " menu de selecao de arwuivos
 nnoremap <silent> <F2> :NERDTreeTabsToggle<CR>
 " execute php-cs-fixer
@@ -526,16 +519,9 @@ nnoremap <F11> :GundoToggle<CR>
 nnoremap <silent> <F12> :Goyo<CR>
 
 
-" Disable Arrow Keys: ==========================================================
-" as mensagem foram movidas pro lado
-" nnoremap <Down>     :echoe ""<CR> " Use j
-" nnoremap <Right>    :echoe ""<CR> " Use l
-" nnoremap <Up>       :echoe ""<CR> " Use k
-" nnoremap <Down>     :echoe ""<CR> " Use j
-
-" Atalhos: =====================================================================
+" SHORTCUTS: ===================================================================
 " Show Battery Usage:
-abbreviate batt :!pmset -g batt<CR>
+abbreviate batt :exec "!pmset -g batt"
 " Lorem Ipsum:
 iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 iabbrev llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -549,36 +535,36 @@ abbreviate myup :!sudo /Applications/XAMPP/xamppfiles/share/mysql/mysql.server s
 abbreviate mydown :!sudo /Applications/XAMPP/xamppfiles/share/mysql/mysql.server stop<CR>
 
 
-" PHP Documentor: ==============================================================
+" PHP DOCUMENTOR: ==============================================================
 Bundle 'tobyS/pdv'
 let g:pdv_template_dir = "~/.dotfiles/vim/bundle/pdv/templates_snip"
 nnoremap <buffer> <C-p> :call pdv#DocumentWithSnip()<CR>
 imap <C-o> :set paste<CR>:exe PhpDoc()<CR>:set nopaste<CR>i
 
 
-" Visional: ====================================================================
+" VISIONAL: ====================================================================
 Bundle 'justindomingue/visional'
 let g:visionalhl='ctermbg=black ctermfg=yellow guifg=yellow guibg=black ctermfg=yellow gui=bold'
 
 
-" Vim Vinegar: =================================================================
+" VIM VINEGAR: =================================================================
 Bundle 'tpope/vim-vinegar'
 
 
-" Lightline: ===================================================================
+" LIGHTLINE: ===================================================================
 Bundle 'itchyny/lightline.vim'
 let g:lightline = {
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 
-" Rename: ======================================================================
+" RENAME: ======================================================================
 Bundle 'wojtekmach/vim-rename'
 " Usage:
 " :Rename[!] {newname}
 
 
-" Mutiple Cursors: =============================================================
+" MULTIPLE CURSORS: ============================================================
 Bundle 'terryma/vim-multiple-cursors'
 let g:multi_cursor_use_default_mapping=0
 " Default mapping
@@ -591,7 +577,7 @@ highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
 highlight link multiple_cursors_visual Visual
 
 
-" Gundo: =======================================================================
+" GUNDO: =======================================================================
 Bundle 'sjl/gundo.vim'
 let g:gundo_width = 60
 let g:gundo_preview_height = 40
@@ -600,7 +586,7 @@ set undolevels=400
 set undodir=~/.dotfiles/vim/undodir
 
 
-" Neocomplete: =================================================================
+" NEOCOMPLETE: =================================================================
 Bundle 'Shougo/neocomplete.vim'
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
@@ -619,12 +605,12 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
 
-" VimShell: ====================================================================
+" VIMSHELL: ====================================================================
 Bundle 'Shougo/vimshell.vim'
 Bundle 'Shougo/vimproc'
 
 
-" NerdTree: ====================================================================
+" NERDTREE: ====================================================================
 " Allows to explore filesystem
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
@@ -683,7 +669,7 @@ let g:NERDTreeAutoCenter = 1
 "?.......Toggle the display of the quick help
 
 
-" Tagbar: ======================================================================
+" TAGBAR: ======================================================================
 Bundle 'majutsushi/tagbar'
 let g:tagbar_singleclick=1
 let g:tagbar_autoshowtag=1
@@ -696,6 +682,7 @@ nmap <Leader>t :!/usr/local/Cellar/ctags/5.8/bin/ctags --totals -R ./<CR>
 nmap <F3> :TagbarToggle<CR>
 
 
+" SILVER SEARCH: ===============================================================
 Bundle 'rking/ag.vim'
 let g:agprg="/usr/local/Cellar/the_silver_searcher/0.19.1/bin/ag  --column --smart-case"
 let g:aghighlight=1
@@ -714,8 +701,19 @@ let g:agformat="%f:%l:%m"
 "q    to close the quickfix window
 
 
-" Auto Save: ===================================================================
+" AUTO SAVE:if expand("%") == ""|browse confirm w|else|confirm w|endif
+" : ===================================================================
 "au! CursorHoldI,CursorHold,BufLeave <buffer> silent! :update
 Bundle 'https://github.com/907th/vim-auto-save'
 let g:auto_save = 1  " enable AutoSave on Vim startup
 let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
+
+
+" EXECUTA NO SERVIDOR: =================================================
+function! Exec_host()
+    let b:file = bufname("%")
+    let b:host = substitute(b:file, "Copy", "http://localhost", "")
+    exec "! open -a safari.app " b:host
+endfunction
+
+nmap <silent><C-h>  :call Exec_host()<CR>

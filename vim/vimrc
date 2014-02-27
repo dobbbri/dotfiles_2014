@@ -37,9 +37,13 @@ else
   colorscheme vividchalk
 endif
 
-set guifont=Anonymous\ Pro\ for\ Powerline:h21
+set guifont=Meslo\ LG\ S\ for\ Powerline:h19
+"set guifont=Anonymous\ Pro\ for\ Powerline:h21
 "set guifont=monofur\ for\ Powerline:h21
-
+"
+if has("balloon_eval") && has("gui_running")
+  set ballooneval
+endif
 
 " TRAILING SPACES: =============================================================
 exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
@@ -265,7 +269,7 @@ Bundle 'vim-scripts/utl.vim'
 
 
 " EASY MOTIONS: ================================================================
-Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'Lokaltog/vim-easymotion'
 
 
 " PHPCOMPLETE: =================================================================
@@ -393,6 +397,30 @@ function! Myspell()
    exe "setlocal " . Myspl
 endfunction
 
+" Move tab left or right
+map <D-H> :call TabMove(-1)<CR>
+map <D-L> :call TabMove(1)<CR>
+"" Move current tab into the specified direction.
+" @param direction -1 for left, 1 for right.
+function! TabMove(direction)
+    " get number of tab pages.
+    let ntp=tabpagenr("$")
+    " move tab, if necessary.
+    if ntp > 1
+        " get number of current tab page.
+        let ctpn=tabpagenr()
+        " move left.
+        if a:direction < 0
+            let index=((ctpn-1+ntp-1)%ntp)
+        else
+            let index=(ctpn%ntp)
+        endif
+
+        " move tab page.
+        execute "tabmove ".index
+    endif
+endfunction
+
 
 " AUTOCMD: =====================================================================
 " Auto remove when saving
@@ -426,13 +454,21 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType vim set omnifunc=syntaxcomplete#Complete
 " Markdown
-autocmd BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  set filetype=markdown
+autocmd BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setfiletype markdown
 " no terminal digite: export MYVIMRC="/User/sldobri/.dotfiles/vim/vimrc"
 autocmd bufwritepost vimrc :so %
 " java compile files
 autocmd filetype java nnoremap <Leader>c :w <CR>:!javac % && java %:r<CR>
 " Commit
 autocmd filetype gitcommit nnoremap <buffer> c :Gcommit<CR>
+
+" Reload changes to .vimrc automatically
+autocmd BufWritePost  ~/.vimrc source ~/.vimrc
+
+" Stuff taken from
+" https://github.com/r00k/dotfiles/blob/master/vimrc
+command! Q q
+command! W w
 
 
 " DISTRACTION FREE: ============================================================
@@ -492,7 +528,10 @@ nmap <C-Down> ddp
 "Bubble multiple lines
 vmap <C-Up> xkP`[V`]
 vmap <C-Down> xp`[V`]
-
+" Opções para que blocos selecionados sejam reselecionados após identações.
+" Ajuda muito na hora de identar grandes e confusos blocos =)
+vnoremap < <gv
+vnoremap > >gv
 
 " FAST SAVE: ===================================================================
 nnoremap <leader>w :w!<CR>
@@ -510,7 +549,7 @@ map <F6> :call BrowseDoc()<CR>
 " alinhar codigo
 nnoremap <silent> <F7> mzgg=G`z<CR>
 " execute javascript
-map <silent> <F8> :call RunJScript1() <CR>
+map <silent> <F8> :call RunJScript1()<CR>
 " corretor Ortográfico
 map <silent><F9> :call Myspell()<CR>
 " ativate Gundo
@@ -623,50 +662,49 @@ let g:NERDTreeHijackNetrw=1
 let g:NERDTreeWinSize=30
 let g:NERDTreeAutoCenter = 1
 " Usage:
-"o.......Open files, directories and bookmarks
-"go......Open selected file, but leave cursor in the NERDTree
-"t.......Open selected node/bookmark in a new tab
-"T.......Same as 't' but keep the focus on the current tab
-"i.......Open selected file in a split window
-"gi......Same as i, but leave the cursor on the NERDTree
-"s.......Open selected file in a new vsplit
-"gs......Same as s, but leave the cursor on the NERDTree
-"O.......Recursively open the selected directory
-"x.......Close the current nodes parent
-"X.......Recursively close all children of the current node
-"e.......Edit the current dir
+"o....Open files, directories and bookmarks
+"go...Open selected file, but leave cursor in the NERDTree
+"t....Open selected node/bookmark in a new tab
+"T....Same as 't' but keep the focus on the current tab
+"i....Open selected file in a split window
+"gi...Same as i, but leave the cursor on the NERDTree
+"s....Open selected file in a new vsplit
+"gs...Same as s, but leave the cursor on the NERDTree
+"O....Recursively open the selected directory
+"x....Close the current nodes parent
+"X....Recursively close all children of the current node
+"e....Edit the current dir
 
-"<CR>...............same as |NERDTree-o|.
-"double-click.......same as the |NERDTree-o| map.
-"middle-click.......same as |NERDTree-i| for files, same as
-                   "|NERDTree-e| for dirs.
+"<CR>...........same as |NERDTree-o|.
+"double-click...same as the |NERDTree-o| map.
+"middle-click...same as |NERDTree-i| for files, same as |NERDTree-e| for dirs.
 
-"D.......Delete the current bookmark
+"D.....Delete the current bookmark
 
-"P.......Jump to the root node
-"p.......Jump to current nodes parent
-"K.......Jump up inside directories at the current tree depth
-"J.......Jump down inside directories at the current tree depth
-"<C-J>...Jump down to the next sibling of the current directory
-"<C-K>...Jump up to the previous sibling of the current directory
+"P.....Jump to the root node
+"p.....Jump to current nodes parent
+"K.....Jump up inside directories at the current tree depth
+"J.....Jump down inside directories at the current tree depth
+"<C-J>.Jump down to the next sibling of the current directory
+"<C-K>.Jump up to the previous sibling of the current directory
 
-"C.......Change the tree root to the selected dir
-"u.......Move the tree root up one directory
-"U.......Same as 'u' except the old root node is left open
-"r.......Recursively refresh the current directory
-"R.......Recursively refresh the current root
-"m.......Display the NERD tree menu
-"cd......Change the CWD to the dir of the selected node
-"CD......Change tree root to the CWD
+"C...Change the tree root to the selected dir
+"u...Move the tree root up one directory
+"U...Same as 'u' except the old root node is left open
+"r...Recursively refresh the current directory
+"R...Recursively refresh the current root
+"m...Display the NERD tree menu
+"cd..Change the CWD to the dir of the selected node
+"CD..Change tree root to the CWD
 
-"I.......Toggle whether hidden files displayed
-"f.......Toggle whether the file filters are used
-"F.......Toggle whether files are displayed
-"B.......Toggle whether the bookmark table is displayed
+"I...Toggle whether hidden files displayed
+"f...Toggle whether the file filters are used
+"F...Toggle whether files are displayed
+"B...Toggle whether the bookmark table is displayed
 
-"q.......Close the NERDTree window
-"A.......Zoom (maximize/minimize) the NERDTree window
-"?.......Toggle the display of the quick help
+"q...Close the NERDTree window
+"A...Zoom (maximize/minimize) the NERDTree window
+"?...Toggle the display of the quick help
 
 
 " TAGBAR: ======================================================================
@@ -687,29 +725,27 @@ Bundle 'rking/ag.vim'
 let g:agprg="/usr/local/Cellar/the_silver_searcher/0.19.1/bin/ag  --column --smart-case"
 let g:aghighlight=1
 let g:agformat="%f:%l:%m"
-"Keyboard Shortcuts
-"In the quickfix window, you can use:
-"e    to open file and close the quickfix window
-"o    to open (same as enter)
-"go   to preview file (open but maintain focus on ag.vim results)
-"t    to open in new tab
-"T    to open in new tab silently
-"h    to open in horizontal split
-"H    to open in horizontal split silently
-"v    to open in vertical split
-"gv   to open in vertical split silently
-"q    to close the quickfix window
+"Usage:
+" e    to open file and close the quickfix window
+" o    to open (same as enter)
+" go   to preview file (open but maintain focus on ag.vim results)
+" t    to open in new tab
+" T    to open in new tab silently
+" h    to open in horizontal split
+" H    to open in horizontal split silently
+" v    to open in vertical split
+" gv   to open in vertical split silently
+" q    to close the quickfix window
 
 
-" AUTO SAVE:if expand("%") == ""|browse confirm w|else|confirm w|endif
-" : ===================================================================
+" AUTO SAVE: ===================================================================
 "au! CursorHoldI,CursorHold,BufLeave <buffer> silent! :update
 Bundle 'https://github.com/907th/vim-auto-save'
 let g:auto_save = 1  " enable AutoSave on Vim startup
 let g:auto_save_no_updatetime = 1  " do not change the 'updatetime' option
 
 
-" EXECUTA NO SERVIDOR: =================================================
+" EXECUTA NO SERVIDOR: =========================================================
 function! Exec_host()
     let b:file = bufname("%")
     let b:host = substitute(b:file, "Copy", "http://localhost", "")
@@ -717,3 +753,7 @@ function! Exec_host()
 endfunction
 
 nmap <silent><C-h>  :call Exec_host()<CR>
+
+
+" MATCHIT: =====================================================================
+Bundle 'vim-scripts/matchit.zip'

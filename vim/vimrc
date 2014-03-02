@@ -29,17 +29,15 @@ filetype plugin indent on       " required!
 set background=dark
 set t_Co=256                    " Allow the use of 256 colors in the terminal
 
-if has("gui_running")
-  colorscheme base16-monokai
+"if has("gui_running")
+  "colorscheme base16-monokai
   set fuoptions=maxvert,maxhorz
-  set fullscreen
-else
+  "set fullscreen
+"else
   colorscheme vividchalk
-endif
+"endif
 
 set guifont=Meslo\ LG\ S\ for\ Powerline:h19
-"set guifont=Anonymous\ Pro\ for\ Powerline:h21
-"set guifont=monofur\ for\ Powerline:h21
 "
 if has("balloon_eval") && has("gui_running")
   set ballooneval
@@ -230,10 +228,6 @@ Bundle 'amirh/HTML-AutoCloseTag'
 Bundle 'hail2u/vim-css3-syntax'
 
 
-" AUTOCLOSE: ===================================================================
-Bundle 'Townk/vim-autoclose'
-
-
 " GIT: =========================================================================
 Bundle 'tpope/vim-fugitive'
 nnoremap <Leader>gs :Gstatus<CR>
@@ -255,7 +249,7 @@ Bundle 'vim-scripts/hexHighlight.vim'
 
 
 " VIM TABLE MODE: ==============================================================
-Bundle 'dhruvasagar/vim-table-mode'
+"Bundle 'dhruvasagar/vim-table-mode'
 
 
 " VDEGUG: ======================================================================
@@ -266,10 +260,6 @@ Bundle 'joonty/vdebug'
 " UTL: =========================================================================
 " Univeral Text Linking - Execute URLs, footnotes, open emails, organize ideas
 Bundle 'vim-scripts/utl.vim'
-
-
-" EASY MOTIONS: ================================================================
-"Bundle 'Lokaltog/vim-easymotion'
 
 
 " PHPCOMPLETE: =================================================================
@@ -461,10 +451,8 @@ autocmd bufwritepost vimrc :so %
 autocmd filetype java nnoremap <Leader>c :w <CR>:!javac % && java %:r<CR>
 " Commit
 autocmd filetype gitcommit nnoremap <buffer> c :Gcommit<CR>
-
 " Reload changes to .vimrc automatically
 autocmd BufWritePost  ~/.vimrc source ~/.vimrc
-
 " Stuff taken from
 " https://github.com/r00k/dotfiles/blob/master/vimrc
 command! Q q
@@ -499,7 +487,7 @@ let g:goyo_callbacks = [function('g:goyo_before'), function('g:goyo_after')]
 
 
 " SURROUND: ===================================================================
-Bundle 'tpope/vim-surround'
+"Bundle 'tpope/vim-surround'
 
 
 " NAVIGATE: ====================================================================
@@ -572,7 +560,6 @@ abbreviate apdown :!sudo /Applications/XAMPP/xamppfiles/xampp stopapache<CR>i
 " Start Stop Mysql:
 abbreviate myup :!sudo /Applications/XAMPP/xamppfiles/share/mysql/mysql.server start<CR>
 abbreviate mydown :!sudo /Applications/XAMPP/xamppfiles/share/mysql/mysql.server stop<CR>
-
 
 " PHP DOCUMENTOR: ==============================================================
 Bundle 'tobyS/pdv'
@@ -756,4 +743,10 @@ nmap <silent><C-h>  :call Exec_host()<CR>
 
 
 " MATCHIT: =====================================================================
-Bundle 'vim-scripts/matchit.zip'
+Bundle 'pydave/AsyncCommand'
+
+
+
+
+" WORK FOLDER: =================================================================
+cd ~/Copy/TreeHouse

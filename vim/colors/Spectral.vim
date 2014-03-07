@@ -17,13 +17,20 @@ let g:colors_name = "Spectral"
 "hi Visual ctermfg=NONE ctermbg=52 cterm=NONE guifg=NONE guibg=#4b1010 gui=NONE
 "hi CursorColumn ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#2e2e30 gui=NONE
 
-hi Pmenu            ctermfg=NONE ctermbg=NONE cterm=NONE      guifg=#FFFFFF guibg=#2e2e30 gui=NONE
-hi PmenuSel         ctermfg=NONE ctermbg=52   cterm=NONE      guifg=#000000 guibg=#35d2ab gui=NONE
+if version >= 700
+  hi SpellBad       ctermbg=DarkRed         cterm=underline  guifg=DarkRed         gui=underline
+  hi SpellCap       ctermbg=DarkBlue        cterm=underline  guifg=DarkBlue        gui=underline
+  hi SpellRare      ctermbg=DarkMagenta     cterm=underline  guifg=DarkMagenta     gui=underline
+  hi SpellLocal     ctermbg=DarkCyan        cterm=underline  guifg=DarkCyan        gui=underline
+endif
 
-hi CursorLine       ctermfg=NONE ctermbg=236  cterm=NONE      guifg=NONE    guibg=#2e2e30 gui=NONE
+hi Pmenu            ctermfg=NONE ctermbg=NONE cterm=NONE      guifg=#FFFFFF guibg=#2e2e30 gui=NONE
+hi PmenuSel         ctermfg=NONE ctermbg=52   cterm=NONE      guifg=#000000 guibg=#35d2ab gui=reverse
+
+hi CursorLine       ctermfg=NONE ctermbg=236  cterm=NONE      guifg=NONE    guibg=#131B24 gui=NONE
 hi ColorColumn      ctermfg=NONE ctermbg=236  cterm=NONE      guifg=NONE    guibg=#2e2e30 gui=NONE
 hi LineNr           ctermfg=102  ctermbg=236  cterm=NONE      guifg=#787a82 guibg=#2e2e30 gui=NONE
-hi VertSplit        ctermfg=59   ctermbg=59   cterm=NONE      guifg=#778899 guibg=NONE    gui=bold
+hi VertSplit        ctermfg=59   ctermbg=59   cterm=NONE      guifg=#262626 guibg=NONE    gui=bold
 hi MatchParen       ctermfg=173  ctermbg=NONE cterm=underline guifg=#cc7832 guibg=NONE    gui=underline
 hi IncSearch        ctermfg=234  ctermbg=79   cterm=NONE      guifg=#1b1b1b guibg=#35d2ab gui=NONE
 hi Search           ctermfg=NONE ctermbg=NONE cterm=underline guifg=NONE    guibg=NONE    gui=underline
@@ -36,32 +43,32 @@ hi Character        ctermfg=143  ctermbg=NONE cterm=NONE      guifg=#a5c25c guib
 hi Comment          ctermfg=240  ctermbg=NONE cterm=NONE      guifg=#778899 guibg=NONE    gui=NONE
 hi Conditional      ctermfg=179  ctermbg=NONE cterm=NONE      guifg=#d0b344 guibg=NONE    gui=NONE
 hi Constant         ctermfg=NONE ctermbg=NONE cterm=NONE      guifg=#A5C25C guibg=NONE    gui=NONE
-hi Define           ctermfg=173  ctermbg=NONE cterm=NONE      guifg=#cc7832 guibg=NONE    gui=NONE
+hi Define           ctermfg=173  ctermbg=NONE cterm=NONE      guifg=orange  guibg=NONE    gui=NONE
 hi ErrorMsg         ctermfg=196  ctermbg=NONE cterm=NONE      guifg=#ff0b00 guibg=NONE    gui=NONE
 hi WarningMsg       ctermfg=196  ctermbg=NONE cterm=NONE      guifg=#ff0b00 guibg=NONE    gui=NONE
 hi Float            ctermfg=221  ctermbg=NONE cterm=NONE      guifg=#ffd442 guibg=NONE    gui=NONE
 hi Function         ctermfg=173  ctermbg=NONE cterm=bold      guifg=#ffd442 guibg=NONE    gui=bold
-hi Identifier       ctermfg=173  ctermbg=NONE cterm=NONE      guifg=#75accf guibg=NONE    gui=NONE
+hi Identifier       ctermfg=173  ctermbg=NONE cterm=NONE      guifg=#66ccff guibg=NONE    gui=NONE
 hi Keyword          ctermfg=173  ctermbg=NONE cterm=NONE      guifg=#ffd442 guibg=NONE    gui=NONE
 hi Label            ctermfg=79   ctermbg=NONE cterm=NONE      guifg=#ffd442 guibg=NONE    gui=NONE
 hi NonText          ctermfg=NONE ctermbg=235  cterm=NONE      guifg=#000000 guibg=NONE    gui=NONE
 hi Number           ctermfg=221  ctermbg=NONE cterm=NONE      guifg=#7550ac guibg=NONE    gui=NONE
-hi Operator         ctermfg=173  ctermbg=NONE cterm=NONE      guifg=#75accf guibg=NONE    gui=NONE
-hi PreProc          ctermfg=173  ctermbg=NONE cterm=NONE      guifg=#cc7832 guibg=NONE    gui=NONE
-hi Special          ctermfg=188  ctermbg=NONE cterm=NONE      guifg=#d5d8e9 guibg=NONE    gui=NONE
+hi Operator         ctermfg=173  ctermbg=NONE cterm=NONE      guifg=#ffffff guibg=NONE    gui=NONE
+hi PreProc          ctermfg=173  ctermbg=NONE cterm=NONE      guifg=#66ccff guibg=NONE    gui=NONE
+hi Special          ctermfg=188  ctermbg=NONE cterm=NONE      guifg=#ffffff guibg=NONE    gui=bold
 hi SpecialKey       ctermfg=NONE ctermbg=236  cterm=NONE      guifg=#ffffff guibg=#2e2e30 gui=NONE
 hi Statement        ctermfg=179  ctermbg=NONE cterm=NONE      guifg=#d0b344 guibg=NONE    gui=NONE
-hi StorageClass     ctermfg=173  ctermbg=NONE cterm=NONE      guifg=#CC7832 guibg=NONE    gui=NONE
+hi StorageClass     ctermfg=173  ctermbg=NONE cterm=NONE      guifg=orange  guibg=NONE    gui=NONE
 hi String           ctermfg=79   ctermbg=NONE cterm=NONE      guifg=#35d2ab guibg=NONE    gui=NONE
 hi Tag              ctermfg=110  ctermbg=NONE cterm=NONE      guifg=#D0B344 guibg=NONE    gui=NONE
 hi Title            ctermfg=188  ctermbg=NONE cterm=bold      guifg=#ffffff guibg=NONE    gui=bold
 hi Todo             ctermfg=240  ctermbg=NONE cterm=inverse   guifg=#555555 guibg=NONE    gui=inverse,bold
 hi Type             ctermfg=NONE ctermbg=NONE cterm=NONE      guifg=#a5c25c guibg=NONE    gui=NONE
-hi Underlined       ctermfg=NONE ctermbg=NONE cterm=underline guifg=#ffffff guibg=NONE    gui=underline
+hi Underlined       ctermfg=NONE ctermbg=NONE cterm=underline guifg=yellow  guibg=NONE   gui=underline
 
-hi htmlTag          ctermfg=179  ctermbg=NONE cterm=NONE      guifg=#6089b4 guibg=NONE    gui=NONE
-hi htmlEndTag       ctermfg=179  ctermbg=NONE cterm=NONE      guifg=#6089b4 guibg=NONE    gui=NONE
-hi htmlTagName      ctermfg=179  ctermbg=NONE cterm=NONE      guifg=#75ACCF guibg=NONE    gui=NONE
+hi htmlTag          ctermfg=179  ctermbg=NONE cterm=NONE      guifg=#7f7f7f guibg=NONE    gui=NONE
+hi htmlEndTag       ctermfg=179  ctermbg=NONE cterm=NONE      guifg=#7f7f7f guibg=NONE    gui=NONE
+hi htmlTagName      ctermfg=179  ctermbg=NONE cterm=NONE      guifg=#66ccff guibg=NONE    gui=NONE
 hi htmlArg          ctermfg=179  ctermbg=NONE cterm=NONE      guifg=#a9b7c6 guibg=NONE    gui=NONE
 hi htmlSpecialChar  ctermfg=143  ctermbg=NONE cterm=NONE      guifg=#a5c25c guibg=NONE    gui=NONE
 

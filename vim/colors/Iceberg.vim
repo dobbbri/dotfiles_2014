@@ -15,8 +15,8 @@ hi Visual ctermfg=NONE ctermbg=16 cterm=NONE guifg=NONE guibg=#161a1f gui=NONE
 hi CursorLine ctermfg=NONE ctermbg=59 cterm=NONE guifg=NONE guibg=#404b4d gui=NONE
 hi CursorColumn ctermfg=NONE ctermbg=59 cterm=NONE guifg=NONE guibg=#404b4d gui=NONE
 hi ColorColumn ctermfg=NONE ctermbg=59 cterm=NONE guifg=NONE guibg=#404b4d gui=NONE
-hi LineNr ctermfg=102 ctermbg=59 cterm=NONE guifg=#778899 guibg=#111111 gui=NONE
-hi VertSplit ctermfg=59 ctermbg=59 cterm=NONE guifg=#4f4f4f guibg=#111111 gui=NONE
+hi LineNr ctermfg=102 ctermbg=59 cterm=NONE guifg=#778899 guibg=#000000 gui=NONE
+hi VertSplit ctermfg=59 ctermbg=59 cterm=NONE guifg=#4f4f4f guibg=#000000 gui=NONE
 hi MatchParen ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
 hi StatusLine ctermfg=152 ctermbg=59 cterm=bold guifg=#bdd6db guibg=#5a686b gui=bold
 hi StatusLineNC ctermfg=152 ctermbg=59 cterm=NONE guifg=#bdd6db guibg=#5a686b gui=NONE
@@ -24,10 +24,10 @@ hi Pmenu ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 hi PmenuSel ctermfg=NONE ctermbg=16 cterm=NONE guifg=#ffffff guibg=#404b4d gui=NONE
 hi IncSearch ctermfg=NONE ctermbg=60 cterm=NONE guifg=NONE guibg=#5c7279 gui=NONE
 hi Search ctermfg=NONE ctermbg=60 cterm=NONE guifg=NONE guibg=#5c7279 gui=NONE
-hi Directory ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
+hi Directory ctermfg=15 ctermbg=NONE cterm=NONE guifg=#999999 guibg=NONE gui=NONE
 hi Folded ctermfg=60 ctermbg=59 cterm=NONE guifg=#c6c8d1 guibg=#323b3d gui=NONE
 
-hi Normal ctermfg=152 ctermbg=59 cterm=NONE guifg=#bdd6db guibg=#111111 gui=NONE
+hi Normal ctermfg=152 ctermbg=59 cterm=NONE guifg=#bdd6db guibg=#000000 gui=NONE
 hi Boolean ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
 hi Character ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
 hi Comment ctermfg=60 ctermbg=NONE cterm=NONE guifg=#778899 guibg=NONE gui=NONE
@@ -41,13 +41,13 @@ hi Function ctermfg=15 ctermbg=NONE cterm=NONE guifg=#a68fc5 guibg=NONE gui=NONE
 hi Identifier ctermfg=74 ctermbg=NONE cterm=NONE guifg=#59c0e3 guibg=NONE gui=italic
 hi Keyword ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
 hi Label ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
-hi NonText ctermfg=59 ctermbg=59 cterm=NONE guifg=#111111 guibg=#111111 gui=NONE
+hi NonText ctermfg=59 ctermbg=59 cterm=NONE guifg=#000000 guibg=#111111 gui=NONE
 hi Number ctermfg=15 ctermbg=NONE cterm=NONE guifg=#c6c8d1 guibg=NONE gui=NONE
 hi Operator ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
 hi PreProc ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
 hi Special ctermfg=152 ctermbg=NONE cterm=NONE guifg=#bdd6db guibg=NONE gui=NONE
 hi SpecialKey ctermfg=59 ctermbg=59 cterm=NONE guifg=#3b3a32 guibg=#404b4d gui=NONE
-hi Statement ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2 guibg=NONE gui=NONE
+hi Statement ctermfg=153 ctermbg=NONE cterm=NONE guifg=#b1e2f2  guibg=NONE gui=NONE
 hi StorageClass ctermfg=74 ctermbg=NONE cterm=NONE guifg=#59c0e3 guibg=NONE gui=italic
 hi String ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
 hi Tag ctermfg=31 ctermbg=NONE cterm=NONE guifg=#2d8da1 guibg=NONE gui=NONE
@@ -81,8 +81,8 @@ hi phpMethod ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NON
 hi phpDelimiter ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 hi phpComment ctermfg=60 ctermbg=NONE cterm=NONE guifg=#c6c8d1 guibg=NONE gui=NONE
 hi phpRailsMethod ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE
-hi htmlTag ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
-hi htmlEndTag ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
+hi htmlTag ctermfg=NONE ctermbg=NONE cterm=NONE guifg=#999999 guibg=NONE gui=NONE
+hi htmlEndTag ctermfg=NONE ctermbg=NONE cterm=NONE guifg=#999999 guibg=NONE gui=NONE
 hi htmlTagName ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 hi htmlArg ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE guibg=NONE gui=NONE
 hi htmlSpecialChar ctermfg=15 ctermbg=NONE cterm=NONE guifg=#ffffff guibg=NONE gui=NONE

@@ -55,7 +55,7 @@ hi NonText          ctermfg=NONE ctermbg=235  cterm=NONE      guifg=#000000 guib
 hi Number           ctermfg=221  ctermbg=NONE cterm=NONE      guifg=#7550ac guibg=NONE    gui=NONE
 hi Operator         ctermfg=173  ctermbg=NONE cterm=NONE      guifg=#ffffff guibg=NONE    gui=NONE
 hi PreProc          ctermfg=173  ctermbg=NONE cterm=NONE      guifg=#66ccff guibg=NONE    gui=NONE
-hi Special          ctermfg=188  ctermbg=NONE cterm=NONE      guifg=#ffffff guibg=NONE    gui=bold
+hi Special          ctermfg=188  ctermbg=NONE cterm=NONE      guifg=#a5c25c guibg=NONE    gui=bold
 hi SpecialKey       ctermfg=NONE ctermbg=236  cterm=NONE      guifg=#ffffff guibg=#2e2e30 gui=NONE
 hi Statement        ctermfg=179  ctermbg=NONE cterm=NONE      guifg=#d0b344 guibg=NONE    gui=NONE
 hi StorageClass     ctermfg=173  ctermbg=NONE cterm=NONE      guifg=orange  guibg=NONE    gui=NONE
@@ -84,6 +84,10 @@ hi cssBraces        ctermfg=NONE ctermbg=NONE cterm=NONE      guifg=#ffffff guib
 hi javaScriptFunction      ctermfg=173  ctermbg=NONE cterm=NONE guifg=#cc7832 guibg=NONE gui=NONE
 hi javaScriptRailsFunction ctermfg=179  ctermbg=NONE cterm=NONE guifg=#d0b344 guibg=NONE gui=NONE
 hi javaScriptBraces        ctermfg=NONE ctermbg=NONE cterm=NONE guifg=NONE    guibg=NONE gui=NONE
+
+hi xmlTag           ctermfg=179  ctermbg=NONE cterm=NONE      guifg=#7f7f7f guibg=NONE    gui=NONE
+hi xmlEndTag        ctermfg=179  ctermbg=NONE cterm=NONE      guifg=#7f7f7f guibg=NONE    gui=NONE
+hi xmlTagName       ctermfg=179  ctermbg=NONE cterm=NONE      guifg=#66ccff guibg=NONE    gui=NONE
 
 hi DiffAdd          ctermfg=188 ctermbg=64    cterm=bold guifg=#d5d8e9 guibg=#44810a gui=bold
 hi DiffDelete       ctermfg=88  ctermbg=NONE  cterm=NONE guifg=#890505 guibg=NONE    gui=NONE

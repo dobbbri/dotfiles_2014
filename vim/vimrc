@@ -12,13 +12,13 @@
 "====================================================== Sergio Luiz Dobri "
 
 " VUNDLE MANAGER: ==============================================================
-" required!
+" required  !
 set nocompatible               " be iMproved
 filetype off                   " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
+Bundle 'https://github.com/gmarik/vundle'
 syntax on
 filetype on
 filetype plugin on
@@ -173,7 +173,7 @@ set tabpagemax=15               " Only show 15 tabs
 set tabstop=4                   " An indentation every four columns
 set softtabstop=4               " Let backspace delete indent
 set expandtab                   " Tabs are spaces, not tabs
-set shiftround                  "round > and < to multiples of shiftwidth
+set shiftround                  " round > and < to multiples of shiftwidth
 
 
 " SESSION SETTINGS: ============================================================
@@ -199,7 +199,7 @@ set guicursor+=v-ve:VisualCursor
 
 set guicursor+=a:blinkon0
 
-" Alterar a cor do curso"
+" Alterar a cor do cursor
 highlight Cursor        ctermfg=22  guifg=#005f00 ctermbg=148 guibg=#afdf00 gui=underline
 highlight Cursor        ctermfg=22  guifg=#005f00 ctermbg=148 guibg=#afdf00 gui=reverse
 highlight InsertCursor  ctermfg=117 guifg=#87dfff ctermbg=231 guibg=#ffffff
@@ -222,18 +222,196 @@ if ! has('gui_running')
 endif
 
 
+" FUNCTIONS: ===================================================================
+" Remove empty line at the end of page
+function! <SID>TrimEndLines()
+  let save_cursor = getpos(".")
+  :silent! %s#\($\n\s*\)\+\%$##
+  call setpos('.', save_cursor)
+endfunction
+
+" Remove trailing spaces
+function! <SID>StripTrailingWhitespaces()
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  %s/\s\+$//e
+  " Clean up: restore previous search history, and cu``rsor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+function! BrowseDoc()
+  if b:current_syntax == "php"
+    ! open "http://ch2.php.net/manual-lookup.php?pattern=<cword>"
+  else
+    return
+  endif
+endfunction
+
+function! RunJScript1()
+  exec "! node %"
+endfunction
+
+" Move tab left or right
+map <D-H> :call TabMove(-1)<CR>
+map <D-L> :call TabMove(1)<CR>
+"" Move current tab into the specified direction.
+" @param direction -1 for left, 1 for right.
+function! TabMove(direction)
+    " get number of tab pages.
+    let ntp=tabpagenr("$")
+    " move tab, if necessary.
+    if ntp > 1
+        " get number of current tab page.
+        let ctpn=tabpagenr()
+        " move left.
+        if a:direction < 0
+            let index=((ctpn-1+ntp-1)%ntp)
+        else
+            let index=(ctpn%ntp)
+        endif
+
+        " move tab page.
+        execute "tabmove ".index
+    endif
+endfunction
+
+function! s:spell_check_current()
+  setlocal spell
+  normal z=
+  setlocal nospell
+endfunction
+
+
+" AUTOCMD: =====================================================================
+" Auto remove when saving
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre * :call <SID>TrimEndLines()
+" autoformat
+autocmd BufRead,BufWritePre *.html normal mzgg=G`z
+autocmd BufRead,BufWritePre *.css normal mzgg=G`z
+autocmd BufRead,BufWritePre *.js normal mzgg=G`z
+"autocmd BufRead,BufWritePre *.php normal mzgg=G`z
+" Text width
+autocmd FileType php  setlocal textwidth=250
+autocmd FileType vim  setlocal textwidth=250
+" Color column
+autocmd FileType php :call matchadd('ColorColumn', '\%81v.*', 250)
+autocmd FileType vim :call matchadd('ColorColumn', '\%121v.*', 250)
+" Languages
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType vim set omnifunc=syntaxcomplete#Complete
+" Markdown
+autocmd BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setfiletype markdown
+" java compile files
+autocmd filetype java nnoremap <Leader>c :w <CR>:!javac % && java %:r<CR>
+" Commit
+autocmd filetype gitcommit nnoremap <buffer> c :Gcommit<CR>
+" Reload changes to .vimrc automatically
+autocmd BufWritePost  ~/.vimrc source ~/.vimrc
+
+
+" SHORTCUTS: ===================================================================
+" Show Battery Usage:
+abbreviate batt :exec "!pmset -g batt"
+" Lorem Ipsum:
+iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+iabbrev llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+" Abre O Buffer No Safari:
+abbreviate saf :! open -a safari.app %:p<CR>
+" Start Stop Apache:
+abbreviate apup :!sudo /Applications/XAMPP/xamppfiles/xampp startapache<CR>
+abbreviate apdown :!sudo /Applications/XAMPP/xamppfiles/xampp stopapache<CR>i
+" Start Stop Mysql:
+abbreviate myup :!sudo /Applications/XAMPP/xamppfiles/share/mysql/mysql.server start<CR>
+abbreviate mydown :!sudo /Applications/XAMPP/xamppfiles/share/mysql/mysql.server stop<CR>
+" Pomodoros:
+abbreviate pom :AsyncCommand /Applications/'Alinof Timer.app'/Contents/MacOS/'Alinof Timer' [SetHours=00, SetMinutes=25, Start]
+abbreviate psb :AsyncCommand /Applications/'Alinof Timer.app'/Contents/MacOS/'Alinof Timer' [SetHours=00, SetMinutes=5, Start]
+abbreviate plb :AsyncCommand /Applications/'Alinof Timer.app'/Contents/MacOS/'Alinof Timer' [SetHours=00, SetMinutes=15, Start]
+" Vimrc:
+abbreviate vim :e ~/.vimrc<CR>
+
+abbreviate sc Sauce
+
+
+" NAVIGATE: ====================================================================
+" entre Buffers
+nnoremap <silent> <S-Right> :bn<CR>
+nnoremap <silent> <S-Left> :bp<CR>
+nnoremap <silent> <C-x> :q<CR>
+" Entre Janlas
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+"
+imap jj <Esc>
+nmap <space> :
+
+
+" BUBLE TEXT: ==================================================================
+"http://vimcasts.org/episodes/bubbling-text/
+"Bubble single lines
+nmap <C-Up> ddkP
+nmap <C-Down> ddp
+"Bubble multiple lines
+vmap <C-Up> xkP`[V`]
+vmap <C-Down> xp`[V`]
+" Opções para que blocos selecionados sejam reselecionados após identações.
+" Ajuda muito na hora de identar grandes e confusos blocos =)
+vnoremap < <gv
+vnoremap > >gv
+" Stuff taken from
+" https://github.com/r00k/dotfiles/blob/master/vimrc
+command! Q q
+command! W w
+
+
+" FAST SAVE: ===================================================================
+nnoremap <leader>w :w!<CR>
+
+
+" FUNCTIONS KEY: ===============================================================
+" menu de selecao de arwuivos
+nnoremap <silent> <F2> :NERDTreeTabsToggle<CR>
+" execute php-cs-fixer
+nnoremap <silent> <F4> :!php-cs-fixer fix % --level=all<CR>
+" execute php
+nnoremap <silent> <F5> :! php %<CR>
+"manual do php
+map <F6> :call BrowseDoc()<CR>
+" alinhar codigo
+nnoremap <silent> <F7> mzgg=G`z<CR>
+" execute javascript
+map <silent> <F8> :call RunJScript1()<CR>
+" corretor Ortográfico
+nnoremap <F10> :call <SID>spell_check_current()<CR>
+" ativate Gundo
+nnoremap <F11> :GundoToggle<CR>
+" remover distracoes
+nnoremap <silent> <F12> :Goyo<CR>
+
+
 " HTML5: =======================================================================
-Bundle 'othree/html5.vim'
-Bundle 'amirh/HTML-AutoCloseTag'
+Bundle 'https://github.com/othree/html5.vim'
+Bundle 'https://github.com/amirh/HTML-AutoCloseTag'
 
 
 " CSS3: ========================================================================
-Bundle 'hail2u/vim-css3-syntax'
+Bundle 'https://github.com/hail2u/vim-css3-syntax'
 
 
 " GIT: =========================================================================
-Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-gitgutter'
+Bundle 'https://github.com/tpope/vim-fugitive'
+Bundle 'https://github.com/airblade/vim-gitgutter'
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gr :Gremove<CR>
 nnoremap <Leader>gl :Glog<CR>
@@ -246,28 +424,28 @@ nnoremap <Leader>gd :Gdiff<CR>
 
 
 " HEX HIGHLIGHT: ===============================================================
-Bundle 'vim-scripts/hexHighlight.vim'
+Bundle 'https://github.com/vim-scripts/hexHighlight.vim'
 " <Leader><F2> to ativate and desativate
 
 
 " VDEGUG: ======================================================================
 " Php Debug
-Bundle 'joonty/vdebug'
+Bundle 'https://github.com/joonty/vdebug'
 
 
 " UTL: =========================================================================
 " Univeral Text Linking - Execute URLs, footnotes, open emails, organize ideas
-Bundle 'vim-scripts/utl.vim'
+Bundle 'https://github.com/vim-scripts/utl.vim'
 
 
 " PHPCOMPLETE: =================================================================
-Bundle 'shawncplus/phpcomplete.vim'
-Bundle 'arnaud-lb/vim-php-namespace'
-Bundle 'StanAngeloff/php.vim'
+Bundle 'https://github.com/shawncplus/phpcomplete.vim'
+Bundle 'https://github.com/arnaud-lb/vim-php-namespace'
+Bundle 'https://github.com/StanAngeloff/php.vim'
 
 
 " PHP GETTER SETTER: ===========================================================
-Bundle 'docteurklein/php-getter-setter.vim'
+Bundle 'https://github.com/docteurklein/php-getter-setter.vim'
 " Commands:
 imap <Leader>gg :InsertGetterOnly<CR>
 imap <Leader>ss :InsertSetterOnly
@@ -276,7 +454,7 @@ imap <Leader>ii :InsertBothGetterSetter
 
 " PHP: =========================================================================
 " Bundle 'donnut/vim-php54-syntax'
-Bundle 'vim-scripts/php.vim-for-php5'
+Bundle 'https://github.com/vim-scripts/php.vim-for-php5'
 let g:php_sql_query=1             " to highlight SQL syntax in strings
 let g:php_htmlInStrings=1         " to highlight HTML in string
 let g:php_noShortTags = 1         " to disable short tags
@@ -288,13 +466,13 @@ let g:php_smart_semicolon = 1
 
 
 " NERDCOMMENTER: ===============================================================
-Bundle 'scrooloose/nerdcommenter'
+Bundle 'https://github.com/scrooloose/nerdcommenter'
 map <leader>cc <plug>NERDCommenterInvert
 
 
 " IDENTLINE: ===================================================================
 " display the indention levels with thin vertical lines
-Bundle 'Yggdroot/indentLine'
+Bundle 'https://github.com/Yggdroot/indentLine'
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui='#24292E'
 let g:indentLine_char='│'
@@ -314,30 +492,15 @@ let g:phpqa_codesniffer_cmd='/Applications/XAMPP/xamppfiles/bin/phpcs'
 let g:phpqa_messdetector_cmd='/Applications/XAMPP/xamppfiles/bin/phpmd'
 
 
-" AUTO PAIRS: ==================================================================
-Bundle 'https://github.com/jiangmiao/auto-pairs'
-let g:AutoPairsFlyMode = 1
-
-
 " EMMET: =======================================================================
 Bundle 'https://github.com/mattn/emmet-vim'
 let g:user_emmet_mode='a'    "enable all function in all mode.
 let g:user_emmet_expandabbr_key='<c-e>'
 let g:user_emmet_complete_tag=1
 
-
-" MARKDOWN: ====================================================================
+" MARKDOWN: =================<D-[><D-[>===================================================
 Bundle 'https://github.com/plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
-
-
-" CALENDAR: ====================================================================
-" Exibe 3 calendarios contendo o mes anterior, mes atual e o proximo mes
-Bundle 'https://github.com/mattn/calendar-vim'
-let g:calendar_navi_label = '<Ant.,Hoje,Pro.>'
-let g:calendar_mruler = 'Jan,Fev,Mar,Abr,Mai,Jun,Jul,Ago,Set,Out,Nov,Dez'
-let g:calendar_wruler = 'Do Se Te Qa Qi Se Sa'
-abbreviate cal :Calendar<CR>
 
 
 " DISTRACTION FREE: ============================================================
@@ -584,204 +747,3 @@ au Syntax * RainbowParenthesesLoadBraces
 
 " SQL COMPLETE: ================================================================
 Bundle 'https://github.com/vim-scripts/SQLComplete.vim'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-" END OF PLUGINS: ==============================================================
-
-
-" FUNCTIONS: ===================================================================
-" Remove empty line at the end of page
-function! <SID>TrimEndLines()
-  let save_cursor = getpos(".")
-  :silent! %s#\($\n\s*\)\+\%$##
-  call setpos('.', save_cursor)
-endfunction
-
-" Remove trailing spaces
-function! <SID>StripTrailingWhitespaces()
-  " Preparation: save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  " Do the business:
-  %s/\s\+$//e
-  " Clean up: restore previous search history, and cu``rsor position
-  let @/=_s
-  call cursor(l, c)
-endfunction
-
-function! BrowseDoc()
-  if b:current_syntax == "php"
-    ! open "http://ch2.php.net/manual-lookup.php?pattern=<cword>"
-  else
-    return
-  endif
-endfunction
-
-function! RunJScript1()
-  exec "! node %"
-endfunction
-
-" Move tab left or right
-map <D-H> :call TabMove(-1)<CR>
-map <D-L> :call TabMove(1)<CR>
-"" Move current tab into the specified direction.
-" @param direction -1 for left, 1 for right.
-function! TabMove(direction)
-    " get number of tab pages.
-    let ntp=tabpagenr("$")
-    " move tab, if necessary.
-    if ntp > 1
-        " get number of current tab page.
-        let ctpn=tabpagenr()
-        " move left.
-        if a:direction < 0
-            let index=((ctpn-1+ntp-1)%ntp)
-        else
-            let index=(ctpn%ntp)
-        endif
-
-        " move tab page.
-        execute "tabmove ".index
-    endif
-endfunction
-
-function! s:spell_check_current()
-  setlocal spell
-  normal z=
-  setlocal nospell
-endfunction
-
-
-" AUTOCMD: =====================================================================
-" Auto remove when saving
-autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre * :call <SID>TrimEndLines()
-" autoformat
-autocmd BufRead,BufWritePre *.html normal mzgg=G`z
-autocmd BufRead,BufWritePre *.css normal mzgg=G`z
-autocmd BufRead,BufWritePre *.js normal mzgg=G`z
-" tab
-autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType css  setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType js   setlocal tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType vim  setlocal tabstop=2 shiftwidth=2 softtabstop=2
-" Text width
-autocmd FileType php  setlocal textwidth=250
-autocmd FileType vim  setlocal textwidth=250
-" Color column
-autocmd FileType php :call matchadd('ColorColumn', '\%81v.*', 250)
-autocmd FileType vim :call matchadd('ColorColumn', '\%121v.*', 250)
-" Languages
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType vim set omnifunc=syntaxcomplete#Complete
-" Markdown
-autocmd BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md  setfiletype markdown
-
-autocmd bufwritepost vimrc :so %
-" java compile files
-autocmd filetype java nnoremap <Leader>c :w <CR>:!javac % && java %:r<CR>
-" Commit
-autocmd filetype gitcommit nnoremap <buffer> c :Gcommit<CR>
-" Reload changes to .vimrc automatically
-autocmd BufWritePost  ~/.vimrc source ~/.vimrc
-
-
-" SHORTCUTS: ===================================================================
-" Show Battery Usage:
-abbreviate batt :exec "!pmset -g batt"
-" Lorem Ipsum:
-iabbrev lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-iabbrev llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-" Abre O Buffer No Safari:
-abbreviate saf :! open -a safari.app %:p<CR>
-" Start Stop Apache:
-abbreviate apup :!sudo /Applications/XAMPP/xamppfiles/xampp startapache<CR>
-abbreviate apdown :!sudo /Applications/XAMPP/xamppfiles/xampp stopapache<CR>i
-" Start Stop Mysql:
-abbreviate myup :!sudo /Applications/XAMPP/xamppfiles/share/mysql/mysql.server start<CR>
-abbreviate mydown :!sudo /Applications/XAMPP/xamppfiles/share/mysql/mysql.server stop<CR>
-" Pomodoros:
-abbreviate pom :AsyncCommand /Applications/'Alinof Timer.app'/Contents/MacOS/'Alinof Timer' [SetHours=00, SetMinutes=25, Start]
-abbreviate psb :AsyncCommand /Applications/'Alinof Timer.app'/Contents/MacOS/'Alinof Timer' [SetHours=00, SetMinutes=5, Start]
-abbreviate plb :AsyncCommand /Applications/'Alinof Timer.app'/Contents/MacOS/'Alinof Timer' [SetHours=00, SetMinutes=15, Start]
-" Vimrc:
-abbreviate vim :e ~/.vimrc<CR>
-
-abbreviate prj Sauce
-
-
-" NAVIGATE: ====================================================================
-" entre Buffers
-nnoremap <silent> <S-Right> :bn<CR>
-nnoremap <silent> <S-Left> :bp<CR>
-nnoremap <silent> <C-x> :q<CR>
-" Entre Janlas
-nmap <C-h> <C-w>h
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
-" Entre tabs
-imap jj <Esc>
-nmap <space> :
-
-
-" BUBLE TEXT: ==================================================================
-"http://vimcasts.org/episodes/bubbling-text/
-"Bubble single lines
-nmap <C-Up> ddkP
-nmap <C-Down> ddp
-"Bubble multiple lines
-vmap <C-Up> xkP`[V`]
-vmap <C-Down> xp`[V`]
-" Opções para que blocos selecionados sejam reselecionados após identações.
-" Ajuda muito na hora de identar grandes e confusos blocos =)
-vnoremap < <gv
-vnoremap > >gv
-" Stuff taken from
-" https://github.com/r00k/dotfiles/blob/master/vimrc
-command! Q q
-command! W w
-
-
-" FAST SAVE: ===================================================================
-nnoremap <leader>w :w!<CR>
-
-
-" FUNCTIONS KEY: ===============================================================
-" menu de selecao de arwuivos
-nnoremap <silent> <F2> :NERDTreeTabsToggle<CR>
-" execute php-cs-fixer
-nnoremap <silent> <F4> :!php-cs-fixer fix % --level=all<CR>
-" execute php
-nnoremap <silent> <F5> :! php %<CR>
-"manual do php
-map <F6> :call BrowseDoc()<CR>
-" alinhar codigo
-nnoremap <silent> <F7> mzgg=G`z<CR>
-" execute javascript
-map <silent> <F8> :call RunJScript1()<CR>
-" corretor Ortográfico
-nnoremap <F10> :call <SID>spell_check_current()<CR>
-" ativate Gundo
-nnoremap <F11> :GundoToggle<CR>
-" remover distracoes
-nnoremap <silent> <F12> :Goyo<CR>

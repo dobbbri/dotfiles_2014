@@ -37,7 +37,7 @@ else
   colorscheme vividchalk
 endif
 
-set guifont=Anonymous\ Pro:h21
+set guifont=Akkurat-Mono:h17
 "
 if has("balloon_eval") && has("gui_running")
   set ballooneval
@@ -156,6 +156,7 @@ set viminfo=
 set ttimeoutlen=50
 " No scratch
 set completeopt-=preview
+let g:netrw_liststyle=3
 
 
 " INDENT: ======================================================================
@@ -316,6 +317,54 @@ autocmd filetype java nnoremap <Leader>c :w <CR>:!javac % && java %:r<CR>
 autocmd filetype gitcommit nnoremap <buffer> c :Gcommit<CR>
 " Reload changes to .vimrc automatically
 autocmd BufWritePost  ~/.vimrc source ~/.vimrc
+autocmd WinLeave * set nocursorline
+autocmd WinEnter * set cursorline
+" from https://github.com/eiro/rcfiles/
+
+noremap! "" ""<left>
+noremap! '' ''<left>
+
+noremap! (( ()<left>
+noremap! (<cr> (<cr>)<c-o>O
+noremap! (; ();<esc>hi
+noremap! (<cr>; (<cr>);<c-o>O
+noremap! ('; ('');<esc>hhi
+noremap! ("; ("");<esc>hhi
+noremap! (' ('')<esc>hi
+noremap! (" ("")<esc>hi
+
+noremap! {{ {}<left>
+noremap! {<cr> {<cr>}<c-o>O
+noremap! {; {};<esc>hi
+noremap! {<cr>; {<cr>};<c-o>O
+noremap! {'; {''};<esc>hhi
+noremap! {"; {""};<esc>hhi
+noremap! {' {''}<esc>hi
+noremap! {" {""}<esc>hi
+
+noremap! [[ []<left>
+noremap! [<cr> [<cr>]<c-o>O
+noremap! [; [];<esc>hi
+noremap! [<cr>; [<cr>];<c-o>O
+noremap! ['; [''];<esc>hhi
+noremap! ["; [""];<esc>hhi
+noremap! [' ['']<esc>hi
+noremap! [" [""]<esc>hi
+"Auto close: parentheses, brackets, and braces.
+imap { {}<left>
+imap ( ()<left>
+imap [ []<left>
+" Easy Resize Windows with Arrow Keys
+noremap <c-up> <c-w>+
+noremap <c-down> <c-w>-
+noremap <c-left> <c-w>>
+noremap <c-right> <c-w><
+
+" Unify Mac cut-and-paste with vim: ============================================
+if version >= 730 && has("macunix")
+  " Default yank and paste go to Mac's clipboard
+  set clipboard=unnamed
+end
 
 
 " SHORTCUTS: ===================================================================
@@ -337,7 +386,7 @@ abbreviate pom :AsyncCommand /Applications/'Alinof Timer.app'/Contents/MacOS/'Al
 abbreviate psb :AsyncCommand /Applications/'Alinof Timer.app'/Contents/MacOS/'Alinof Timer' [SetHours=00, SetMinutes=5, Start]
 abbreviate plb :AsyncCommand /Applications/'Alinof Timer.app'/Contents/MacOS/'Alinof Timer' [SetHours=00, SetMinutes=15, Start]
 " Vimrc:
-abbreviate vim :e ~/.vimrc<CR>
+abbreviate vi :e ~/.vimrc<CR>
 
 abbreviate sc Sauce
 
@@ -381,7 +430,7 @@ nnoremap <leader>w :w!<CR>
 
 " FUNCTIONS KEY: ===============================================================
 " menu de selecao de arwuivos
-nnoremap <silent> <F2> :NERDTreeTabsToggle<CR>
+nmap <silent> <F2> :NERDTreeToggle<CR> :TagbarToggle<CR>
 " execute php-cs-fixer
 nnoremap <silent> <F4> :!php-cs-fixer fix % --level=all<CR>
 " execute php
@@ -398,15 +447,20 @@ nnoremap <F10> :call <SID>spell_check_current()<CR>
 nnoremap <F11> :GundoToggle<CR>
 " remover distracoes
 nnoremap <silent> <F12> :Goyo<CR>
-
+" desativate f1
+noremap <F1> <Esc>
 
 " HTML5: =======================================================================
 Bundle 'https://github.com/othree/html5.vim'
 Bundle 'https://github.com/amirh/HTML-AutoCloseTag'
+Bundle 'https://github.com/hokaccha/vim-html5validator'
 
 
 " CSS3: ========================================================================
 Bundle 'https://github.com/hail2u/vim-css3-syntax'
+Bundle 'https://github.com/csscomb/vim-csscomb/'
+"Usage:
+":CSScomb
 
 
 " GIT: =========================================================================
@@ -531,8 +585,8 @@ let g:goyo_callbacks = [function('g:goyo_before'), function('g:goyo_after')]
 
 
 " VISIONAL: ====================================================================
-Bundle 'https://github.com/justindomingue/visional'
-let g:visionalhl='ctermbg=black ctermfg=yellow guifg=yellow guibg=black ctermfg=yellow gui=bold'
+"Bundle 'https://github.com/justindomingue/visional'
+"let g:visionalhl='ctermbg=black ctermfg=yellow guifg=yellow guibg=black ctermfg=yellow gui=bold'
 
 
 " LIGHTLINE: ===================================================================
@@ -704,7 +758,7 @@ Bundle 'https://github.com/pydave/AsyncCommand'
 
 " SAUCE: =======================================================================
 Bundle 'https://github.com/joonty/vim-sauce'
-let g:sauce_path = "~/.dotfiles/vim/sauce/"
+let g:sauce_path = "~/Copy/vim_sauce/"
 " Usage:
 " Sauce <name>       " Load a sauce
 " SauceNew <name>    " Create a new sauce
@@ -717,6 +771,10 @@ let g:sauce_path = "~/.dotfiles/vim/sauce/"
 " JAVASCRIPT: ==================================================================
 Bundle 'https://github.com/pangloss/vim-javascript'
 Bundle 'https://github.com/maksimr/vim-jsbeautify'
+Bundle 'https://github.com/hallettj/jslint.vim'
+autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
+autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
 
 
 " RAINBOW PARENTHESES: =========================================================

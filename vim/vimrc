@@ -30,15 +30,16 @@ set background=dark
 set t_Co=256                    " Allow the use of 256 colors in the terminal
 
 if has("gui_running")
-  colorscheme Spectral
+  colorscheme skittles_dark
   set fuoptions=maxvert,maxhorz
   "set fullscreen
 else
   colorscheme vividchalk
 endif
 
-set guifont=Akkurat-Mono:h17
-"
+set guifont=BPmono:h17
+" set guifont=Akkurat-Mono:h17
+
 if has("balloon_eval") && has("gui_running")
   set ballooneval
 endif
@@ -354,11 +355,9 @@ noremap! [" [""]<esc>hi
 imap { {}<left>
 imap ( ()<left>
 imap [ []<left>
-" Easy Resize Windows with Arrow Keys
-noremap <c-up> <c-w>+
-noremap <c-down> <c-w>-
-noremap <c-left> <c-w>>
-noremap <c-right> <c-w><
+" Open new lines without going into insert mode
+nnoremap <leader>o o<esc>
+nnoremap <leader>O O<esc>
 
 " Unify Mac cut-and-paste with vim: ============================================
 if version >= 730 && has("macunix")
@@ -387,7 +386,7 @@ abbreviate psb :AsyncCommand /Applications/'Alinof Timer.app'/Contents/MacOS/'Al
 abbreviate plb :AsyncCommand /Applications/'Alinof Timer.app'/Contents/MacOS/'Alinof Timer' [SetHours=00, SetMinutes=15, Start]
 " Vimrc:
 abbreviate vi :e ~/.vimrc<CR>
-
+" Sauce Projects
 abbreviate sc Sauce
 
 
@@ -709,7 +708,7 @@ Bundle 'https://github.com/majutsushi/tagbar'
 let g:tagbar_singleclick=1
 let g:tagbar_autoshowtag=1
 let g:tagbar_iconchars=['▸', '▾']
-let g:tagbar_width=30
+let g:tagbar_width=g:NERDTreeWinSize
 let g:tagbar_compact=1
 let g:tagbar_ctags_bin='/usr/local/Cellar/ctags/5.8/bin/ctags'
 
@@ -805,3 +804,13 @@ au Syntax * RainbowParenthesesLoadBraces
 
 " SQL COMPLETE: ================================================================
 Bundle 'https://github.com/vim-scripts/SQLComplete.vim'
+
+
+" ALIGN: =======================================================================
+Bundle 'https://github.com/vim-scripts/Align'
+" \t=  : align assignments (don't count logic, like == or !=)
+" \t,   : align on commas
+" \t|   : align on vertical bars (|)
+" \tsp  : align on whitespace
+" \tt   : align LaTeX tabular tables
+" \acom : align comments
